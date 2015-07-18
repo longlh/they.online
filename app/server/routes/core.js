@@ -5,8 +5,22 @@ exports._requires = [
 	'/server/app'
 ];
 exports._factory = function(app) {
+	// integrating site
 	app.get('/', function(req, res, next) {
-		// res.send('<h1>Hello world!</h1>').end();
-		res.render('index');
+		res.render('integrate');
+	});
+
+	// agent page
+	app.get('/agent/:id', function(req, res, next) {
+		res.render('agent', {
+			id: req.params.id
+		});
+	});
+
+	// iframe
+	app.get('/iframe/:id', function(req, res, next) {
+		res.render('iframe', {
+			id: req.params.id
+		});
 	});
 };

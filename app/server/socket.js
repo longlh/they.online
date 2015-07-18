@@ -10,76 +10,52 @@ exports._factory = function(socketIO, Promise, httpServer) {
 	var io = socketIO(httpServer);
 
 	io.on('connection', function(socket) {
-		console.log('A user connected to server...', socket.id);
-
-		socket.on('disconnect', function() {
-			console.log('A user disconnected from server...');
-			socket.broadcast.emit('message', {
-				code: 'LEAVE',
-				data: 'bye'
-			});
-		});
-
+		// listen message
 		socket.on('message', function(message) {
-			// broadcast
-			if (message.code === 'CHAT') {
-				io.to(message.data.room).emit('message', {
-					code: 'CHAT',
-					data: message.data.chat,
-					from: socket.id
-				});
-
-			} else if (message.code === 'JOIN') {
-				console.log('[' +
+			// handle JOIN
+			if (message.code === 'VISITOR_JOIN') {
+				console.log('Visitor [' +
+						message.data.visitor +
+						'] connected with agent [' +
+						message.data.agent +
+						'], socket [' +
 						socket.id +
-						'] requests joining room [' +
-						message.data +
 						']');
 
-				// leave all joined rooms
-				var leaves = socket.rooms.map(function(room) {
-					console.log('[' +
-							socket.id +
-							'] is leaving room [' +
-							room +
-							']');
+				// join room
+				socket.join(message.data.visitor + '_' + message.data.agent);
+			} else if (message.code === 'AGENT_JOIN') {
+				console.log('Agent [' +
+						message.data.agent +
+						'] is online, socket [' +
+						socket.id +
+						']');
 
-					return new Promise(function(resolve, reject) {
-						socket.leave(room, function() {
-							console.log('[' +
-									socket.id +
-									'] has left room [' +
-									room +
-									']');
+				// join room
+				socket.join(message.data.agent);
+			} else if (message.code === 'CHAT') {
+				var reply = {
+					code: 'CHAT',
+					from: socket.id,
+					data: {
+						chat: message.data.chat,
+						agent: message.data.agent,
+						visitor: message.data.visitor
+					}
+				};
 
-							io.to(room).emit('message', {
-								code: 'LEAVE',
-								from: socket.id,
-								data: room
-							});
+				// boardcast to all visitor's devices
+				io.to(message.data.visitor + '_' + message.data.agent).emit('message', reply);
 
-							resolve();
-						});
-					});
-				});
-
-				Promise.all(leaves).then(function() {
-					socket.join(message.data, function() {
-						console.log('[' +
-								socket.id +
-								'] has joined room [' +
-								message.data +
-								']');
-
-						io.to(message.data).emit('message', {
-							code: 'JOIN',
-							from: socket.id,
-							data: message.data
-						});
-					});
-
-				});
+				// boardcast to agent
+				io.to(message.data.agent).emit('message', reply);
 			}
+		});
+
+		socket.on('disconnect', function() {
+			console.log('[' +
+					socket.id +
+					'] disconnected');
 		});
 	});
 
