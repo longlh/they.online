@@ -1,0 +1,71 @@
+<!doctype html>
+<html>
+	<head>
+		<style>
+			.highlight {
+				color: blue;
+				font-weight: bold;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>Chat Application</h1>
+		<form id="chat">
+			<input type="text" id="message">
+			<button type="submit">Send</button>
+		</form>
+		<div id="messages">
+
+		</div>
+		<script src="/socket.io/socket.io.js"></script>
+		<script>
+			window.addEventListener('load', function() {
+				var socket = io();
+				var form = document.getElementById('chat');
+				var input = document.getElementById('message');
+				var container = document.getElementById('messages');
+
+				form.addEventListener('submit', function(event) {
+					event.preventDefault();
+
+					var message = input.value;
+
+					if (message) {
+						socket.emit('message', {
+							code: 'CHAT',
+							data: message
+						});
+
+						appendMessageLine(container, message, true);
+						// reset input
+						input.value = '';
+					}
+				});
+
+				socket.on('message', function(message) {
+					console.log(message);
+					if (message.code === 'CHAT') {
+						appendMessageLine(container, message.data);
+					} else if (message.code === 'JOIN') {
+						appendMessageLine(container, 'A user has joined chat room!');
+					} else if (message.code === 'LEAVE') {
+						appendMessageLine(container, 'A user has left!');
+					}
+				});
+			});
+
+			function appendMessageLine(container, message, highlight) {
+				var line = document.createElement('div');
+				var text = document.createTextNode(message);
+
+				if (highlight) {
+					line.className = 'highlight';
+				}
+
+				line.appendChild(text);
+
+				container.appendChild(line);
+			}
+		</script>
+	</body>
+</html>

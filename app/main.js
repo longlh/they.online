@@ -3,11 +3,10 @@
 exports._ = '/main';
 exports._requires = [
 	'/config/env',
-	'/server',
-	'/server/router'
+	'/server/http'
 ];
-exports._factory = function(config, app) {
-	app.listen(config.port, function() {
+exports._factory = function(config, httpServer) {
+	httpServer.listen(config.port, function() {
 		console.log('Application start at :' + config.port);
 	});
 };
