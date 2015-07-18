@@ -4,6 +4,7 @@
   "description": "Easy-integrated chat system for static websites, blogs, e-commerces...",
   "main": "index.js",
   "dependencies": {
+    "bluebird": "2.9.34",
     "di-linker": "1.1.0",
     "ect": "0.5.9",
     "express": "4.13.1",

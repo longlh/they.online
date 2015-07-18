@@ -10,6 +10,11 @@
 	</head>
 	<body>
 		<h1>Chat Application</h1>
+		<form id="room">
+			<input type="text" id="room-no">
+			<button type="submit">Join</button>
+		</form>
+		<hr>
 		<form id="chat">
 			<input type="text" id="message">
 			<button type="submit">Send</button>
@@ -21,40 +26,72 @@
 		<script>
 			window.addEventListener('load', function() {
 				var socket = io();
-				var form = document.getElementById('chat');
-				var input = document.getElementById('message');
+				var chatForm = document.getElementById('chat');
+				var roomForm = document.getElementById('room');
+				var chatMessageInput = document.getElementById('message');
+				var roomNoInput = document.getElementById('room-no');
 				var container = document.getElementById('messages');
 
-				form.addEventListener('submit', function(event) {
+				chatForm.addEventListener('submit', function(event) {
 					event.preventDefault();
 
-					var message = input.value;
+					var message = chatMessageInput.value;
 
 					if (message) {
 						socket.emit('message', {
 							code: 'CHAT',
-							data: message
+							data: {
+								room: roomNoInput.value,
+								chat: message
+							}
 						});
 
-						appendMessageLine(container, message, true);
+						log(container, message, true);
 						// reset input
-						input.value = '';
+						chatMessageInput.value = '';
+					}
+				});
+
+				roomForm.addEventListener('submit', function(event) {
+					event.preventDefault();
+
+					var roomNo = roomNoInput.value;
+
+					if (roomNo) {
+						socket.emit('message', {
+							code: 'JOIN',
+							data: roomNo
+						});
 					}
 				});
 
 				socket.on('message', function(message) {
 					console.log(message);
 					if (message.code === 'CHAT') {
-						appendMessageLine(container, message.data);
+						if (message.from !== socket.id) {
+							log(container, message.data);
+						}
 					} else if (message.code === 'JOIN') {
-						appendMessageLine(container, 'A user has joined chat room!');
+						var highlight = false;
+						var actor = socket.id === message.from ?
+								(highlight = true, 'You') :
+								'[' + message.from + ']';
+
+						log(container, actor + ' has joined room [' + message.data + ']', highlight);
 					} else if (message.code === 'LEAVE') {
-						appendMessageLine(container, 'A user has left!');
+						var highlight = false;
+						var actor = socket.id === message.from ?
+								(highlight = true, 'You') :
+								'[' + message.from + ']';
+
+						log(container, actor + ' has left room [' + message.data + ']', highlight);
 					}
 				});
+
+
 			});
 
-			function appendMessageLine(container, message, highlight) {
+			function log(container, message, highlight) {
 				var line = document.createElement('div');
 				var text = document.createTextNode(message);
 
