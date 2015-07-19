@@ -2,11 +2,11 @@
 
 exports._ = '/server/socket';
 exports._requires = [
-	'@socket.io',
 	'@bluebird',
+	'@socket.io',
 	'/server/http'
 ];
-exports._factory = function(socketIO, Promise, httpServer) {
+exports._factory = function(Promise, socketIO, httpServer) {
 	var io = socketIO(httpServer);
 
 	io.on('connection', function(socket) {
