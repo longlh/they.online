@@ -1,15 +1,17 @@
 'use strict';
 
+var profile = process.env.NODE_ENV ? process.env.NODE_ENV : 'development';
+
 exports._ = '/config/env';
 exports._requires = [
 	'@lodash',
-	process.env.NODE_ENV ?
-			exports._ + '/' + process.env.NODE_ENV :
-			exports._ + '/development'
+	'@path',
+	exports._ + '/' + profile
 ];
-exports._factory = function(_, executionProfile) {
+exports._factory = function(_, path, executionProfile) {
 	var defaults = {
-
+		rootDir: path.resolve(__dirname, '../../..'),
+		profile: profile
 	};
 
 	return _.assign(defaults, executionProfile);

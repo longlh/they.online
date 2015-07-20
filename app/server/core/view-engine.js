@@ -4,10 +4,11 @@ exports._  = '/server/core/view-engine';
 exports._requires = [
 	'@ect',
 	'@path',
-	'/server/app'
+	'/server/app',
+	'/config/env'
 ];
-exports._factory = function(ect, path, app) {
-	var templateDir = path.resolve('.', 'app/server/views');
+exports._factory = function(ect, path, app, env) {
+	var templateDir = path.resolve(env.rootDir, 'app/server/views');
 	var renderer = ect({
 		watch: true,
 		ext: '.ect',

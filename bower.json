@@ -1,0 +1,17 @@
+{
+  "name": "easy-chat",
+  "main": "index.js",
+  "version": "0.0.1",
+  "homepage": "https://github.com/longlh/easy-chat",
+  "authors": [
+    "Luc Hoang Long <d@dapps.me>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
