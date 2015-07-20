@@ -17,7 +17,8 @@ exports._factory = function(path, express, bodyParser, env) {
 
 	// use static middleware in `development` mode
 	if (env.profile === 'development') {
-		app.use(express.static(path.resolve(env.rootDir, 'app/client/public')));
+		app.use('/public', express.static(path.resolve(env.rootDir, 'app/client/public')));
+		app.use('/lib', express.static(path.resolve(env.rootDir, 'bower_components')));
 	}
 
 	app.use(bodyParser.urlencoded({

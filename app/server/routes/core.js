@@ -7,7 +7,7 @@ exports._requires = [
 exports._factory = function(app) {
 	// integrating site
 	app.get('/', function(req, res, next) {
-		res.render('integrate');
+		res.render('main');
 	});
 
 	// agent page
