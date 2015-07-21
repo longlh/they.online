@@ -10,7 +10,10 @@ exports._factory = function(db) {
 			type: String,
 			required: true
 		},
-		plan: String
+		plan: {
+			type: String,
+			default: 'free'
+		}
 	});
 
 	var model = db.model('Tenant', schema);
