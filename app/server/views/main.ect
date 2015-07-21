@@ -4,14 +4,15 @@
 	</head>
 	<body>
 		<h1>Static Content</h1>
+		<a href="/signout">Sign out</a>
 		<script src="/lib/angular/angular.min.js"></script>
 		<script src="/lib/angular-route/angular-route.min.js"></script>
 		<script src="/lib/angular-resource/angular-resource.min.js"></script>
 		<script src="/public/js/main.js"></script>
-		<% if @agent : %>
+		<% if @_session : %>
 		<script>
 		<!--
-			var agent = <%- JSON.stringify(@agent) %>;
+			var agent = <%- JSON.stringify(@_session) %>;
 
 			console.log(agent);
 		-->

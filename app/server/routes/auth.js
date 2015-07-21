@@ -18,4 +18,8 @@ exports._factory = function(app, auth, session) {
 			}), session.serialize, function(req, res, next) {
 				res.redirect('/');
 			});
+
+	app.get('/signout', session.destroy, function(req, res, next) {
+		res.redirect('/');
+	});
 };

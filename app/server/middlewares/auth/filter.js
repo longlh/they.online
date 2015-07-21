@@ -9,9 +9,6 @@ exports._factory = function(_) {
 
 	self.requireAuthenticate = function(req, res, next) {
 		if (req.isAuthenticated()) {
-			// strip down all sentitive information
-			res.locals.agent = _.pick(req.user, 'id', 'tenant', 'displayName', 'admin');
-
 			return next();
 		}
 

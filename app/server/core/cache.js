@@ -17,6 +17,11 @@ exports._factory = function(Promise, redis, env) {
 			store[key] = value;
 
 			return Promise.resolve();
+		},
+		clear: function(key) {
+			delete store[key];
+
+			return Promise.resolve();
 		}
 	};
 };
