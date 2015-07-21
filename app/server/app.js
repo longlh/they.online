@@ -11,6 +11,7 @@ exports._requires = [
 ];
 exports._activations = [
 	'/server/core/view-engine',
+	'/server/routes/auth',
 	'/server/routes/core',
 	'/server/routes/agent'
 ];

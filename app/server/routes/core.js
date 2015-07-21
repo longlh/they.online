@@ -2,11 +2,12 @@
 
 exports._ = '/server/routes/core';
 exports._requires = [
-	'/server/app'
+	'/server/app',
+	'/server/middlewares/auth/filter'
 ];
-exports._factory = function(app) {
+exports._factory = function(app, authFilter) {
 	// integrating site
-	app.get('/', function(req, res, next) {
+	app.get('/', authFilter.requireAuthenticate, function(req, res, next) {
 		res.render('main');
 	});
 
