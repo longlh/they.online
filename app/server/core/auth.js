@@ -3,17 +3,10 @@
 exports._ = '/server/core/auth';
 exports._requires = [
 	'@passport',
-	'/server/core/auth-strategies/local',
-	'/server/models/agent'
+	'/server/core/auth-strategies/local'
 ];
-exports._factory = function(passport, localStrategy, Agent) {
+exports._factory = function(passport, localStrategy) {
 	// config
-	passport.serializeUser(function serialize(agent, done) {
-		done(null, agent._id);
-	});
-
-	passport.deserializeUser(Agent.findById.bind(Agent));
-
 	passport.use(localStrategy);
 
 	return passport;

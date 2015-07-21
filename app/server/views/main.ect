@@ -8,5 +8,14 @@
 		<script src="/lib/angular-route/angular-route.min.js"></script>
 		<script src="/lib/angular-resource/angular-resource.min.js"></script>
 		<script src="/public/js/main.js"></script>
+		<% if @agent : %>
+		<script>
+		<!--
+			var agent = <%- JSON.stringify(@agent) %>;
+
+			console.log(agent);
+		-->
+		</script>
+		<% end %>
 	</body>
 </html>

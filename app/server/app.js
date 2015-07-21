@@ -5,7 +5,7 @@ exports._requires = [
 	'@path',
 	'@express',
 	'@body-parser',
-	'@express-session',
+	'@cookie-parser',
 	'/server/core/auth',
 	'/config/env'
 ];
@@ -15,7 +15,7 @@ exports._activations = [
 	'/server/routes/core',
 	'/server/routes/agent'
 ];
-exports._factory = function(path, express, bodyParser, session, auth, env) {
+exports._factory = function(path, express, bodyParser, cookieParser, auth, env) {
 	var app = express();
 
 	// use static middleware in `development` mode
@@ -29,11 +29,13 @@ exports._factory = function(path, express, bodyParser, session, auth, env) {
 		extended: true
 	}));
 
-	app.use(session({
-		secret: 'xxx',
-		resave: false,
-		saveUninitialized: false
-	}));
+	app.use(cookieParser());
+
+	// app.use(session({
+	// 	secret: 'xxx',
+	// 	resave: false,
+	// 	saveUninitialized: false
+	// }));
 	app.use(auth.initialize());
 	app.use(auth.session());
 
