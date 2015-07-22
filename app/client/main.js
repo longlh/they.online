@@ -28,6 +28,12 @@
 				resolve: {
 					_session: sessionResolver
 				}
+			}).when('/tenant', {
+				controller: '/controllers/tenant',
+				templateUrl: template('tenant'),
+				resolve: {
+					_session: sessionResolver
+				}
 			}).otherwise({
 				redirectTo: '/pages/404'
 			}).caseInsensitiveMatch = true;
@@ -47,11 +53,21 @@
 		function($rootScope, $location) {
 			// handle error when route resolving failed
 			$rootScope.$on('$routeChangeError', function(event, next, previous, error) {
-				console.log(error);
-
 				event.preventDefault();
-				location.href = '/signin';
+
+				if (error.status === 401) {
+					location.href = '/';
+					return;
+				}
+
+				// location.href = '/signin';
 			});
+		}
+	]).run([
+		'$http',
+		'/services/storage',
+		function($http, storage) {
+			$http.defaults.headers.common.Authentication = storage.get('session').id;
 		}
 	]);
 })();

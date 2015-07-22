@@ -26,7 +26,9 @@ exports._factory = function(_, Promise, uuid, cache, Agent) {
 		var sid = uuid.v4();
 
 		// store sessionId in client-side
-		res.cookie('sid', sid);
+		res.cookie('sid', sid, {
+			httpOnly: true
+		});
 
 		// store sessionId in server-side
 		storeSession(res, sid, req.user);
@@ -35,7 +37,8 @@ exports._factory = function(_, Promise, uuid, cache, Agent) {
 	};
 
 	self.deserialize = function(req, res, next) {
-		var sid = req.cookies.sid;
+		// look in header first, then look in cookies
+		var sid = req.headers.Authentication || req.cookies.sid;
 
 		if (!sid) {
 			return next();

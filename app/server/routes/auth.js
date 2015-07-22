@@ -22,11 +22,4 @@ exports._factory = function(app, auth, session) {
 	app.get('/signout', session.destroy, function(req, res, next) {
 		res.redirect('/');
 	});
-
-	app.get('/api/sessions/:id', function(req, res, next) {
-		// TODO check session by :id
-		console.log(req.params.id);
-
-		res.status(204).end();
-	});
 };

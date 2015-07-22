@@ -7,12 +7,20 @@ exports._requires = [
 exports._factory = function(_) {
 	var self = {};
 
-	self.requireAuthenticate = function(req, res, next) {
+	self.requireAuthentication = function(req, res, next) {
 		if (req.isAuthenticated()) {
 			return next();
 		}
 
 		res.redirect('/signin');
+	};
+
+	self.blockUnauthenticated = function(req, res, next) {
+		if (res.locals._session) {
+			return next();
+		}
+
+		res.status(401).end();
 	};
 
 	return self;

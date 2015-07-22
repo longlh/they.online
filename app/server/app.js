@@ -14,7 +14,8 @@ exports._activations = [
 	'/server/core/view-engine',
 	'/server/routes/auth',
 	'/server/routes/core',
-	'/server/routes/agent'
+	'/server/routes/agent',
+	'/server/routes/api'
 ];
 exports._factory = function(path, express, bodyParser, cookieParser, auth, env) {
 	var app = express();

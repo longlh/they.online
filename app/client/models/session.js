@@ -6,10 +6,7 @@
 
 		var Session = ModelFactory.model({
 			resource: {
-				path: '/api/sessions/:id',
-				defaultParameters: {
-					id: '@id'
-				},
+				path: '/api/sessions/current',
 				methods: {
 					ping: {
 						method: 'get'

@@ -7,7 +7,7 @@ exports._requires = [
 ];
 exports._factory = function(app, filter) {
 	// integrating site
-	app.get('/', filter.requireAuthenticate, function(req, res, next) {
+	app.get('/', filter.requireAuthentication, function(req, res, next) {
 		res.render('main');
 	});
 
