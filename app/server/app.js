@@ -10,6 +10,7 @@ exports._requires = [
 	'/config/env'
 ];
 exports._activations = [
+	'/server/core/assets',
 	'/server/core/view-engine',
 	'/server/routes/auth',
 	'/server/routes/core',
@@ -20,7 +21,8 @@ exports._factory = function(path, express, bodyParser, cookieParser, auth, env) 
 
 	// use static middleware in `development` mode
 	if (env.profile === 'development') {
-		app.use('/public', express.static(path.resolve(env.rootDir, 'app/client/public')));
+		app.use('/app', express.static(path.resolve(env.rootDir, 'app/client')));
+		app.use('/public', express.static(path.resolve(env.rootDir, 'app/public')));
 		app.use('/lib', express.static(path.resolve(env.rootDir, 'bower_components')));
 	}
 

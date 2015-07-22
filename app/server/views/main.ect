@@ -5,16 +5,18 @@
 	<body>
 		<h1>Static Content</h1>
 		<a href="/signout">Sign out</a>
+		<ng-view></ng-view>
+		<script src="/lib/lodash/lodash.min.js"></script>
 		<script src="/lib/angular/angular.min.js"></script>
 		<script src="/lib/angular-route/angular-route.min.js"></script>
 		<script src="/lib/angular-resource/angular-resource.min.js"></script>
-		<script src="/public/js/main.js"></script>
+		<% for file in @assets : %>
+		<script src="<%= file %>"></script>
+		<% end %>
 		<% if @_session : %>
 		<script>
 		<!--
-			var agent = <%- JSON.stringify(@_session) %>;
-
-			console.log(agent);
+			angular.module('easy-chat').constant('data', <%- JSON.stringify(@_session) %>);
 		-->
 		</script>
 		<% end %>

@@ -13,17 +13,28 @@ module.exports = function(grunt) {
 				options: {
 					jshintrc: 'build/rules/.jshintrc-server'
 				}
+			},
+			client: {
+				src: [
+					'app/client/**/*.js'
+				],
+				options: {
+					jshintrc: 'build/rules/.jshintrc-client'
+				}
 			}
 		},
 		jscs: {
+			options: {
+				config: 'build/rules/.jscsrc'
+			},
 			server: {
 				src: [
 					'Gruntfile.js',
 					'<%= jshint.server.src %>'
-				],
-				options: {
-					config: 'build/rules/.jscsrc'
-				}
+				]
+			},
+			client: {
+				src: '<%= jshint.client.src %>'
 			}
 		},
 		develop: {
@@ -40,6 +51,12 @@ module.exports = function(grunt) {
 					'<%= jshint.server.src %>'
 				],
 				tasks: ['jscs:server', 'jshint:server', 'develop']
+			},
+			client: {
+				files: [
+					'<%= jshint.client.src %>'
+				],
+				tasks: ['jscs:client', 'jshint:client']
 			}
 		},
 	});
