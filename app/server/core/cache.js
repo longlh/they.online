@@ -8,20 +8,44 @@ exports._requires = [
 ];
 exports._factory = function(Promise, redis, env) {
 	var store = {};
+	var timeout = {};
+	var self = {};
 
-	return {
-		get: function(key) {
-			return Promise.resolve(store[key]);
-		},
-		put: function(key, value, cb) {
-			store[key] = value;
+	self.get = function(key, expiry) {
+		var value = store[key];
 
-			return Promise.resolve();
-		},
-		clear: function(key) {
-			delete store[key];
-
-			return Promise.resolve();
+		if (value) {
+			return self.expire(key, expiry);
 		}
+
+		return Promise.resolve(value);
 	};
+
+	self.put = function(key, value, expiry) {
+		store[key] = value;
+
+		return self.expire(key, expiry);
+	};
+
+	self.expire = function(key, expiry) {
+		clearTimeout(timeout[key]);
+
+		if (expiry) {
+			timeout[key] = setTimeout(function() {
+				console.log('clear');
+				self.clear(key);
+			}, expiry);
+		}
+
+		return Promise.resolve(store[key]);
+	};
+
+	self.clear = function(key) {
+		delete store[key];
+		delete timeout[key];
+
+		return Promise.resolve();
+	};
+
+	return self;
 };

@@ -11,7 +11,10 @@ exports._requires = [
 exports._factory = function(_, path, executionProfile) {
 	var defaults = {
 		rootDir: path.resolve(__dirname, '../../..'),
-		profile: profile
+		profile: profile,
+		session: {
+			expiry: 60 * 60 * 1000 // 1 hour
+		}
 	};
 
 	return _.assign(defaults, executionProfile);

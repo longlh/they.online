@@ -5,10 +5,11 @@ exports._requires = [
 	'@lodash',
 	'@bluebird',
 	'@node-uuid',
+	'/config/env',
 	'/server/core/cache',
 	'/server/models/agent'
 ];
-exports._factory = function(_, Promise, uuid, cache, Agent) {
+exports._factory = function(_, Promise, uuid, env, cache, Agent) {
 	function storeSession(res, sid, data) {
 		res.locals._session = {
 			id: sid,
@@ -33,7 +34,9 @@ exports._factory = function(_, Promise, uuid, cache, Agent) {
 		// store sessionId in server-side
 		storeSession(res, sid, req.user);
 
-		cache.put(sid, req.user.id).then(next).catch(next);
+		cache.put(sid, req.user.id, env.session.expiry).then(function() {
+			next();
+		}).catch(next);
 	};
 
 	self.deserialize = function(req, res, next) {
@@ -44,7 +47,7 @@ exports._factory = function(_, Promise, uuid, cache, Agent) {
 			return next();
 		}
 
-		return cache.get(sid).then(function(agentId) {
+		return cache.get(sid, env.session.expiry).then(function(agentId) {
 			if (!agentId) {
 				return;
 			}
@@ -55,9 +58,10 @@ exports._factory = function(_, Promise, uuid, cache, Agent) {
 
 			return find();
 		}).then(function(agent) {
-			req.user = agent;
-
-			storeSession(res, sid, agent);
+			if (agent) {
+				req.user = agent;
+				storeSession(res, sid, agent);
+			}
 
 			next();
 		}).catch(next);
