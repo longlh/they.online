@@ -27,7 +27,7 @@ exports._factory = function(_, Promise, uuid, env, cache, Agent) {
 		var sid = uuid.v4();
 
 		// store sessionId in client-side
-		res.cookie('sid', sid, {
+		res.cookie(env.session.cookie, sid, {
 			httpOnly: true
 		});
 
@@ -41,7 +41,7 @@ exports._factory = function(_, Promise, uuid, env, cache, Agent) {
 
 	self.deserialize = function(req, res, next) {
 		// look in header first, then look in cookies
-		var sid = req.headers.Authentication || req.cookies.sid;
+		var sid = req.headers.Authentication || req.cookies[env.session.cookie];
 
 		if (!sid) {
 			return next();
@@ -49,7 +49,7 @@ exports._factory = function(_, Promise, uuid, env, cache, Agent) {
 
 		return cache.get(sid, env.session.expiry).then(function(agentId) {
 			if (!agentId) {
-				return;
+				return Promise.reject();
 			}
 
 			var query = Agent.findById(agentId);
@@ -58,10 +58,8 @@ exports._factory = function(_, Promise, uuid, env, cache, Agent) {
 
 			return find();
 		}).then(function(agent) {
-			if (agent) {
-				req.user = agent;
-				storeSession(res, sid, agent);
-			}
+			req.user = agent;
+			storeSession(res, sid, agent);
 
 			next();
 		}).catch(next);
@@ -73,7 +71,7 @@ exports._factory = function(_, Promise, uuid, env, cache, Agent) {
 		}
 
 		// clear in cookie
-		res.clearCookie('sid');
+		res.clearCookie(env.session.cookie);
 		cache.clear(res.locals._session.id).then(next).catch(next);
 	};
 

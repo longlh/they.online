@@ -3,10 +3,9 @@
 exports._ = '/server/core/cache';
 exports._requires = [
 	'@bluebird',
-	'@redis',
 	'/config/env'
 ];
-exports._factory = function(Promise, redis, env) {
+exports._factory = function(Promise, env) {
 	var store = {};
 	var timeout = {};
 	var self = {};
@@ -15,6 +14,7 @@ exports._factory = function(Promise, redis, env) {
 		var value = store[key];
 
 		if (value) {
+			// extend expiry when hit cache
 			return self.expire(key, expiry);
 		}
 

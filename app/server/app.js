@@ -42,5 +42,8 @@ exports._factory = function(path, express, bodyParser, cookieParser, auth, env) 
 	app.use(auth.initialize());
 	app.use(auth.session());
 
+	app.set('env', env.profile);
+	app.set('x-powered-by', false);
+
 	return app;
 };
