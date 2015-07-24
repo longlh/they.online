@@ -3,8 +3,15 @@
 
 	angular.module('easy-chat').controller('/controllers/tenant', [
 		'$scope',
-		function($scope) {
+		'_tenant',
+		function($scope, tenant) {
+			$scope.tenant = tenant;
 
+			$scope.save = function() {
+				console.log($scope.tenant);
+
+				$scope.tenant.save();
+			};
 		}
 	]);
 })();

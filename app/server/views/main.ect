@@ -1,11 +1,30 @@
 <!doctype html>
 <html data-ng-app="easy-chat">
 	<head>
+		<link rel="stylesheet" href="/public/css/reset.css">
+		<link rel="stylesheet" href="/public/css/style.css">
 	</head>
 	<body>
-		<h1>Static Content</h1>
-		<a href="/signout">Sign out</a>
-		<ng-view></ng-view>
+		<div class="page-top">
+			<a href="/signout">Sign out</a>
+		</div>
+		<div class="page-middle cf">
+			<div class="page-left">
+				<ul>
+					<li>
+						<a href="#/tenant">Manage tenant</a>
+					</li>
+					<li>
+						<a href="#/chat">Chat room</a>
+					</li>
+				</ul>
+			</div>
+			<div class="page-right">
+				<ng-view></ng-view>
+			</div>
+		</div>
+		<div class="page-bottom">
+		</div>
 		<script src="/lib/lodash/lodash.min.js"></script>
 		<script src="/lib/angular/angular.min.js"></script>
 		<script src="/lib/angular-route/angular-route.min.js"></script>

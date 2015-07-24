@@ -32,10 +32,18 @@
 				controller: '/controllers/tenant',
 				templateUrl: template('tenant'),
 				resolve: {
-					_session: sessionResolver
+					_session: sessionResolver,
+					_tenant: [
+						'/models/tenant',
+						function(Tenant) {
+							return Tenant.get({
+								id: 'current'
+							});
+						}
+					]
 				}
 			}).otherwise({
-				redirectTo: '/pages/404'
+				redirectTo: '/'
 			}).caseInsensitiveMatch = true;
 		}
 	]).run([

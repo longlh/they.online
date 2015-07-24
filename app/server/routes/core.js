@@ -3,13 +3,12 @@
 exports._ = '/server/routes/core';
 exports._requires = [
 	'/server/app',
-	'/server/middlewares/auth/filter'
+	'/server/middlewares/auth/filter',
+	'/server/middlewares/util'
 ];
-exports._factory = function(app, filter) {
+exports._factory = function(app, filter, util) {
 	// integrating site
-	app.get('/', filter.requireAuthentication, function(req, res, next) {
-		res.render('main');
-	});
+	app.get('/', filter.requireAuthentication, util.render('main'));
 
 	// agent page
 	app.get('/agent/:id', function(req, res, next) {

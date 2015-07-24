@@ -13,4 +13,7 @@ exports._factory = function(app, authFilter, tenant, util) {
 	app.get('/api/sessions/current', util.status(204));
 
 	app.get('/api/tenants/current', tenant.current, util.json('_tenant'));
+
+	app.route('/api/tenants/:id')
+			.post(tenant.identify('id'));
 };
