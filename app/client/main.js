@@ -8,39 +8,11 @@
 		'$routeProvider',
 		'/services/template',
 		function($routeProvider, template) {
-			var sessionResolver = [
-				'$q',
-				'/services/storage',
-				function($q, storage) {
-					var session = storage.get('session');
-
-					if (!session) {
-						return $q.reject();
-					}
-
-					return session.ping();
-				}
-			];
-
 			$routeProvider.when('/', {
 				controller: '/controllers/dashboard',
 				templateUrl: template('dashboard'),
 				resolve: {
-					_session: sessionResolver
-				}
-			}).when('/tenant', {
-				controller: '/controllers/tenant',
-				templateUrl: template('tenant'),
-				resolve: {
-					_session: sessionResolver,
-					_tenant: [
-						'/models/tenant',
-						function(Tenant) {
-							return Tenant.get({
-								id: 'current'
-							});
-						}
-					]
+					_session: '/resolvers/session'
 				}
 			}).otherwise({
 				redirectTo: '/'

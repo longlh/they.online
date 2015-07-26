@@ -15,7 +15,7 @@ exports._factory = function(Promise, Tenant) {
 		// populate tenent of signed-in agent
 		agent.populate('tenant');
 
-		Promise.resolve(agent.execPopulate()).then(function(agent) {
+		return Promise.resolve(agent.execPopulate()).then(function(agent) {
 			res.locals._tenant = agent.tenant;
 			next();
 		}).catch(next);
@@ -27,7 +27,7 @@ exports._factory = function(Promise, Tenant) {
 
 			var query = Tenant.findById(id);
 
-			Promise.resolve(query.exec()).then(function(tenant) {
+			return Promise.resolve(query.exec()).then(function(tenant) {
 				res.locals._tenant = tenant;
 
 				next();
@@ -36,13 +36,14 @@ exports._factory = function(Promise, Tenant) {
 	};
 
 	self.update = function(req, res, next) {
+		// specify tenant's fields should be updated
 		var query = Tenant.findByIdAndUpdate(res.locals._tenant._id, {
 			displayName: req.body.displayName
 		}, {
 			new: true
 		});
 
-		Promise.resolve(query.exec()).then(function(tenant) {
+		return Promise.resolve(query.exec()).then(function(tenant) {
 			res.locals._tenant = tenant;
 
 			next();
