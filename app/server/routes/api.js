@@ -15,5 +15,5 @@ exports._factory = function(app, authFilter, tenant, util) {
 	app.get('/api/tenants/current', tenant.current, util.json('_tenant'));
 
 	app.route('/api/tenants/:id')
-			.post(tenant.identify('id'));
+			.post(tenant.identify('id'), tenant.update, util.json('_tenant'));
 };

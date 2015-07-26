@@ -44,14 +44,27 @@
 
 							if (_.isArray(response.resource)) {
 								data = _.map(response.resource, function iterate(r) {
+									if (r instanceof Model) {
+										Model.call(r);
+
+										return r;
+									}
+
 									return new Model(r);
 								});
 							} else {
-								data = new Model(response.resource);
+								data = response.resource;
+								if (response.resource instanceof Model) {
+									// re-call constructor
+									Model.call(data);
+								} else {
+									data = new Model(response.resource);
+								}
 							}
 
 							return _.isFunction(customHandler) ?
-									customHandler(response, data) : data;
+									customHandler(response, data) :
+									data;
 						}
 					};
 				};
@@ -132,8 +145,7 @@
 				_.forEach(options.resource.methods, function iterate(meta, method) {
 					if (meta && _.isFunction(Resource[method])) {
 						Model[method] = function() {
-
-							return Resource[method].apply(Resource, arguments).$promise;
+							return Resource[method].apply(Model, arguments).$promise;
 						};
 					}
 				});

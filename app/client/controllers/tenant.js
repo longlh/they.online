@@ -8,9 +8,7 @@
 			$scope.tenant = tenant;
 
 			$scope.save = function() {
-				console.log($scope.tenant);
-
-				$scope.tenant.save();
+				return $scope.tenant.save();
 			};
 		}
 	]);

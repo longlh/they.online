@@ -35,5 +35,19 @@ exports._factory = function(Promise, Tenant) {
 		};
 	};
 
+	self.update = function(req, res, next) {
+		var query = Tenant.findByIdAndUpdate(res.locals._tenant._id, {
+			displayName: req.body.displayName
+		}, {
+			new: true
+		});
+
+		Promise.resolve(query.exec()).then(function(tenant) {
+			res.locals._tenant = tenant;
+
+			next();
+		}).catch(next);
+	};
+
 	return self;
 };
