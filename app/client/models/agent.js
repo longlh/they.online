@@ -18,7 +18,7 @@
 				}
 			});
 
-			return Agent;
+			return Agent.class;
 		}
 	]);
 
