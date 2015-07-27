@@ -13,7 +13,7 @@ exports._factory = function(_, Promise, uuid, env, cache, Agent) {
 	function storeSession(res, sid, data) {
 		res.locals._session = {
 			id: sid,
-			data: _.pick(data, 'displayName') // pick some public information only
+			data: data
 		};
 	}
 

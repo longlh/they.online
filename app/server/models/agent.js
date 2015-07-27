@@ -45,6 +45,15 @@ exports._factory = function(_, crypto, db) {
 		},
 		authenticate: function(password) {
 			return this.makeHashedPassword(password) === this.hashedPassword;
+		},
+		toJSON: function() {
+			var raw = this.toObject();
+
+			// omit sensitive data
+			delete raw.salt;
+			delete raw.hashedPassword;
+
+			return raw;
 		}
 	};
 

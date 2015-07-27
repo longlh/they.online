@@ -1,7 +1,10 @@
 'use strict';
 
 exports._ = '/server/middlewares/util';
-exports._factory = function() {
+exports._requires = [
+	'@lodash'
+];
+exports._factory = function(_) {
 	var self = {};
 
 	self.render = function(template) {
@@ -17,8 +20,24 @@ exports._factory = function() {
 	};
 
 	self.json = function(key) {
+		function look(data, keys) {
+			if (_.isUndefined(data) || _.isNull(data)) {
+				return undefined;
+			}
+
+			var key = keys.shift();
+
+			if (key) {
+				// keep looking deeper
+				return look(data[key], keys);
+
+			}
+
+			return data;
+		}
+
 		return function(req, res, next) {
-			res.json(res.locals[key]);
+			res.json(look(res.locals, key.split('.')));
 		};
 	};
 

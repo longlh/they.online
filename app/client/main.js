@@ -49,5 +49,10 @@
 		function($http, storage) {
 			$http.defaults.headers.common.Authentication = storage.get('session').id;
 		}
+	]).run([
+		'/services/socket',
+		function(socket) {
+			socket.connect();
+		}
 	]);
 })();
