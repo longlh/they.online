@@ -7,12 +7,13 @@
 	]).config([
 		'$routeProvider',
 		'/services/template',
-		function($routeProvider, template) {
+		'/resolvers/session',
+		function($routeProvider, template, sessionResolver) {
 			$routeProvider.when('/', {
 				controller: '/controllers/dashboard',
 				templateUrl: template('dashboard'),
 				resolve: {
-					_session: '/resolvers/session'
+					_session: sessionResolver
 				}
 			}).otherwise({
 				redirectTo: '/'
