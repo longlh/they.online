@@ -10,7 +10,7 @@ exports._requires = [
 exports._factory = function(app, authFilter, tenant, util) {
 	app.use('/api', authFilter.blockUnauthenticated);
 
-	app.get('/api/sessions/current', util.status(204));
+	app.get('/api/sessions/current', util.json('_session'));
 
 	app.get('/api/tenants/current', tenant.current, util.json('_tenant'));
 

@@ -1,7 +1,7 @@
 ;(function() {
 	'use strict';
 
-	angular.module('easy-chat').factory('/resolvers/session', [
+	angular.module('easy-chat').constant('/resolvers/session', [
 		'$q',
 		'/services/storage',
 		function($q, storage) {
