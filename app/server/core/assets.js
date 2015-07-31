@@ -20,6 +20,7 @@ exports._factory = function(Promise, glob, app) {
 				return reject(err);
 			}
 
+			files.unshift('app/client/import.js');
 			files.unshift('app/client/main.js');
 			resolve(files);
 		});

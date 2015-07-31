@@ -1,26 +1,29 @@
 ;(function() {
 	'use strict';
 
-	var DEFAULT_METHODS = {
-			query: {
-				method: 'get',
-				isArray: true
-			},
-			get: {
-				method: 'get'
-			},
-			save: {
-				method: 'post'
-			},
-			delete: {
-				method: 'delete'
-			}
-		};
+	angular.module('easy-chat').factory('/services/model-factory', [
+		'@lodash',
+		'$resource',
+		function(_, $resource) {
+			var DEFAULT_METHODS = {
+				query: {
+					method: 'get',
+					isArray: true
+				},
+				get: {
+					method: 'get'
+				},
+				save: {
+					method: 'post'
+				},
+				delete: {
+					method: 'delete'
+				}
+			};
 
-	var ModelFactory = function($resource) {
+			var self = {};
 
-		return {
-			model: function(options) {
+			self.model = function(options) {
 				var Model = function(properties) {
 					_.assign(this, properties);
 
@@ -154,12 +157,9 @@
 					class: Model,
 					base: proto
 				};
-			}
-		};
-	};
+			};
 
-	angular.module('easy-chat').factory('/services/model-factory', [
-		'$resource',
-		ModelFactory
+			return self;
+		}
 	]);
 })();

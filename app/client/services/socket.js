@@ -3,28 +3,14 @@
 
 	angular.module('easy-chat').factory('/services/socket', [
 		function() {
-			var self = {};
-			var socket;
+			var socket = io();
 
-			self.connect = function() {
-				console.log('Socket connecting...');
+			socket.on('disconnect', function() {
+				console.warn('Disconnected.');
+				console.log('Reconnecting...');
+			});
 
-				socket = io();
-
-				socket.on('connect', function() {
-					console.log('Connected', socket);
-				});
-			};
-
-			self.send = function(data) {
-				socket.emit('message', data);
-			};
-
-			self.listen = function(cb) {
-				socket.on('message', cb);
-			};
-
-			return self;
+			return socket;
 		}
 	]);
 })();
