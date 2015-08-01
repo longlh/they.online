@@ -3,10 +3,11 @@
 exports._ = '/server/socket';
 exports._requires = [
 	'@bluebird',
+	'@node-uuid',
 	'@socket.io',
 	'/server/http'
 ];
-exports._factory = function(Promise, socketIO, httpServer) {
+exports._factory = function(Promise, UUID, socketIO, httpServer) {
 	var io = socketIO(httpServer);
 
 	io.on('connection', function(socket) {
@@ -38,6 +39,7 @@ exports._factory = function(Promise, socketIO, httpServer) {
 					code: 'CHAT',
 					from: socket.id,
 					data: {
+						id: UUID.v4(),
 						chat: message.data.chat,
 						agent: message.data.agent,
 						visitor: message.data.visitor
