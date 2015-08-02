@@ -37,7 +37,16 @@
 				socket.on('connect', join);
 			};
 
-			Emitter.on('message', console.info.bind(console));
+			self.reply = function(visitor, message) {
+				socket.emit('message', {
+					code: 'CHAT',
+					data: {
+						visitor: visitor,
+						agent: storage.get('session').data._id,
+						chat: message
+					}
+				});
+			};
 
 			return self;
 		}
