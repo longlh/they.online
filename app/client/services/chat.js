@@ -26,7 +26,7 @@
 
 			socket.on('message', function(message) {
 				// switch cases
-				Emitter.emit('message', message);
+				Emitter.emit('message:receive', message);
 			});
 
 			var self = {};
