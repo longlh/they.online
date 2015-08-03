@@ -19,6 +19,10 @@
 				});
 			}
 
+			var conversations = {};
+
+			storage.put('conversations', conversations);
+
 			// init socket
 			socket.on('disconnect', function() {
 
@@ -26,7 +30,12 @@
 
 			socket.on('message', function(message) {
 				// switch cases
-				Emitter.emit('message:receive', message);
+				if (message.code === 'CHAT') {
+					conversations[message.data.visitor] = conversations[message.data.visitor] || [];
+
+					conversations[message.data.visitor].push(message);
+					Emitter.emit('message:receive', message);
+				}
 			});
 
 			var self = {};
