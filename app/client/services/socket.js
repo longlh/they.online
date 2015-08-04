@@ -1,8 +1,9 @@
 ;(function() {
 	'use strict';
 
-	angular.module('easy-chat').factory('/services/socket', [
-		function() {
+	angular.module(APP).factory('/services/socket', [
+		'@io',
+		function(io) {
 			var socket = io();
 
 			socket.on('disconnect', function() {

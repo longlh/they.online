@@ -1,7 +1,7 @@
 ;(function() {
 	'use strict';
 
-	angular.module('easy-chat').config([
+	angular.module(APP).config([
 		'$routeProvider',
 		'/services/template',
 		'/resolvers/session',

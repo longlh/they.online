@@ -1,7 +1,7 @@
 ;(function() {
 	'use strict';
 
-	angular.module('easy-chat').factory('/services/storage', [
+	angular.module(APP).factory('/services/storage', [
 		function() {
 			var storage = {};
 			var self = {};

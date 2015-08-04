@@ -1,7 +1,7 @@
 ;(function() {
 	'use strict';
 
-	angular.module('easy-chat').controller('/controllers/chat', [
+	angular.module(APP).controller('/controllers/chat', [
 		'$scope',
 		'/services/event-emitter',
 		'/services/chat',
@@ -17,20 +17,22 @@
 
 				chat.reply(visitor, $scope.replies[visitor]);
 
+				// reset checkbox after send reply
 				$scope.replies[visitor] = '';
 			};
-
-			// agent actives
-			Emitter.emit('agent:active');
 
 			// agent inactives
 			$scope.$on('$locationChangeStart', function() {
 				Emitter.emit('agent:inactive');
 			});
 
+			// force scope does dirty check
 			Emitter.on('message:receive', function(message) {
 				$scope.$digest();
 			});
+
+			// agent actives
+			Emitter.emit('agent:active');
 		}
 	]);
 })();

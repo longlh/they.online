@@ -1,5 +1,6 @@
 ;(function() {
 	'use strict';
 
-	angular.module('easy-chat').constant('@lodash', _);
+	angular.module(APP).constant('@lodash', _);
+	angular.module(APP).constant('@io', io);
 })();

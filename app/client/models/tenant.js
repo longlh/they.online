@@ -1,7 +1,7 @@
 ;(function() {
 	'use strict';
 
-	angular.module('easy-chat').factory('/models/tenant', [
+	angular.module(APP).factory('/models/tenant', [
 		'/services/model-factory',
 		function(ModelFactory) {
 			var Tenant = ModelFactory.model({

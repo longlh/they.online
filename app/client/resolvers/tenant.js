@@ -1,7 +1,7 @@
 ;(function() {
 	'use strict';
 
-	angular.module('easy-chat').constant('/resolvers/tenant', [
+	angular.module(APP).constant('/resolvers/tenant', [
 		'$route',
 		'/models/tenant',
 		function($route, Tenant) {

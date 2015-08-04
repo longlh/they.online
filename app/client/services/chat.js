@@ -1,11 +1,12 @@
 ;(function() {
 	'use strict';
 
-	angular.module('easy-chat').factory('/services/chat', [
+	angular.module(APP).factory('/services/chat', [
+		'/models/conversation',
 		'/services/event-emitter',
 		'/services/socket',
 		'/services/storage',
-		function(Emitter, socket, storage) {
+		function(Conversation, Emitter, socket, storage) {
 			function join() {
 				console.log('Connected! Join channel.');
 
@@ -31,7 +32,7 @@
 			socket.on('message', function(message) {
 				// switch cases
 				if (message.code === 'CHAT') {
-					conversations[message.data.visitor] = conversations[message.data.visitor] || [];
+					conversations[message.data.visitor] = conversations[message.data.visitor] || new Conversation(message.data.visitor);
 
 					conversations[message.data.visitor].push(message);
 					Emitter.emit('message:receive', message);

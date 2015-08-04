@@ -1,7 +1,7 @@
 ;(function() {
 	'use strict';
 
-	angular.module('easy-chat').factory('/services/model-factory', [
+	angular.module(APP).factory('/services/model-factory', [
 		'@lodash',
 		'$resource',
 		function(_, $resource) {

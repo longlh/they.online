@@ -1,7 +1,7 @@
 ;(function() {
 	'use strict';
 
-	angular.module('easy-chat').directive('comChatNotification', [
+	angular.module(APP).directive('comChatNotification', [
 		'/services/partial',
 		function(partial) {
 			return {
@@ -27,16 +27,15 @@
 						});
 
 						Emitter.on('agent:active', function() {
+							counting = false;
+
 							$timeout(function() {
-								counting = false;
 								$scope.inbox = 0;
 							});
 						});
 
 						Emitter.on('agent:inactive', function() {
-							$timeout(function() {
-								counting = true;
-							});
+							counting = true;
 						});
 					}
 				]

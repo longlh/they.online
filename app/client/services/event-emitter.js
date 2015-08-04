@@ -1,7 +1,7 @@
 ;(function() {
 	'use strict';
 
-	angular.module('easy-chat').factory('/services/event-emitter', [
+	angular.module(APP).factory('/services/event-emitter', [
 		'$rootScope',
 		function($rootScope) {
 			var self = {};

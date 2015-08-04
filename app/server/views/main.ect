@@ -30,13 +30,18 @@
 		<script src="/lib/angular/angular.min.js"></script>
 		<script src="/lib/angular-route/angular-route.min.js"></script>
 		<script src="/lib/angular-resource/angular-resource.min.js"></script>
+		<script>
+		<!--
+		var APP = 'easy-chat';
+		-->
+		</script>
 		<% for file in @assets : %>
 		<script src="<%= file %>"></script>
 		<% end %>
 		<% if @_session : %>
 		<script>
 		<!--
-			angular.module('easy-chat').constant('data', <%- JSON.stringify(@_session) %>);
+			angular.module(APP).constant('data', <%- JSON.stringify(@_session) %>);
 		-->
 		</script>
 		<% end %>

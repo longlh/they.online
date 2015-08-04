@@ -1,7 +1,7 @@
 ;(function() {
 	'use strict';
 
-	angular.module('easy-chat').controller('/controllers/tenant', [
+	angular.module(APP).controller('/controllers/tenant', [
 		'$scope',
 		'_tenant',
 		function($scope, tenant) {
