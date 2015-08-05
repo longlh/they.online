@@ -32,7 +32,6 @@ exports._factory = function(Promise, env) {
 
 		if (expiry) {
 			timeout[key] = setTimeout(function() {
-				console.log('clear');
 				self.clear(key);
 			}, expiry);
 		}

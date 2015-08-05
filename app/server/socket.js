@@ -10,6 +10,7 @@ exports._requires = [
 exports._factory = function(Promise, UUID, socketIO, httpServer) {
 	var io = socketIO(httpServer);
 
+	// socket connected
 	io.on('connection', function(socket) {
 		// listen message
 		socket.on('message', function(message) {
@@ -54,6 +55,7 @@ exports._factory = function(Promise, UUID, socketIO, httpServer) {
 			}
 		});
 
+		// socket disconnected
 		socket.on('disconnect', function() {
 			console.log('[' +
 					socket.id +
