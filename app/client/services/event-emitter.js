@@ -7,11 +7,11 @@
 			var self = {};
 
 			self.emit = function(event, message) {
-				$rootScope.$emit(event, message);
+				return $rootScope.$emit(event, message);
 			};
 
 			self.on = function(event, handler) {
-				$rootScope.$on(event, function(event, data) {
+				return $rootScope.$on(event, function(event, data) {
 					handler(data);
 				});
 			};

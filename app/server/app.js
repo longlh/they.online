@@ -34,11 +34,6 @@ exports._factory = function(path, express, bodyParser, cookieParser, auth, env) 
 
 	app.use(cookieParser());
 
-	// app.use(session({
-	// 	secret: 'xxx',
-	// 	resave: false,
-	// 	saveUninitialized: false
-	// }));
 	app.use(auth.initialize());
 	app.use(auth.session());
 

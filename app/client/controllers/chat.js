@@ -7,6 +7,12 @@
 		'/services/chat',
 		'/services/storage',
 		function($scope, Emitter, chat, storage) {
+			// force scope does dirty check
+			var off = Emitter.on('message:receive', function() {
+				console.log('xxx');
+				$scope.$digest();
+			});
+
 			$scope.conversations = storage.get('conversations');
 			$scope.replies = {};
 
@@ -22,13 +28,9 @@
 			};
 
 			// agent inactives
-			$scope.$on('$locationChangeStart', function() {
+			$scope.$on('$destroy', function() {
 				Emitter.emit('agent:inactive');
-			});
-
-			// force scope does dirty check
-			Emitter.on('message:receive', function(message) {
-				$scope.$digest();
+				off();
 			});
 
 			// agent actives
