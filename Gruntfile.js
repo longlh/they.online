@@ -2,6 +2,9 @@
 
 module.exports = function(grunt) {
 	grunt.initConfig({
+		clean: {
+			src: ['build/public']
+		},
 		jshint: {
 			server: {
 				src: [
@@ -37,6 +40,23 @@ module.exports = function(grunt) {
 				src: '<%= jshint.client.src %>'
 			}
 		},
+		stylus: {
+			options: {
+				use: [
+					require('kouto-swiss')
+				]
+			},
+			public: {
+				files: {
+					'build/public/css/app.css': 'app/public/stylus/app.styl'
+				}
+			},
+			app: {
+				files: {
+					'build/public/css/main.css': 'app/client/import.styl'
+				}
+			}
+		},
 		develop: {
 			app: {
 				file: 'index.js'
@@ -57,6 +77,13 @@ module.exports = function(grunt) {
 					'<%= jshint.client.src %>'
 				],
 				tasks: ['jscs:client', 'jshint:client']
+			},
+			stylus: {
+				files: [
+					'<%= stylus.public.files',
+					'<%= stylus.app.files'
+				],
+				tasks: ['clean', 'stylus', 'develop']
 			}
 		},
 	});
@@ -64,5 +91,6 @@ module.exports = function(grunt) {
 	require('load-grunt-tasks')(grunt);
 
 	grunt.registerTask('static', ['jscs', 'jshint']);
-	grunt.registerTask('default', ['static', 'develop', 'watch']);
+	grunt.registerTask('build', ['clean', 'stylus']);
+	grunt.registerTask('default', ['static', 'build', 'develop', 'watch']);
 };

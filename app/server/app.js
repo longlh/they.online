@@ -25,6 +25,7 @@ exports._factory = function(path, express, bodyParser, cookieParser, auth, env) 
 		app.use('/app', express.static(path.resolve(env.rootDir, 'app/client')));
 		app.use('/public', express.static(path.resolve(env.rootDir, 'app/public')));
 		app.use('/lib', express.static(path.resolve(env.rootDir, 'bower_components')));
+		app.use('/build', express.static(path.resolve(env.rootDir, 'build/public')));
 	}
 
 	app.use(bodyParser.json());

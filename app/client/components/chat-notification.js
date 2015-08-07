@@ -37,6 +37,10 @@
 						Emitter.on('agent:inactive', function() {
 							counting = true;
 						});
+
+						$scope.$on('$destroy', function() {
+							// TODO de-register all event registrations
+						});
 					}
 				]
 			};
