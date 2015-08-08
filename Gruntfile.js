@@ -3,7 +3,12 @@
 module.exports = function(grunt) {
 	grunt.initConfig({
 		clean: {
-			src: ['build/public']
+			css: {
+				src: ['build/public/css']
+			},
+			js: {
+				src: ['build/public/js']
+			}
 		},
 		jshint: {
 			server: {
@@ -47,14 +52,26 @@ module.exports = function(grunt) {
 				]
 			},
 			public: {
-				files: {
-					'build/public/css/app.css': 'app/public/stylus/app.styl'
-				}
+				files: [{
+					cwd: 'app/public/stylus',
+					src: [
+						'**/*.styl',
+						'!_*.styl'
+					],
+					dest: 'build/public/css/pages',
+					expand: true
+				}]
 			},
 			app: {
-				files: {
-					'build/public/css/main.css': 'app/client/import.styl'
-				}
+				files: [{
+					cwd: 'app/client',
+					src: [
+						'**/*.styl',
+						'!_*.styl'
+					],
+					dest: 'build/public/css/app',
+					expand: true
+				}]
 			}
 		},
 		develop: {
@@ -80,10 +97,9 @@ module.exports = function(grunt) {
 			},
 			stylus: {
 				files: [
-					'<%= stylus.public.files',
-					'<%= stylus.app.files'
+					'app/**/*.styl'
 				],
-				tasks: ['clean', 'stylus', 'develop']
+				tasks: ['clean:css', 'stylus', 'develop']
 			}
 		},
 	});
