@@ -66,7 +66,7 @@ module.exports = function(grunt) {
 				files: [{
 					cwd: 'app/client',
 					src: [
-						'**/*.styl',
+						'*.styl',
 						'!_*.styl'
 					],
 					dest: 'build/public/css/app',
