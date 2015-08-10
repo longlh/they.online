@@ -4,10 +4,10 @@ module.exports = function(grunt) {
 	grunt.initConfig({
 		clean: {
 			css: {
-				src: ['build/public/css']
+				src: ['build/out/css']
 			},
 			js: {
-				src: ['build/public/js']
+				src: ['build/out/js']
 			}
 		},
 		jshint: {
@@ -58,7 +58,8 @@ module.exports = function(grunt) {
 						'**/*.styl',
 						'!_*.styl'
 					],
-					dest: 'build/public/css/pages',
+					dest: 'build/out/css/pages',
+					ext: '.css',
 					expand: true
 				}]
 			},
@@ -69,7 +70,8 @@ module.exports = function(grunt) {
 						'*.styl',
 						'!_*.styl'
 					],
-					dest: 'build/public/css/app',
+					dest: 'build/out/css/app',
+					ext: '.css',
 					expand: true
 				}]
 			}

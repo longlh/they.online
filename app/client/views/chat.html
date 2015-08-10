@@ -1,8 +1,8 @@
 <div>
 	<h1>Chat room</h1>
 	<div data-ng-repeat="(visitor, conversation) in conversations">
-		<h3>{{visitor}}</h3>
-		<div data-ng-repeat="line in conversation">{{line.data.chat}}</div>
+		<h3>Visitor: {{visitor}}</h3>
+		<div data-ng-repeat="line in conversation">Message: {{line.data.chat}}</div>
 		<form data-ng-submit="reply(visitor)">
 			<input type="text" data-ng-model="replies[visitor]"><br>
 			<button type="submit">Reply</button>
