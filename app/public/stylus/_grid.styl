@@ -1,0 +1,17 @@
+_total_cols = 10
+
+.gs
+	gs('fluid', _total_cols)
+
+	.row
+		row()
+
+		for size in (1..(_total_cols - 1))
+			.col-{size}
+				col(size)
+
+			.offset-{size}
+				offset(size)
+
+		.col
+			col()

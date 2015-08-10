@@ -49,7 +49,8 @@ module.exports = function(grunt) {
 			options: {
 				use: [
 					require('kouto-swiss')
-				]
+				],
+				compress: false
 			},
 			public: {
 				files: [{
@@ -58,19 +59,7 @@ module.exports = function(grunt) {
 						'**/*.styl',
 						'!_*.styl'
 					],
-					dest: 'build/out/css/pages',
-					ext: '.css',
-					expand: true
-				}]
-			},
-			app: {
-				files: [{
-					cwd: 'app/client',
-					src: [
-						'*.styl',
-						'!_*.styl'
-					],
-					dest: 'build/out/css/app',
+					dest: 'build/out/css',
 					ext: '.css',
 					expand: true
 				}]
