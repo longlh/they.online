@@ -23,4 +23,8 @@ exports._factory = function(app, filter, util) {
 			id: req.params.id
 		});
 	});
+
+	app.get('/test', function(req, res, next) {
+		res.render('test');
+	});
 };

@@ -1,0 +1,24 @@
+.input
+	border 1px solid BORDER_COLOR
+
+	&.input-single-line
+		size false LINE_HEIGHT
+
+	&.input-multi-line
+		line-height (LINE_HEIGHT - 6)
+		resize vertical
+
+	&.input-warning
+		outline none
+		border 1px solid BORDER_COLOR_WARNING
+		box-shadow 1px 0 5px BORDER_COLOR_WARNING
+
+	&:hover
+		outline none
+		border 1px solid BORDER_COLOR_HOVER
+		box-shadow 1px 0 5px BORDER_COLOR_HOVER
+
+	&:focus
+		outline none
+		border 1px solid BORDER_COLOR_FOCUS
+		box-shadow 1px 0 5px BORDER_COLOR_FOCUS

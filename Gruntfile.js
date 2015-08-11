@@ -57,7 +57,7 @@ module.exports = function(grunt) {
 					cwd: 'app/public/stylus',
 					src: [
 						'**/*.styl',
-						'!_*.styl'
+						'!**/_*.styl'
 					],
 					dest: 'build/out/css',
 					ext: '.css',

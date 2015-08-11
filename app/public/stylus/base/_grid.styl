@@ -1,0 +1,24 @@
+_SUPPORTED_GRID_SYSTEM = 8 10 12 16
+
+_grid_system(__TYPE, __TOTAL_COLS)
+	gs(__TYPE, __TOTAL_COLS)
+
+	.row
+		row()
+
+		for __SIZE in (1..(__TOTAL_COLS - 1))
+			.col-{__SIZE}
+				col(__SIZE)
+
+			.offset-{__SIZE}
+				offset(__SIZE)
+
+		.col
+			col()
+
+for __GRID_SYSTEM in _SUPPORTED_GRID_SYSTEM
+	.gs-{__GRID_SYSTEM}
+		_grid_system('fixed', __GRID_SYSTEM)
+
+		&.gs-fluid
+			_grid_system('fluid', __GRID_SYSTEM)

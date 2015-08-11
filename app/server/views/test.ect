@@ -1,0 +1,120 @@
+<% extend 'layouts/base' %>
+
+<% block 'end_head' : %>
+<style>
+	.gray {
+		background-color: gray;
+		border: 1px solid black;
+	}
+	.yellow {
+		background-color: yellow;
+		border: 1px solid black;
+	}
+	h1 {
+		text-align: center;
+	}
+</style>
+
+<% end %>
+
+<h1>Form</h1>
+<div class="gs-12 gs-fluid">
+	<div class="row">
+		<div class="col-4">
+			<form class="form">
+				<div class="form-line">
+					<div class="form-label">
+						<label class="label">Text Box</label>
+					</div>
+					<div class="form-control">
+						<input class="input input-single-line" type="text">
+					</div>
+				</div>
+				<div class="form-line">
+					<div class="form-label">
+						<label class="label">Password</label>
+					</div>
+					<div class="form-control">
+						<input class="input input-single-line input-warning" type="password">
+					</div>
+				</div>
+				<div class="form-line">
+					<div class="form-label">
+						<label class="label">Select</label>
+					</div>
+					<div class="form-control">
+						<select class="input input-single-line">
+							<option>1st option</option>
+							<option>2nd option</option>
+							<option>3rd option</option>
+							<option>4th option</option>
+							<option>5th option</option>
+						</select>
+					</div>
+				</div>
+			</form>
+		</div>
+		<div class="col-4">
+			<form class="form">
+				<div class="form-line">
+					<div class="form-label">
+						<label class="label">Text Area</label>
+					</div>
+					<div class="form-control">
+						<textarea class="input input-multi-line" rows="5"></textarea>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+<% for cols in [8, 10, 12, 16] : %>
+<h1>Fixed Grid System with <%= cols %> columns</h1>
+<div class="gs-<%= cols %>">
+	<% for size in [1..(cols - 1)] : %>
+	<% times = Math.floor(cols / size) %>
+	<% left = cols % size %>
+	<div class="row">
+		<% for col in [1..times] : %>
+		<div class="col-<%= size %> gray">
+			<span>Col <%= size %></span>
+		</div>
+		<% end %>
+
+		<% if left > 0 : %>
+		<div class="col-<%= left %> yellow">
+			<span>Col <%= left %></span>
+		</div>
+		<% end %>
+	</div>
+	<br>
+	<br>
+	<% end %>
+</div>
+<% end %>
+
+<% for cols in [8, 10, 12, 16] : %>
+<h1>Fluid Grid System with <%= cols %> columns</h1>
+<div class="gs-<%= cols %> gs-fluid">
+	<% for size in [1..(cols - 1)] : %>
+	<% times = Math.floor(cols / size) %>
+	<% left = cols % size %>
+	<div class="row">
+		<% for col in [1..times] : %>
+		<div class="col-<%= size %> gray">
+			<span>Col <%= size %></span>
+		</div>
+		<% end %>
+
+		<% if left > 0 : %>
+		<div class="col-<%= left %> yellow">
+			<span>Col <%= left %></span>
+		</div>
+		<% end %>
+	</div>
+	<br>
+	<br>
+	<% end %>
+</div>
+<% end %>
