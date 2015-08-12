@@ -1,0 +1,99 @@
+_FORM_LABEL = 200px
+_FORM_SPACE = 10px
+_FORM_LINE_HEIGHT = 28px
+_INPUT_COLOR_INACTIVE = #eee
+
+.form
+	.form-line
+		clearfix()
+		margin (_FORM_SPACE / 2) 0
+
+		.form-label
+			float left
+			size _FORM_LABEL false
+			line-height _FORM_LINE_HEIGHT
+
+		.form-control
+			margin-left _FORM_LABEL
+
+		.input
+			size 100% false
+
+			&.input-single-line
+				size false _FORM_LINE_HEIGHT
+
+			&.input-multi-line
+				line-height (_FORM_LINE_HEIGHT - 6)
+				resize vertical
+
+.checkbox, .radio
+	size false _FORM_LINE_HEIGHT
+
+	input
+		display none
+		visibility hidden
+
+	label
+		span
+			position relative
+			top -1px
+
+		i
+			cursor pointer
+			position relative
+			top 3px
+			content ''
+			display inline-block
+			size 22px
+			border 1px solid BORDER_COLOR
+			margin-right 10px
+
+			&:before
+				content ''
+				display inline-block
+				margin 2px
+				size 16px
+
+	input:checked
+		& + label
+			i:before
+				background BORDER_COLOR
+
+	input:disabled
+		& + label
+			i
+				cursor not-allowed
+				background _INPUT_COLOR_INACTIVE
+
+.radio
+	label
+		i, i:before
+			border-radius 50%
+
+.input
+	border 1px solid BORDER_COLOR
+
+	&.input-warning
+		outline none
+		border 1px solid BORDER_COLOR_WARNING
+
+	&:hover
+		outline none
+		border 1px solid BORDER_COLOR_HOVER
+		box-shadow 1px 0 5px BORDER_COLOR_HOVER
+
+	&:focus
+	&:active
+		outline none
+		border 1px solid BORDER_COLOR_FOCUS
+		box-shadow 1px 0 5px BORDER_COLOR_FOCUS
+
+	&:disabled
+		outline none
+		border 1px solid BORDER_COLOR
+		box-shadow none
+		cursor not-allowed
+		background _INPUT_COLOR_INACTIVE
+
+	&[readonly]
+		background _INPUT_COLOR_INACTIVE

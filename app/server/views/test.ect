@@ -17,57 +17,160 @@
 
 <% end %>
 
+<h1>Table</h1>
+<table class="table table-fluid table-border">
+	<thead>
+		<tr>
+			<% for cell in [1..10] : %>
+			<th>
+				<span>Header</span>
+			</th>
+			<% end %>
+		</tr>
+	</thead>
+	<tbody>
+		<% for row in [1..5] : %>
+		<tr>
+			<% for cell in [1..10] : %>
+			<td>
+				<span>Cell</span>
+			</td>
+			<% end %>
+		</tr>
+		<% end %>
+	</tbody>
+</table>
+<br>
+<br>
+<table class="table table-border">
+	<thead>
+		<tr>
+			<% for cell in [1..10] : %>
+			<th>
+				<span>Header</span>
+			</th>
+			<% end %>
+		</tr>
+	</thead>
+	<tbody>
+		<% for row in [1..5] : %>
+		<tr>
+			<% for cell in [1..10] : %>
+			<td>
+				<span>Cell</span>
+			</td>
+			<% end %>
+		</tr>
+		<% end %>
+	</tbody>
+</table>
+<hr>
+
 <h1>Form</h1>
 <div class="gs-12 gs-fluid">
-	<div class="row">
+	<div class="row form">
 		<div class="col-4">
-			<form class="form">
-				<div class="form-line">
-					<div class="form-label">
-						<label class="label">Text Box</label>
-					</div>
-					<div class="form-control">
-						<input class="input input-single-line" type="text">
-					</div>
+			<div class="form-line">
+				<div class="form-label">
+					<label class="label">Text Box</label>
 				</div>
-				<div class="form-line">
-					<div class="form-label">
-						<label class="label">Password</label>
-					</div>
-					<div class="form-control">
-						<input class="input input-single-line input-warning" type="password">
-					</div>
+				<div class="form-control">
+					<input type="text" class="input input-single-line">
 				</div>
-				<div class="form-line">
-					<div class="form-label">
-						<label class="label">Select</label>
-					</div>
-					<div class="form-control">
-						<select class="input input-single-line">
-							<option>1st option</option>
-							<option>2nd option</option>
-							<option>3rd option</option>
-							<option>4th option</option>
-							<option>5th option</option>
-						</select>
-					</div>
+			</div>
+			<div class="form-line">
+				<div class="form-label">
+					<label class="label">Password</label>
 				</div>
-			</form>
+				<div class="form-control">
+					<input type="password" class="input input-single-line input-warning">
+				</div>
+			</div>
+			<div class="form-line">
+				<div class="form-label">
+					<label class="label">Disabled</label>
+				</div>
+				<div class="form-control">
+					<input type="text" class="input input-single-line" disabled>
+				</div>
+			</div>
+			<div class="form-line">
+				<div class="form-label">
+					<label class="label">Readonly</label>
+				</div>
+				<div class="form-control">
+					<input type="text" class="input input-single-line" readonly>
+				</div>
+			</div>
+			<div class="form-line">
+				<div class="form-label">
+					<label class="label">Select</label>
+				</div>
+				<div class="form-control">
+					<select class="input input-single-line">
+						<option>1st option</option>
+						<option>2nd option</option>
+						<option>3rd option</option>
+						<option>4th option</option>
+						<option>5th option</option>
+					</select>
+				</div>
+			</div>
 		</div>
 		<div class="col-4">
-			<form class="form">
-				<div class="form-line">
-					<div class="form-label">
-						<label class="label">Text Area</label>
+			<div class="form-line">
+				<div class="form-label">
+					<label class="label">Text Area</label>
+				</div>
+				<div class="form-control">
+					<textarea class="input input-multi-line" rows="5"></textarea>
+				</div>
+			</div>
+		</div>
+		<div class="col-4">
+			<div class="form-line">
+				<div class="form-label">
+					<label class="label">Check Box</label>
+				</div>
+				<div class="form-control">
+					<div class="checkbox">
+						<input type="checkbox" id="cbx1" checked>
+						<label for="cbx1"><i></i><span>1st option</span></label>
 					</div>
-					<div class="form-control">
-						<textarea class="input input-multi-line" rows="5"></textarea>
+					<div class="checkbox">
+						<input type="checkbox" id="cbx2">
+						<label for="cbx2"><i></i><span>2nd option</span></label>
+					</div>
+					<div class="checkbox">
+						<input type="checkbox" id="cbx3" disabled>
+						<label for="cbx3"><i></i><span>2nd option</span></label>
 					</div>
 				</div>
-			</form>
+			</div>
+			<div class="form-line">
+				<div class="form-label">
+					<label class="label">Radio Button</label>
+				</div>
+				<div class="form-control">
+					<div class="radio">
+						<input type="radio" id="rd1" name="radio" checked>
+						<label for="rd1"><i></i><span>1st option</span></label>
+					</div>
+					<!--<div class="radio">
+						<input type="radio" id="rd2" name="radio">
+						<label for="rd2"><i></i><span>2nd option</span></label>
+					</div>
+					<div class="radio">
+						<input type="radio" id="rd3" name="radio" disabled>
+						<label for="rd3"><i></i><span>2nd option</span></label>
+					</div>-->
+				</div>
+			</div>
 		</div>
 	</div>
 </div>
+
+<hr>
 
 <% for cols in [8, 10, 12, 16] : %>
 <h1>Fixed Grid System with <%= cols %> columns</h1>
