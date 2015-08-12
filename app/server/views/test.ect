@@ -1,9 +1,11 @@
 <% extend 'layouts/base' %>
 
+<% sample = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.' %>
+
 <% block 'end_head' : %>
 <style>
 	.gray {
-		background-color: gray;
+		background-color: lightgray;
 		border: 1px solid black;
 	}
 	.yellow {
@@ -17,7 +19,40 @@
 
 <% end %>
 
-<h1>Table</h1>
+<h1>Panels</h1>
+<div class="gs-16 gs-fluid">
+	<div class="row">
+		<div class="col-4-offset-1 panel">
+			<div class="panel-header text-center">
+				<span>Header Only</span>
+			</div>
+			<div class="panel-body text-left">
+				<span><%= sample %></span>
+			</div>
+		</div>
+		<div class="col-4-offset-1 panel">
+			<div class="panel-header text-center">
+				<span>Header</span>
+			</div>
+			<div class="panel-body text-justify">
+				<span><%= sample %></span>
+			</div>
+			<div class="panel-footer text-center">
+				<span>Footer</span>
+			</div>
+		</div>
+		<div class="col-4-offset-1 panel">
+			<div class="panel-body text-right">
+				<span><%= sample %></span>
+			</div>
+			<div class="panel-footer text-center">
+				<span>Footer Only</span>
+			</div>
+		</div>
+	</div>
+</div>
+<hr>
+<h1>Tables</h1>
 <table class="table table-fluid table-border">
 	<thead>
 		<tr>
@@ -65,8 +100,7 @@
 	</tbody>
 </table>
 <hr>
-
-<h1>Form</h1>
+<h1>Forms & Inputs</h1>
 <div class="gs-12 gs-fluid">
 	<div class="row form">
 		<div class="col-4">
@@ -123,7 +157,15 @@
 					<label class="label">Text Area</label>
 				</div>
 				<div class="form-control">
-					<textarea class="input input-multi-line" rows="5"></textarea>
+					<textarea class="input input-multi-line" rows="5"><%= sample %></textarea>
+				</div>
+			</div>
+			<div class="form-line">
+				<div class="form-label">
+					<label class="label">Text Area</label>
+				</div>
+				<div class="form-control">
+					<textarea class="input input-multi-line" rows="3"></textarea>
 				</div>
 			</div>
 		</div>
@@ -156,23 +198,21 @@
 						<input type="radio" id="rd1" name="radio" checked>
 						<label for="rd1"><i></i><span>1st option</span></label>
 					</div>
-					<!--<div class="radio">
+					<div class="radio">
 						<input type="radio" id="rd2" name="radio">
 						<label for="rd2"><i></i><span>2nd option</span></label>
 					</div>
 					<div class="radio">
 						<input type="radio" id="rd3" name="radio" disabled>
 						<label for="rd3"><i></i><span>2nd option</span></label>
-					</div>-->
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
-
 <hr>
-
-<% for cols in [8, 10, 12, 16] : %>
+<% for cols in [10, 12, 16] : %>
 <h1>Fixed Grid System with <%= cols %> columns</h1>
 <div class="gs-<%= cols %>">
 	<% for size in [1..(cols - 1)] : %>
@@ -181,23 +221,22 @@
 	<div class="row">
 		<% for col in [1..times] : %>
 		<div class="col-<%= size %> gray">
-			<span>Col <%= size %></span>
+			<span>col-<%= size %></span>
 		</div>
 		<% end %>
 
 		<% if left > 0 : %>
 		<div class="col-<%= left %> yellow">
-			<span>Col <%= left %></span>
+			<span>col-<%= left %></span>
 		</div>
 		<% end %>
 	</div>
 	<br>
-	<br>
 	<% end %>
 </div>
 <% end %>
-
-<% for cols in [8, 10, 12, 16] : %>
+<hr>
+<% for cols in [10, 12, 16] : %>
 <h1>Fluid Grid System with <%= cols %> columns</h1>
 <div class="gs-<%= cols %> gs-fluid">
 	<% for size in [1..(cols - 1)] : %>
@@ -206,17 +245,16 @@
 	<div class="row">
 		<% for col in [1..times] : %>
 		<div class="col-<%= size %> gray">
-			<span>Col <%= size %></span>
+			<span>col-<%= size %></span>
 		</div>
 		<% end %>
 
 		<% if left > 0 : %>
 		<div class="col-<%= left %> yellow">
-			<span>Col <%= left %></span>
+			<span>col-<%= left %></span>
 		</div>
 		<% end %>
 	</div>
-	<br>
 	<br>
 	<% end %>
 </div>

@@ -34,6 +34,8 @@ _INPUT_COLOR_INACTIVE = #eee
 		visibility hidden
 
 	label
+		user-select none
+
 		span
 			position relative
 			top -1px
@@ -53,6 +55,19 @@ _INPUT_COLOR_INACTIVE = #eee
 				display inline-block
 				margin 2px
 				size 16px
+
+		&:hover
+			i
+				outline none
+				border 1px solid BORDER_COLOR_HOVER
+				box-shadow 1px 0 5px BORDER_COLOR_HOVER
+
+		&:focus, &:active
+			i
+				outline none
+				border 1px solid BORDER_COLOR_FOCUS
+				box-shadow 1px 0 5px BORDER_COLOR_FOCUS
+
 
 	input:checked
 		& + label
@@ -82,13 +97,12 @@ _INPUT_COLOR_INACTIVE = #eee
 		border 1px solid BORDER_COLOR_HOVER
 		box-shadow 1px 0 5px BORDER_COLOR_HOVER
 
-	&:focus
-	&:active
+	&:focus, &:active
 		outline none
 		border 1px solid BORDER_COLOR_FOCUS
 		box-shadow 1px 0 5px BORDER_COLOR_FOCUS
 
-	&:disabled
+	&:disabled, &[disabled]
 		outline none
 		border 1px solid BORDER_COLOR
 		box-shadow none

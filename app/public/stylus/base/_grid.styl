@@ -1,17 +1,20 @@
-_SUPPORTED_GRID_SYSTEM = 8 10 12 16
+_SUPPORTED_GRID_SYSTEM = 10 12 16
 
 _grid_system(__TYPE, __TOTAL_COLS)
 	gs(__TYPE, __TOTAL_COLS)
 
 	.row
+		clearfix()
 		row()
 
 		for __SIZE in (1..(__TOTAL_COLS - 1))
 			.col-{__SIZE}
 				col(__SIZE)
 
-			.offset-{__SIZE}
-				offset(__SIZE)
+			for __OFFSET in (1..(__TOTAL_COLS - __SIZE))
+				.col-{__SIZE}-offset-{__OFFSET}
+					col(__SIZE)
+					offset(__OFFSET)
 
 		.col
 			col()
