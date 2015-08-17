@@ -1,4 +1,4 @@
-_SUPPORTED_GRID_SYSTEM = 10 12 16
+_SUPPORTED_GRID_SYSTEMS = 10 12 16
 
 _grid_system(__TYPE, __TOTAL_COLS)
 	gs(__TYPE, __TOTAL_COLS)
@@ -19,7 +19,7 @@ _grid_system(__TYPE, __TOTAL_COLS)
 		.col
 			col()
 
-for __GRID_SYSTEM in _SUPPORTED_GRID_SYSTEM
+for __GRID_SYSTEM in _SUPPORTED_GRID_SYSTEMS
 	.gs-{__GRID_SYSTEM}
 		_grid_system('fixed', __GRID_SYSTEM)
 

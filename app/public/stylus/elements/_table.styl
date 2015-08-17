@@ -6,8 +6,20 @@
 		td, th
 			border 1px solid BORDER_COLOR
 
+	&.table-strip
+		tbody
+			tr:nth-child(2n+1)
+				background COLOR_PASSIVE
+
+	&.table-hover
+		tbody
+			tr:hover
+				background COLOR_ACTIVE
+
 	td, th
 		padding CELL_PADDING
+		border-top 1px solid BORDER_COLOR
+		border-bottom 1px solid BORDER_COLOR
 
 	th
 		font-weight bold

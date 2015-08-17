@@ -1,7 +1,49 @@
 <% extend 'layouts/base' %>
 
-<form action="/signin" method="post">
-	<input type="text" name="uid"><br>
-	<input type="password" name="pwd"><br>
-	<button type="submit">Sign in</button>
-</form>
+<div class="break break-extra-large"></div>
+<div class="gs-16 gs-fluid">
+	<div class="row">
+		<div class="col-4-offset-6 panel panel-highlight">
+			<div class="panel-header">
+				<h1>Sign In</h1>
+			</div>
+			<div class="panel-body">
+				<form class="form" action="/signin" method="post">
+					<div class="form-line">
+						<div class="form-label">
+							<label class="label" for="uid">ID</label>
+						</div>
+						<div class="form-control">
+							<input class="input input-single-line" type="text" name="uid" id="uid">
+						</div>
+					</div>
+					<div class="form-line">
+						<div class="form-label">
+							<label class="label" for="password">Password</label>
+						</div>
+						<div class="form-control">
+							<input class="input input-single-line" type="password" name="pwd" id="password">
+						</div>
+					</div>
+					<div class="form-line">
+						<div class="form-control">
+							<div class="checkbox">
+								<input type="checkbox" name="remember" id="remember">
+								<label for="remember">
+									<i></i>
+									<span>Remember me</span>
+								</label>
+							</div>
+						</div>
+					</div>
+					<div class="form-line">
+						<div class="form-control">
+							<button class="button" type="submit">Sign in</button>
+						</div>
+					</div>
+
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
