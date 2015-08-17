@@ -34,7 +34,7 @@ exports._factory = function(_, Promise, uuid, env, cache, Agent) {
 		// store sessionId in server-side
 		storeSession(res, sid, req.user);
 
-		cache.put(sid, req.user.id, env.session.expiry).then(function() {
+		return cache.put(sid, req.user.id, env.session.expiry).then(function() {
 			next();
 		}).catch(next);
 	};
@@ -72,7 +72,9 @@ exports._factory = function(_, Promise, uuid, env, cache, Agent) {
 
 		// clear in cookie
 		res.clearCookie(env.session.cookie);
-		cache.clear(res.locals._session.id).then(next).catch(next);
+		return cache.clear(res.locals._session.id).then(function() {
+			next();
+		}).catch(next);
 	};
 
 	return self;
