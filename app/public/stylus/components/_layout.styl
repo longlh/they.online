@@ -1,0 +1,41 @@
+_HEADER_HEIGHT = 60px
+_HEADER_BACKGROUND = #ffffff
+
+_SIDEBAR_WIDTH = 250px
+_SIDEBAR_BACKGROUND = #2b303b
+
+_SIDEBAR_HEADER_BACKGROUND = #272b35
+_SIDEBAR_HEADER_BORDER_COLOR = #232730
+
+_MAIN_CONTAINER_BACKGROUND = #fafafa
+_MAIN_CONTAINER_PADDING = 25px
+
+.sidebar
+	size _SIDEBAR_WIDTH false
+	background _SIDEBAR_BACKGROUND
+	position fixed
+	top 0
+	left 0
+	bottom 0
+
+	.sidebar-header
+		size false _HEADER_HEIGHT
+		line-height _HEADER_HEIGHT
+		background _SIDEBAR_HEADER_BACKGROUND
+		border 1px solid _SIDEBAR_HEADER_BORDER_COLOR
+
+	.sidebar-menu
+		height s('calc(%s - %s)', 100%, _HEADER_HEIGHT)
+
+.header-navbar
+	margin-left _SIDEBAR_WIDTH
+	size false _HEADER_HEIGHT
+	border-bottom 1px solid BORDER_COLOR
+	background _HEADER_BACKGROUND
+
+.main-container
+	margin-left _SIDEBAR_WIDTH
+	padding _MAIN_CONTAINER_PADDING
+
+body
+	background _MAIN_CONTAINER_BACKGROUND

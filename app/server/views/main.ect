@@ -1,51 +1,57 @@
-<!doctype html>
-<html data-ng-app="easy-chat">
-	<head>
-		<link rel="stylesheet" href="/build/css/main.css">
-	</head>
-	<body class="gs">
-		<div class="row">
-			<div class="col">
-				<a href="/signout">Sign out</a>
-			</div>
+<% extend 'layouts/base' %>
+
+<% block 'end_head' : %>
+<!-- block `end_head` begin -->
+
+<link rel="stylesheet" href="/build/css/main.css">
+
+<!-- block `end_head` end -->
+<% end %>
+
+<% block 'end_body' : %>
+<!-- block `end_body` begin -->
+<script src="/socket.io/socket.io.js"></script>
+<script src="/lib/lodash/lodash.min.js"></script>
+<script src="/lib/angular/angular.min.js"></script>
+<script src="/lib/angular-route/angular-route.min.js"></script>
+<script src="/lib/angular-resource/angular-resource.min.js"></script>
+<script>
+<!--
+var APP = 'easy-chat';
+-->
+</script>
+<% for file in @assets : %>
+<script src="<%= file %>"></script>
+<% end %>
+<% if @_session : %>
+<script>
+<!--
+	angular.module(APP).constant('data', <%- JSON.stringify(@_session) %>);
+-->
+</script>
+<% end %>
+
+<!-- block `end_body` end -->
+<% end %>
+<div id="page-container">
+	<nav class="sidebar">
+		<div class="sidebar-header">
 		</div>
-		<div class="row">
-			<div class="col-2">
-				<ul>
-					<li>
-						<a href="#/tenant">Manage tenant</a>
-					</li>
-					<li>
-						<a href="#/chat">Chat room</a><com-chat-notification />
-					</li>
-				</ul>
-			</div>
-			<div class="col-8" data-ng-view>
-			</div>
+		<div class="sidebar-menu">
+			<ul>
+				<li>
+					<a href="#/tenant">Manage tenant</a>
+				</li>
+				<li>
+					<a href="#/chat">Chat room</a><com-chat-notification />
+				</li>
+			</ul>
 		</div>
-		<div class="row">
-			<div class="col">
-			</div>
-		</div>
-		<script src="/socket.io/socket.io.js"></script>
-		<script src="/lib/lodash/lodash.min.js"></script>
-		<script src="/lib/angular/angular.min.js"></script>
-		<script src="/lib/angular-route/angular-route.min.js"></script>
-		<script src="/lib/angular-resource/angular-resource.min.js"></script>
-		<script>
-		<!--
-		var APP = 'easy-chat';
-		-->
-		</script>
-		<% for file in @assets : %>
-		<script src="<%= file %>"></script>
-		<% end %>
-		<% if @_session : %>
-		<script>
-		<!--
-			angular.module(APP).constant('data', <%- JSON.stringify(@_session) %>);
-		-->
-		</script>
-		<% end %>
-	</body>
-</html>
+	</nav>
+	<header class="header-navbar">
+	</header>
+	<main class="main-container" data-ng-view>
+	</main>
+	<footer id="page-footer">
+	</footer>
+</div>

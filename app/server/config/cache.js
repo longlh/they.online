@@ -2,21 +2,13 @@
 
 exports._ = '/config/cache';
 exports._requires = [
-	'@bluebird',
-	'@redis',
-	'/config/env'
+	'/config/redis'
 ];
-exports._factory = function(Promise, redis, env) {
+exports._factory = function(redis) {
 	var self = {};
-	var client = redis.createClient();
-	// promisify
-	var rGet = Promise.promisify(client.get, client);
-	var rSet = Promise.promisify(client.set, client);
-	var rDel = Promise.promisify(client.del, client);
-	var rExpire = Promise.promisify(client.expire, client);
 
 	self.get = function(key, expiry) {
-		return rGet(key).then(function(value) {
+		return redis.get(key).then(function(value) {
 			if (value && expiry) {
 				return self.expire(key, expiry, value);
 			}
@@ -26,7 +18,7 @@ exports._factory = function(Promise, redis, env) {
 	};
 
 	self.put = function(key, value, expiry) {
-		return rSet(key, value).then(function() {
+		return redis.set(key, value).then(function() {
 			if (expiry) {
 				return self.expire(key, expiry, value);
 			}
@@ -36,13 +28,13 @@ exports._factory = function(Promise, redis, env) {
 	};
 
 	self.expire = function(key, expiry, value) {
-		return rExpire(key, expiry).then(function() {
+		return redis.expire(key, expiry).then(function() {
 			return value;
 		});
 	};
 
 	self.clear = function(key) {
-		return rDel(key);
+		return redis.del(key);
 	};
 
 	return self;
