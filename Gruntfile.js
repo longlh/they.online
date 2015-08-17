@@ -49,24 +49,39 @@ module.exports = function(grunt) {
 			options: {
 				use: [
 					require('kouto-swiss')
-				],
-				compress: false
+				]
 			},
-			public: {
+			dev: {
 				files: [{
 					cwd: 'app/public/stylus',
 					src: [
-						'**/*.styl',
-						'!**/_*.styl'
+						'*.styl',
+						'!_*.styl'
 					],
 					dest: 'build/out/css',
 					ext: '.css',
+					expand: true
+				}, {
+					cwd: 'app/public/stylus',
+					src: [
+						'*/*.styl',
+						'!*/_*.styl'
+					],
+					dest: 'build/out/css',
+					ext: '.pages.css',
+					extDot: 'first',
+					flatten: true,
 					expand: true
 				}]
 			}
 		},
 		develop: {
-			app: {
+			dev: {
+				options: {
+					env: {
+						NODE_ENV: 'development'
+					}
+				},
 				file: 'index.js'
 			}
 		},
@@ -90,14 +105,23 @@ module.exports = function(grunt) {
 				files: [
 					'app/**/*.styl'
 				],
-				tasks: ['clean:css', 'stylus', 'develop']
+				tasks: ['clean:css', 'stylus:dev', 'develop']
 			}
 		},
 	});
 
 	require('load-grunt-tasks')(grunt);
 
-	grunt.registerTask('static', ['jscs', 'jshint']);
-	grunt.registerTask('build', ['clean', 'stylus']);
-	grunt.registerTask('default', ['static', 'build', 'develop', 'watch']);
+	grunt.registerTask('static', [
+		'jscs',
+		'jshint'
+	]);
+
+	grunt.registerTask('default', [
+		'clean',
+		'static',
+		'stylus:dev',
+		'develop:dev',
+		'watch'
+	]);
 };

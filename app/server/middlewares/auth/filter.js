@@ -1,6 +1,6 @@
 'use strict';
 
-exports._ = '/server/middlewares/auth/filter';
+exports._ = '/middlewares/auth/filter';
 exports._requires = [
 	'@lodash'
 ];

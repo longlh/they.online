@@ -3,10 +3,10 @@
 exports._ = '/main';
 exports._requires = [
 	'/config/env',
-	'/server/http'
+	'/http'
 ];
 exports._factory = function(env, httpServer) {
 	httpServer.listen(env.port, function() {
-		console.log('Application start at :' + env.port);
+		console.log('Application start at :' + env.port + ' [' + env._profile + ']');
 	});
 };

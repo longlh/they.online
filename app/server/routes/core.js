@@ -1,10 +1,10 @@
 'use strict';
 
-exports._ = '/server/routes/core';
+exports._ = '/routes/core';
 exports._requires = [
-	'/server/app',
-	'/server/middlewares/auth/filter',
-	'/server/middlewares/util'
+	'/app',
+	'/middlewares/auth/filter',
+	'/middlewares/util'
 ];
 exports._factory = function(app, filter, util) {
 	// integrating site

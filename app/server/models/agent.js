@@ -1,10 +1,10 @@
 'use strict';
 
-exports._ = '/server/models/agent';
+exports._ = '/models/agent';
 exports._requires = [
 	'@lodash',
 	'@crypto',
-	'/server/core/db'
+	'/config/db'
 ];
 exports._factory = function(_, crypto, db) {
 	// sub-document

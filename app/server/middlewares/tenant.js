@@ -1,9 +1,9 @@
 'use strict';
 
-exports._ = '/server/middlewares/tenant';
+exports._ = '/middlewares/tenant';
 exports._requires = [
 	'@bluebird',
-	'/server/models/tenant'
+	'/models/tenant'
 ];
 exports._factory = function(Promise, Tenant) {
 	var self = {};

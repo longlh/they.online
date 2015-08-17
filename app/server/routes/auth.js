@@ -1,10 +1,10 @@
 'use strict';
 
-exports._ = '/server/routes/auth';
+exports._ = '/routes/auth';
 exports._requires = [
-	'/server/app',
-	'/server/core/auth',
-	'/server/middlewares/auth/session'
+	'/app',
+	'/config/auth',
+	'/middlewares/auth/session'
 ];
 exports._factory = function(app, auth, session) {
 	app.use(session.deserialize);

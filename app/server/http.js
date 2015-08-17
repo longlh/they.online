@@ -1,12 +1,13 @@
 'use strict';
 
-exports._ = '/server/http';
+exports._ = '/http';
 exports._requires = [
 	'@http',
-	'/server/app'
+	'/config/express'
 ];
 exports._activations = [
-	'/server/socket'
+	'/app',
+	'/socket'
 ];
 exports._factory = function(http, app) {
 	var httpServer = http.Server(app);

@@ -1,11 +1,11 @@
 'use strict';
 
-exports._ = '/server/socket';
+exports._ = '/socket';
 exports._requires = [
 	'@bluebird',
 	'@node-uuid',
 	'@socket.io',
-	'/server/http'
+	'/http'
 ];
 exports._factory = function(Promise, UUID, socketIO, httpServer) {
 	var io = socketIO(httpServer);

@@ -1,6 +1,6 @@
 'use strict';
 
-exports._ = '/server/core/cache';
+exports._ = '/config/cache';
 exports._requires = [
 	'@bluebird',
 	'/config/env'

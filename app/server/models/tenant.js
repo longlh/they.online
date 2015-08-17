@@ -1,8 +1,8 @@
 'use strict';
 
-exports._ = '/server/models/tenant';
+exports._ = '/models/tenant';
 exports._requires = [
-	'/server/core/db'
+	'/config/db'
 ];
 exports._factory = function(db) {
 	var schema = new db.Schema({

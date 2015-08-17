@@ -1,9 +1,9 @@
 'use strict';
 
-exports._ = '/server/core/auth';
+exports._ = '/config/auth';
 exports._requires = [
 	'@passport',
-	'/server/core/auth-strategies/local'
+	'/config/auth/strategies/local'
 ];
 exports._factory = function(passport, localStrategy) {
 	// config

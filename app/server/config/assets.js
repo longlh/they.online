@@ -1,10 +1,10 @@
 'use strict';
 
-exports._ = '/server/core/assets';
+exports._ = '/config/assets';
 exports._requires = [
 	'@bluebird',
 	'@glob',
-	'/server/app'
+	'/app'
 ];
 exports._factory = function(Promise, glob, app) {
 	function convert(files, version) {

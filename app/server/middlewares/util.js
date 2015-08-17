@@ -1,6 +1,6 @@
 'use strict';
 
-exports._ = '/server/middlewares/util';
+exports._ = '/middlewares/util';
 exports._requires = [
 	'@lodash'
 ];

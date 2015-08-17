@@ -1,9 +1,9 @@
 'use strict';
 
-exports._ = '/server/middlewares/agents/save';
+exports._ = '/middlewares/agents/save';
 exports._requires = [
-	'/server/models/agent',
-	'/server/models/tenant'
+	'/models/agent',
+	'/models/tenant'
 ];
 exports._factory = function(Agent, Tenant) {
 	return function(req, res, next) {

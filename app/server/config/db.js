@@ -1,6 +1,6 @@
 'use strict';
 
-exports._ = '/server/core/db';
+exports._ = '/config/db';
 exports._requires = [
 	'@mongoose',
 	'/config/env'

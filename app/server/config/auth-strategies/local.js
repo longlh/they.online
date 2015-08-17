@@ -1,10 +1,10 @@
 'use strict';
 
-exports._ = '/server/core/auth-strategies/local';
+exports._ = '/config/auth/strategies/local';
 exports._requires = [
 	'@bluebird',
 	'@passport-local',
-	'/server/models/agent'
+	'/models/agent'
 ];
 exports._factory = function(Promise, local, Agent) {
 	return new local.Strategy({

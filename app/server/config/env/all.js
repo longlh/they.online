@@ -1,6 +1,6 @@
 'use strict';
 
-var profile = process.env.NODE_ENV ? process.env.NODE_ENV : 'development';
+var profile = process.env.NODE_ENV || 'development';
 
 exports._ = '/config/env';
 exports._requires = [
@@ -8,10 +8,10 @@ exports._requires = [
 	'@path',
 	exports._ + '/' + profile
 ];
-exports._factory = function(_, path, executionProfile) {
+exports._factory = function(_, path, specifiedConfiguration) {
 	var defaults = {
-		rootDir: path.resolve(__dirname, '../../..'),
-		profile: profile,
+		_root: path.resolve(__dirname, '../../../..'),
+		_profile: profile,
 		session: {
 			cookie: '_sid',
 			// expiry: 1 * 10 * 1000 // 1 hour
@@ -19,5 +19,5 @@ exports._factory = function(_, path, executionProfile) {
 		}
 	};
 
-	return _.assign(defaults, executionProfile);
+	return _.assign(defaults, specifiedConfiguration);
 };

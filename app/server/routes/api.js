@@ -1,11 +1,11 @@
 'use strict';
 
-exports._ = '/server/routes/api';
+exports._ = '/routes/api';
 exports._requires = [
-	'/server/app',
-	'/server/middlewares/auth/filter',
-	'/server/middlewares/tenant',
-	'/server/middlewares/util'
+	'/app',
+	'/middlewares/auth/filter',
+	'/middlewares/tenant',
+	'/middlewares/util'
 ];
 exports._factory = function(app, authFilter, tenant, util) {
 	app.use('/api', authFilter.blockUnauthenticated);
