@@ -18,11 +18,74 @@
 </style>
 <link rel="stylesheet" href="/build/css/main.css">
 <% end %>
+<h1>Buttons</h1>
+<hr>
 <h1>Forms & Inputs</h1>
+<div class="gs-12 gs-fluid">
+	<div class="row">
+		<div class="col-4-offset-1">
+			<button type="button" class="button">White</button>
+			<button type="button" class="button button-primary">Primary</button>
+			<button type="button" class="button button-complete">Complete</button>
+			<button type="button" class="button button-success">Success</button>
+			<button type="button" class="button button-danger">Danger</button>
+			<button type="button" class="button button-warning">Warning</button>
+		</div>
+	</div>
+</div>
+<h1>Stack Form</h1>
+<div class="gs-12 gs-fluid">
+	<div class="row">
+		<div class="col-4 form form-stack">
+			<div class="form-group">
+				<label class="label">Login</label>
+				<span class="help">e.g. "Tyler Durden"</span>
+				<div class="form-control">
+					<input type="text" class="input input-single-line">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="label">Password</label>
+				<div class="form-control">
+					<input type="password" class="input input-single-line">
+				</div>
+			</div>
+		</div>
+		<div class="col-4 form form-stack">
+			<div class="form-group">
+				<label class="label">Gender</label>
+				<span class="help">e.g. "Male"</span>
+				<div class="form-control">
+					<div class="radio">
+						<input type="radio" id="cbx-gender-male" name="gender" checked>
+						<label for="cbx-gender-male"><i></i><span>Male</span></label>
+					</div>
+					<div class="radio">
+						<input type="radio" id="cbx-gender-female" name="gender">
+						<label for="cbx-gender-female"><i></i><span>Female</span></label>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-4 form form-stack">
+			<div class="form-group">
+				<label class="label">Age</label>
+				<span class="help">e.g. "20"</span>
+				<div class="form-control">
+					<select class="input input-single-line">
+						<option>20</option>
+						<option>21</option>
+					</select>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<h1>2 Columns Form</h1>
 <div class="gs-12 gs-fluid">
 	<div class="row form">
 		<div class="col-4">
-			<div class="form-line">
+			<div class="form-group">
 				<div class="form-label">
 					<label class="label">Text Box</label>
 				</div>
@@ -30,7 +93,7 @@
 					<input type="text" class="input input-single-line">
 				</div>
 			</div>
-			<div class="form-line">
+			<div class="form-group">
 				<div class="form-label">
 					<label class="label">Password</label>
 				</div>
@@ -38,7 +101,7 @@
 					<input type="password" class="input input-single-line input-warning">
 				</div>
 			</div>
-			<div class="form-line">
+			<div class="form-group">
 				<div class="form-label">
 					<label class="label">Disabled</label>
 				</div>
@@ -46,7 +109,7 @@
 					<input type="text" class="input input-single-line" disabled>
 				</div>
 			</div>
-			<div class="form-line">
+			<div class="form-group">
 				<div class="form-label">
 					<label class="label">Readonly</label>
 				</div>
@@ -54,7 +117,7 @@
 					<input type="text" class="input input-single-line" readonly>
 				</div>
 			</div>
-			<div class="form-line">
+			<div class="form-group">
 				<div class="form-label">
 					<label class="label">Select</label>
 				</div>
@@ -70,7 +133,7 @@
 			</div>
 		</div>
 		<div class="col-4">
-			<div class="form-line">
+			<div class="form-group">
 				<div class="form-label">
 					<label class="label">Text Area</label>
 				</div>
@@ -78,7 +141,7 @@
 					<textarea class="input input-multi-line" rows="5"><%= sample %></textarea>
 				</div>
 			</div>
-			<div class="form-line">
+			<div class="form-group">
 				<div class="form-label">
 					<label class="label">Disabled Text Area</label>
 				</div>
@@ -86,7 +149,7 @@
 					<textarea class="input input-multi-line" rows="5" disabled><%= sample %></textarea>
 				</div>
 			</div>
-			<div class="form-line">
+			<div class="form-group">
 				<div class="form-label">
 					<label class="label">Normal Buttons</label>
 				</div>
@@ -98,7 +161,7 @@
 			</div>
 		</div>
 		<div class="col-4">
-			<div class="form-line">
+			<div class="form-group">
 				<div class="form-label">
 					<label class="label">Check Box</label>
 				</div>
@@ -117,7 +180,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="form-line">
+			<div class="form-group">
 				<div class="form-label">
 					<label class="label">Radio Button</label>
 				</div>

@@ -3,7 +3,7 @@
 <% block 'end_head' : %>
 <!-- block `end_head` begin -->
 
-<link rel="stylesheet" href="/build/css/main.css">
+<link rel="stylesheet" href="/build/css/signin.pages.css">
 
 <!-- block `end_head` end -->
 <% end %>
@@ -16,25 +16,21 @@
 				<h1>Sign In</h1>
 			</div>
 			<div class="panel-body">
-				<form class="form" action="/signin" method="post">
-					<div class="form-line">
-						<div class="form-label">
-							<label class="label" for="uid">ID</label>
-						</div>
+				<form class="form form-stack" action="/signin" method="post">
+					<div class="form-group">
+						<label class="label" for="uid">ID</label>
 						<div class="form-control">
 							<input class="input input-single-line" type="text" name="uid" id="uid">
 						</div>
 					</div>
-					<div class="form-line">
-						<div class="form-label">
-							<label class="label" for="password">Password</label>
-						</div>
+					<div class="form-group">
+						<label class="label" for="password">Password</label>
 						<div class="form-control">
 							<input class="input input-single-line" type="password" name="pwd" id="password">
 						</div>
 					</div>
-					<div class="form-line">
-						<div class="form-control">
+					<div class="form-group">
+						<div class="form-control pull-right">
 							<div class="checkbox">
 								<input type="checkbox" name="remember" id="remember">
 								<label for="remember">
@@ -43,13 +39,10 @@
 								</label>
 							</div>
 						</div>
-					</div>
-					<div class="form-line">
 						<div class="form-control">
 							<button class="button" type="submit">Sign in</button>
 						</div>
 					</div>
-
 				</form>
 			</div>
 		</div>

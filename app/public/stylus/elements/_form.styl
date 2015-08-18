@@ -1,12 +1,23 @@
 _FORM_LABEL = 200px
 _FORM_SPACE = 10px
-_FORM_LINE_HEIGHT = 28px
-_BUTTON_COLOR = #ffffff
+_FORM_LINE_HEIGHT = 35px
+
+_HELP_COLOR = rgba(98,98,98,0.55)
 
 .form
-	.form-line
+	/* common style for all form */
+	.form-group
 		clearfix()
-		margin (_FORM_SPACE / 2)
+		margin 0 (_FORM_SPACE / 2) _FORM_SPACE
+
+		.label
+			font-size: TEXT_BASE_SIZE - 2
+			text-transform uppercase
+			font-weight 600
+
+		.help
+			font-size TEXT_BASE_SIZE - 2
+			color color-fallback(_HELP_COLOR)
 
 		.form-label
 			float left
@@ -19,6 +30,7 @@ _BUTTON_COLOR = #ffffff
 
 		.input
 			size 100% false
+			padding 0 _FORM_SPACE
 
 			&.input-single-line
 				size false _FORM_LINE_HEIGHT
@@ -27,8 +39,17 @@ _BUTTON_COLOR = #ffffff
 				line-height (_FORM_LINE_HEIGHT - 6)
 				resize vertical
 
+	&.form-stack
+		.form-group
+			.form-control
+				margin (_FORM_SPACE / 2) 0 0 0
+
 .checkbox, .radio
-	size false _FORM_LINE_HEIGHT
+	line-height _FORM_LINE_HEIGHT
+	display inline-block
+
+	& + .checkbox, & + .radio
+		margin-left _FORM_SPACE
 
 	input
 		display none
@@ -44,11 +65,12 @@ _BUTTON_COLOR = #ffffff
 		i
 			cursor pointer
 			position relative
-			top 3px
+			top 6px
 			content ''
 			display inline-block
 			size 22px
 			border 1px solid BORDER_COLOR
+			border-radius BORDER_RADIUS
 			margin-right 5px
 
 			&:before
@@ -56,6 +78,9 @@ _BUTTON_COLOR = #ffffff
 				display inline-block
 				margin 3px
 				size 14px
+				position relative
+				top -2px
+				border-radius BORDER_RADIUS
 
 		&:hover
 			i
@@ -73,7 +98,7 @@ _BUTTON_COLOR = #ffffff
 	input:checked
 		& + label
 			i:before
-				background BORDER_COLOR
+				background BORDER_COLOR_HOVER
 
 	input:disabled
 		& + label, & + label:hover, & + label:focus, & + label:active
@@ -89,7 +114,10 @@ _BUTTON_COLOR = #ffffff
 			border-radius 50%
 
 .input
+	transition all TRANSITION_TIME
 	border 1px solid BORDER_COLOR
+	border-radius BORDER_RADIUS
+	display block
 
 	&.input-warning
 		outline none
@@ -115,21 +143,57 @@ _BUTTON_COLOR = #ffffff
 	&[readonly]
 		cursor not-allowed
 
+_BUTTON_COLOR(__NORMAL, __HOVER, __ACTIVE)
+	border-color __NORMAL
+	background __NORMAL
+
+	&:hover
+		border-color __HOVER
+		background __HOVER
+
+	&:active
+		border-color __ACTIVE
+		background __ACTIVE
+
 .button
-	height _FORM_LINE_HEIGHT
+	_BUTTON_COLOR(COLOR_WHITE, COLOR_WHITE_LIGHT, COLOR_WHITE_DARK)
+	transition all TRANSITION_TIME
+	size false _FORM_LINE_HEIGHT
+	min-width 120px
+	border-radius (BORDER_RADIUS * 1.5)
+	padding (_FORM_SPACE / 2) (_FORM_SPACE * 2)
+	letter-spacing 0.01em
+	vendor('font-smoothing', antialiased, prefixes: webkit moz ms o)
 	border 1px solid BORDER_COLOR
-	background _BUTTON_COLOR
+
+	&:hover
+		border-color BORDER_COLOR_HOVER
+
+	&:active
+		border-color BORDER_COLOR_FOCUS
 
 	&:hover, &:active, &:focus
 		outline none
 
-	&:hover
-		border 1px solid BORDER_COLOR_HOVER
-		box-shadow 0 0 5px BORDER_COLOR_HOVER
-
-	&:active, &:focus
-		border 1px solid BORDER_COLOR_FOCUS
-		box-shadow 0 0 5px BORDER_COLOR_FOCUS
-
 	& + .button
-		margin-left _FORM_SPACE
+		margin-left (_FORM_SPACE / 2)
+
+	&.button-primary
+		_BUTTON_COLOR(COLOR_PRIMARY, COLOR_PRIMARY_LIGHT, COLOR_PRIMARY_DARK)
+		color COLOR_WHITE
+
+	&.button-complete
+		_BUTTON_COLOR(COLOR_COMPLETE, COLOR_COMPLETE_LIGHT, COLOR_COMPLETE_DARK)
+		color COLOR_WHITE
+
+	&.button-success
+		_BUTTON_COLOR(COLOR_SUCCESS, COLOR_SUCCESS_LIGHT, COLOR_SUCCESS_DARK)
+		color COLOR_WHITE
+
+	&.button-danger
+		_BUTTON_COLOR(COLOR_DANGER, COLOR_DANGER_LIGHT, COLOR_DANGER_DARK)
+		color COLOR_WHITE
+
+	&.button-warning
+		_BUTTON_COLOR(COLOR_WARNING, COLOR_WARNING_LIGHT, COLOR_WARNING_DARK)
+		color COLOR_WHITE

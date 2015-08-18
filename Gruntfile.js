@@ -8,6 +8,9 @@ module.exports = function(grunt) {
 			},
 			js: {
 				src: ['build/out/js']
+			},
+			font: {
+				src: ['build/out/fonts']
 			}
 		},
 		jshint: {
@@ -43,6 +46,15 @@ module.exports = function(grunt) {
 			},
 			client: {
 				src: '<%= jshint.client.src %>'
+			}
+		},
+		copy: {
+			font: {
+				cwd: 'bower_components/font-awesome-stylus/fonts',
+				src: '**',
+				dest: 'build/out/fonts/',
+				flatten: true,
+				expand: true
 			}
 		},
 		stylus: {
@@ -120,6 +132,7 @@ module.exports = function(grunt) {
 	grunt.registerTask('default', [
 		'clean',
 		'static',
+		'copy:font',
 		'stylus:dev',
 		'develop:dev',
 		'watch'

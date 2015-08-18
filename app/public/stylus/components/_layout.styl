@@ -14,28 +14,28 @@ _MAIN_CONTAINER_PADDING = 25px
 	size _SIDEBAR_WIDTH false
 	background _SIDEBAR_BACKGROUND
 	position fixed
-	top 0
+	top _HEADER_HEIGHT
 	left 0
 	bottom 0
-
-	.sidebar-header
-		size false _HEADER_HEIGHT
-		line-height _HEADER_HEIGHT
-		background _SIDEBAR_HEADER_BACKGROUND
-		border 1px solid _SIDEBAR_HEADER_BORDER_COLOR
+	border-top 1px solid _SIDEBAR_HEADER_BORDER_COLOR
 
 	.sidebar-menu
-		height s('calc(%s - %s)', 100%, _HEADER_HEIGHT)
+		height 100%
 
 .header-navbar
-	margin-left _SIDEBAR_WIDTH
 	size false _HEADER_HEIGHT
-	border-bottom 1px solid BORDER_COLOR
+	padding-right _MAIN_CONTAINER_PADDING
 	background _HEADER_BACKGROUND
+
+	.sidebar-header
+		size _SIDEBAR_WIDTH _HEADER_HEIGHT
+		line-height _HEADER_HEIGHT
+		background _SIDEBAR_HEADER_BACKGROUND
 
 .main-container
 	margin-left _SIDEBAR_WIDTH
 	padding _MAIN_CONTAINER_PADDING
+	border-top 1px solid BORDER_COLOR
 
 body
 	background _MAIN_CONTAINER_BACKGROUND
