@@ -4,6 +4,21 @@ _FORM_LINE_HEIGHT = 35px
 
 _HELP_COLOR = rgba(98,98,98,0.55)
 
+_BUTTON_COLOR(__NORMAL, __HOVER, __ACTIVE)
+	border-color __NORMAL
+	background __NORMAL
+
+	&:hover
+		border-color __HOVER
+		background __HOVER
+
+	&:active
+		border-color __ACTIVE
+		background __ACTIVE
+
+_TRANSITION()
+	transition color TRANSITION_TIME, background-color TRANSITION_TIME, box-shadow TRANSITION_TIME, color TRANSITION_TIME, border-color TRANSITION_TIME
+
 .form
 	/* common style for all form */
 	.form-group
@@ -79,7 +94,7 @@ _HELP_COLOR = rgba(98,98,98,0.55)
 				margin 3px
 				size 14px
 				position relative
-				top -2px
+				top -3px
 				border-radius BORDER_RADIUS
 
 		&:hover
@@ -114,7 +129,7 @@ _HELP_COLOR = rgba(98,98,98,0.55)
 			border-radius 50%
 
 .input
-	transition all TRANSITION_TIME
+	_TRANSITION()
 	border 1px solid BORDER_COLOR
 	border-radius BORDER_RADIUS
 	display block
@@ -143,24 +158,12 @@ _HELP_COLOR = rgba(98,98,98,0.55)
 	&[readonly]
 		cursor not-allowed
 
-_BUTTON_COLOR(__NORMAL, __HOVER, __ACTIVE)
-	border-color __NORMAL
-	background __NORMAL
-
-	&:hover
-		border-color __HOVER
-		background __HOVER
-
-	&:active
-		border-color __ACTIVE
-		background __ACTIVE
-
 .button
 	_BUTTON_COLOR(COLOR_WHITE, COLOR_WHITE_LIGHT, COLOR_WHITE_DARK)
-	transition all TRANSITION_TIME
+	_TRANSITION()
 	size false _FORM_LINE_HEIGHT
 	min-width 120px
-	border-radius (BORDER_RADIUS * 1.5)
+	border-radius BORDER_RADIUS
 	padding (_FORM_SPACE / 2) (_FORM_SPACE * 2)
 	letter-spacing 0.01em
 	vendor('font-smoothing', antialiased, prefixes: webkit moz ms o)

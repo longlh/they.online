@@ -1,0 +1,16 @@
+_SUPPORTED_THUMBNAILS = 40px 44px
+
+_thumbnail(__SIZE)
+	size __SIZE
+	line-height __SIZE
+	display inline-block
+	vertical-align middle
+	text-align center
+	font-size 16px
+	background #21252d
+
+
+for __THUMB_SIZE in _SUPPORTED_THUMBNAILS
+	.thumb
+		&.thumb-{__THUMB_SIZE}
+			_thumbnail(__THUMB_SIZE)

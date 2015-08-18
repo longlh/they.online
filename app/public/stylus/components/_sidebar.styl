@@ -1,0 +1,52 @@
+.sidebar
+
+	.sidebar-menu
+		.menu-items
+			margin 0
+			padding 0
+
+			& > li
+				transition color TRANSITION_TIME
+				clearfix()
+				clear right
+				display block
+				padding 0
+				color #788195
+
+				&:first-child
+					margin-top 30px
+
+				&.open
+					& > a, & > .thumb
+						color #ffffff
+
+				&:hover
+					color #ffffff
+
+				& > a
+					font-family font-stack('Arial')
+					display inline-block
+					padding 0 3px
+					padding-left 32px
+					min-height 50px
+					line-height 50px
+					font-size 14px
+					overflow ellipsis
+					white-space nowrap
+					color inherit
+					clear both
+
+					& > .title
+						line-height 28px
+						float left
+
+					& > .details
+						font-size 12px
+						line-height 16px
+						display block
+						clear both
+						opacity .4
+
+				& > .thumb
+					float right
+					margin-right 20px
