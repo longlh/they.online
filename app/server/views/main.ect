@@ -34,7 +34,19 @@ var APP = 'easy-chat';
 <!-- block `end_body` end -->
 <% end %>
 <div id="page-container">
-	<nav class="sidebar">
+	<header class="header-navbar">
+		<div class="pull-right thumb thumb-32 thumb-circular user-avatar">
+			<a href="#/">
+				<img src="http://pages.revox.io/dashboard/latest/angular/assets/img/profiles/avatar.jpg" width="32" height="32">
+			</a>
+		</div>
+		<div class="pull-right text-large text-color-hint user-name">
+			<span>Luc Hoang Long</span>
+		</div>
+	</header>
+	<nav class="sidebar full-height">
+		<div class="sidebar-header">
+		</div>
 		<div class="sidebar-menu">
 			<ul class="menu-items">
 				<li>
@@ -42,16 +54,16 @@ var APP = 'easy-chat';
 						<span class="title">Dashboard</span>
 						<span class="details">12 New Updates</span>
 					</a>
-					<span class="thumb thumb-44">
-						<i class="fa fa-home fa-fw"></i>
+					<span class="thumb thumb-40">
+						<i class="fa fa-globe fa-fw"></i>
 					</span>
 				</li>
 				<li>
 					<a href="#/tenant">
-						<span class="title">Tenants</span>
+						<span class="title">Tenant</span>
 					</a>
-					<span class="thumb thumb-44">
-						<i class="fa fa-users fa-fw"></i>
+					<span class="thumb thumb-40">
+						<i class="fa fa-home fa-fw"></i>
 					</span>
 				</li>
 				<li>
@@ -59,17 +71,13 @@ var APP = 'easy-chat';
 						<span class="title">Chat</span>
 						<span class="details">100 New Messages</span>
 					</a>
-					<span class="thumb thumb-44">
-						<i class="fa fa-comments fa-fw"></i>
+					<span class="thumb thumb-40">
+						<i class="fa fa-comments-o fa-fw"></i>
 					</span>
 				</li>
 			</ul>
 		</div>
 	</nav>
-	<header class="header-navbar">
-		<div class="sidebar-header">
-		</div>
-	</header>
 	<main class="main-container" data-ng-view>
 	</main>
 	<footer id="page-footer">

@@ -26,12 +26,15 @@ _TRANSITION()
 		margin 0 (_FORM_SPACE / 2) _FORM_SPACE
 
 		.label
-			font-size: TEXT_BASE_SIZE - 2
+			font-size: TEXT_BASE_SIZE - 3
 			text-transform uppercase
 			font-weight 600
 
+		.label + .help
+			padding-left _FORM_SPACE
+
 		.help
-			font-size TEXT_BASE_SIZE - 2
+			font-size TEXT_BASE_SIZE - 3
 			color color-fallback(_HELP_COLOR)
 
 		.form-label
@@ -42,6 +45,9 @@ _TRANSITION()
 
 		.form-control
 			margin-left _FORM_LABEL
+
+			.help
+				line-height _FORM_LINE_HEIGHT
 
 		.input
 			size 100% false

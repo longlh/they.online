@@ -15,8 +15,101 @@
 </style>
 <link rel="stylesheet" href="/build/css/main.css">
 <% end %>
+
+<h1>Panels</h1>
+<div class="gs-12 gs-fluid gs-padding gs-padding">
+	<div class="row">
+		<div class="col-4">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<div class="panel-title">Header Only</div>
+					<div class="panel-controls">
+						<ul>
+							<li>
+								<a href="#/">
+									<i class="fa fa-star-o fa-fw"></i>
+								</a>
+							</li>
+							<li>
+								<a href="#/">
+									<i class="fa fa-refresh fa-fw"></i>
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="panel-body">
+					<p><%= sample %></p>
+				</div>
+			</div>
+			<div class="panel panel-default">
+				<div class="panel-heading separator">
+					<div class="panel-title">Header Only</div>
+					<div class="panel-controls">
+						<ul>
+							<li>
+								<a href="#/">
+									<i class="fa fa-refresh fa-fw"></i>
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="panel-body">
+					<p><%= sample %></p>
+				</div>
+			</div>
+		</div>
+		<div class="col-4">
+			<div class="panel panel-transparent">
+				<div class="panel-heading separator">
+					<div class="panel-title">Header</div>
+					<div class="panel-controls">
+						<ul>
+							<li>
+								<a href="#/">
+									<i class="fa fa-star-o fa-fw"></i>
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="panel-body">
+					<h1>Separator</h1>
+					<p><%= sample %></p>
+				</div>
+			</div>
+			<div class="panel panel-default panel-transparent">
+				<div class="panel-heading separator">
+					<div class="panel-title">Header</div>
+					<div class="panel-controls">
+						<ul>
+							<li>
+								<a href="#/">
+									<i class="fa fa-star fa-fw"></i>
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="panel-body scroll">
+					<p class="text-left"><%= sample %></p>
+					<p class="text-right"><%= sample %></p>
+					<p class="text-justify"><%= sample %></p>
+					<p class="text-center"><%= sample %></p>
+				</div>
+			</div>
+		</div>
+		<div class="col-4 panel panel-default">
+			<div class="panel-body">
+				<p><%= sample %></p>
+			</div>
+		</div>
+	</div>
+</div>
+<hr>
 <h1>Typography</h1>
-<div class="gs-12 gs-fluid">
+<div class="gs-12 gs-fluid gs-padding">
 	<div class="row">
 		<div class="col-4-offset-1">
 			<h1>h1. Heading</h1>
@@ -52,7 +145,7 @@
 </div>
 <hr>
 <h1>Buttons</h1>
-<div class="gs-12 gs-fluid">
+<div class="gs-12 gs-fluid gs-padding">
 	<div class="row">
 		<div class="col-4-offset-1">
 			<button type="button" class="button">White</button>
@@ -68,7 +161,7 @@
 <hr>
 <h1>Forms & Inputs</h1>
 <h1>Stack Form</h1>
-<div class="gs-12 gs-fluid">
+<div class="gs-12 gs-fluid gs-padding">
 	<div class="row">
 		<div class="col-4 form form-stack">
 			<div class="form-group">
@@ -116,7 +209,7 @@
 	</div>
 </div>
 <h1>2 Columns Form</h1>
-<div class="gs-12 gs-fluid">
+<div class="gs-12 gs-fluid gs-padding">
 	<div class="row form">
 		<div class="col-4">
 			<div class="form-group">
@@ -237,39 +330,6 @@
 	</div>
 </div>
 <hr>
-<h1>Panels</h1>
-<div class="gs-16 gs-fluid">
-	<div class="row">
-		<div class="col-4-offset-1 panel panel-highlight">
-			<div class="panel-header text-center">
-				<span>Header Only</span>
-			</div>
-			<div class="panel-body text-left">
-				<span><%= sample %></span>
-			</div>
-		</div>
-		<div class="col-4-offset-1 panel">
-			<div class="panel-header text-center">
-				<span>Header</span>
-			</div>
-			<div class="panel-body text-justify">
-				<span><%= sample %></span>
-			</div>
-			<div class="panel-footer text-center">
-				<span>Footer</span>
-			</div>
-		</div>
-		<div class="col-4-offset-1 panel panel-highlight">
-			<div class="panel-body text-right">
-				<span><%= sample %></span>
-			</div>
-			<div class="panel-footer text-center">
-				<span>Footer Only</span>
-			</div>
-		</div>
-	</div>
-</div>
-<hr>
 <h1>Tables</h1>
 <table class="table table-fluid table-strip table-hover">
 	<thead>
@@ -368,7 +428,7 @@
 <hr>
 <% for cols in [10, 12, 16] : %>
 <h1>Fluid Grid System with <%= cols %> columns</h1>
-<div class="gs-<%= cols %> gs-fluid">
+<div class="gs-<%= cols %> gs-fluid gs-padding">
 	<% for size in [1..(cols - 1)] : %>
 	<% times = Math.floor(cols / size) %>
 	<% left = cols % size %>

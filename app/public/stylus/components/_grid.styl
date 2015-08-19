@@ -1,4 +1,5 @@
 _SUPPORTED_GRID_SYSTEMS = 10 12 16
+_GRID_PADDING = 50px
 
 _grid_system(__TYPE, __TOTAL_COLS)
 	gs(__TYPE, __TOTAL_COLS)
@@ -25,3 +26,7 @@ for __GRID_SYSTEM in _SUPPORTED_GRID_SYSTEMS
 
 		&.gs-fluid
 			_grid_system('fluid', __GRID_SYSTEM)
+
+			&.gs-padding
+				width auto
+				margin 0 _GRID_PADDING

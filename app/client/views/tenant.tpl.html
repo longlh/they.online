@@ -1,0 +1,40 @@
+<div class="gs-16 gs-fluid gs-padding">
+	<div class="row">
+		<div class="col-7">
+			<form data-ng-submit="save()" class="form form-stack panel panel-default">
+				<div class="panel-heading">
+					<!-- <div class="panel-title">Tenant Information</div> -->
+				</div>
+				<div class="panel-body">
+					<div class="form-group">
+						<label class="label">Tenant name</label>
+						<span class="help">Your tenant name will be displayed to vistors</span>
+						<div class="form-control">
+							<input type="text" data-ng-model="tenant.displayName" class="input input-single-line">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="label">Plan</label>
+						<div class="form-control">
+							<div class="gs-16 gs-fluid">
+								<div class="row">
+									<div class="col-8">
+										<select data-ng-model="tenant.plan" class="input input-single-line">
+											<option value="free">Free</option>
+										</select>
+									</div>
+									<div class="col-7-offset-1">
+										<span class="help">Free plan has very limited functionalities</span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<button class="button button-primary">Update</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

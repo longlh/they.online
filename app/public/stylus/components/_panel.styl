@@ -1,16 +1,70 @@
 .panel
-	border 1px solid BORDER_COLOR
-	border-radius BORDER_RADIUS
+	background COLOR_WHITE
+	margin-bottom 20px
+
+	&.panel-default
+		border 1px solid BORDER_COLOR
+
+	&.panel-transparent
+		background transparent
 
 	&.panel-highlight
 		.panel-header, .panel-footer
 			background COLOR_ACTIVE
 
-	.panel-header, .panel-body, .panel-footer
-		padding CELL_PADDING
+	.panel-heading
+		font-family font-stack('Helvetica')
+		padding 20px 20px 7px 20px
+		min-height 48px
+		position relative
 
-	.panel-header + .panel-body
-		border-top 1px solid BORDER_COLOR
+		.panel-title
+			text-transform uppercase
+			display inline-block
+			letter-spacing 0.02em
+			font-size 12px
+			font-weight 600
+			overflow ellipsis
 
-	.panel-body + .panel-footer
-		border-top 1px solid BORDER_COLOR
+		.panel-controls
+			float right
+			margin-right -3px
+			font-size (TEXT_BASE_SIZE - 2)
+
+			ul
+				li
+					display inline-block
+					margin-left 3px
+
+		a
+			transition opacity TRANSITION_TIME
+			color TEXT_COLOR
+			opacity .4
+
+			&:hover
+				opacity .8
+
+		& + .panel-body
+			padding-top 0
+
+		&.separator
+			&:after
+				content ''
+				height 1px
+				background color-fallback(rgba(0,0,0,0.08))
+				position absolute
+				left 16px
+				right 16px
+				bottom 0
+
+			& + .panel-body
+				padding-top 10px
+
+	.panel-body
+		padding 20px
+		overflow hidden
+
+		&.scroll
+			max-height 300px
+			overflow-y auto
+

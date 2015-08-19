@@ -1,4 +1,4 @@
-_SUPPORTED_THUMBNAILS = 40px 44px
+_SUPPORTED_THUMBNAILS = 16px 24px 32px 40px 48px 64px 128px
 
 _thumbnail(__SIZE)
 	size __SIZE
@@ -6,11 +6,14 @@ _thumbnail(__SIZE)
 	display inline-block
 	vertical-align middle
 	text-align center
-	font-size 16px
-	background #21252d
+	overflow hidden
 
+	&.thumb-circular
+		border-radius 50%
 
 for __THUMB_SIZE in _SUPPORTED_THUMBNAILS
 	.thumb
 		&.thumb-{__THUMB_SIZE}
 			_thumbnail(__THUMB_SIZE)
+
+
