@@ -1,11 +1,56 @@
-<div>
-	<h1>Chat room</h1>
-	<div data-ng-repeat="(visitor, conversation) in conversations">
-		<h3>Visitor: {{visitor}}</h3>
-		<div data-ng-repeat="line in conversation">Message: {{line.data.chat}}</div>
-		<form data-ng-submit="reply(visitor)">
-			<input type="text" data-ng-model="replies[visitor]"><br>
-			<button type="submit">Reply</button>
-		</form>
-	</div>
+<div class="sidebar-right">
+	<ul class="chat-list">
+		<li class="bg-active">
+			<div class="visitor-avatar thumb thumb-40 thumb-circular">
+				<img src="http://pages.revox.io/dashboard/latest/angular/assets/img/profiles/2x.jpg" width="40" height="40">
+			</div>
+			<div class="visitor-unread-message">
+			</div>
+			<div class="visitor-name">
+				<span>Erik Taylor</span>
+			</div>
+		</li>
+		<li>
+			<div class="visitor-avatar thumb thumb-40 thumb-circular">
+				<i class="fa fa-firefox fa-fw"></i>
+			</div>
+			<div class="visitor-unread-message">
+				<span>12</span>
+			</div>
+			<div class="visitor-name">
+				<span>Anonymous 1</span>
+			</div>
+		</li>
+		<li>
+			<div class="visitor-avatar thumb thumb-40 thumb-circular">
+				<img src="http://pages.revox.io/dashboard/latest/angular/assets/img/profiles/7x.jpg" width="40" height="40">
+			</div>
+			<div class="visitor-unread-message">
+				<span>4</span>
+			</div>
+			<div class="visitor-name">
+				<span>Glen Lawrence</span>
+			</div>
+		</li>
+		<li>
+			<div class="visitor-avatar thumb thumb-40 thumb-circular">
+				<i class="fa fa-safari fa-fw"></i>
+			</div>
+			<div class="visitor-unread-message">
+			</div>
+			<div class="visitor-name">
+				<span>Anonymous 2</span>
+			</div>
+		</li>
+		<li>
+			<div class="visitor-avatar thumb thumb-40 thumb-circular">
+				<i class="fa fa-internet-explorer fa-fw"></i>
+			</div>
+			<div class="visitor-unread-message">
+			</div>
+			<div class="visitor-name">
+				<span>Anonymous 3</span>
+			</div>
+		</li>
+	</ul>
 </div>

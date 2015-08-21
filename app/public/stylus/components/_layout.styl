@@ -4,6 +4,8 @@ _HEADER_BACKGROUND = #ffffff
 _SIDEBAR_WIDTH = 250px
 _SIDEBAR_BACKGROUND = #2b303b
 
+_SIDEBAR_RIGHT_WIDTH = 300px
+
 _SIDEBAR_HEADER_BACKGROUND = #272b35
 _SIDEBAR_HEADER_BORDER_COLOR = #232730
 
@@ -28,6 +30,16 @@ _MAIN_CONTAINER_PADDING = 25px
 		background _SIDEBAR_HEADER_BACKGROUND
 		border-bottom 1px solid _SIDEBAR_HEADER_BORDER_COLOR
 
+
+.sidebar-right
+	size _SIDEBAR_RIGHT_WIDTH false
+	background COLOR_WHITE
+	position fixed
+	top _HEADER_HEIGHT
+	right 0
+	bottom 0
+	border-left 1px solid BORDER_COLOR
+
 .header-navbar
 	position fixed
 	top 0
@@ -45,9 +57,12 @@ _MAIN_CONTAINER_PADDING = 25px
 		margin-right (_MAIN_CONTAINER_PADDING / 2)
 
 .main-container
-	margin-top _HEADER_HEIGHT
 	margin-left _SIDEBAR_WIDTH
 	padding _MAIN_CONTAINER_PADDING
+	padding-top (_MAIN_CONTAINER_PADDING + _HEADER_HEIGHT)
 
 body
 	background _MAIN_CONTAINER_BACKGROUND
+
+html, body
+	height 100%
