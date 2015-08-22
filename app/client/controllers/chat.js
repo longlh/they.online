@@ -35,6 +35,16 @@
 
 			// agent actives
 			Emitter.emit('agent:active');
+
+			$scope.messages = [];
+
+			for (var i = 0; i < 10; i++) {
+				$scope.messages.push({
+					content: 'xxxxxxxxxxxxxxxasdasdddddddddddddddd - ' + i,
+					self: i % 3 === 0,
+					id: i
+				});
+			}
 		}
 	]);
 })();

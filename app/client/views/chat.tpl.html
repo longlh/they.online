@@ -1,4 +1,17 @@
-<div class="sidebar-right">
+<div class="chat-window full-height has-sidebar-right">
+	<div class="chat-conversation scroll-y">
+		<div class="chat-messages">
+			<div class="chat-message" data-ng-repeat="message in messages|orderBy:'id':true">
+				<div class="chat-content" data-ng-class="::{'self':message.self}">
+					<span>{{::message.content}}</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="chat-editor bg-white">
+	</div>
+</div>
+<div class="sidebar-right scroll-y">
 	<ul class="chat-list">
 		<li class="bg-active">
 			<div class="visitor-avatar thumb thumb-40 thumb-circular">

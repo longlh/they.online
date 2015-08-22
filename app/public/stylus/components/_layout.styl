@@ -58,8 +58,11 @@ _MAIN_CONTAINER_PADDING = 25px
 
 .main-container
 	margin-left _SIDEBAR_WIDTH
-	padding _MAIN_CONTAINER_PADDING
-	padding-top (_MAIN_CONTAINER_PADDING + _HEADER_HEIGHT)
+	padding 0
+	padding-top (_HEADER_HEIGHT)
+
+	.has-sidebar-right
+		margin-right _SIDEBAR_RIGHT_WIDTH
 
 body
 	background _MAIN_CONTAINER_BACKGROUND

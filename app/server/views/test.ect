@@ -5,11 +5,9 @@
 <% block 'end_head' : %>
 <style>
 	.gray {
-		background-color: lightgray;
 		border: 1px solid black;
 	}
 	.yellow {
-		background-color: yellow;
 		border: 1px solid black;
 	}
 </style>
@@ -410,13 +408,13 @@
 	<% left = cols % size %>
 	<div class="row">
 		<% for col in [1..times] : %>
-		<div class="col-<%= size %> gray">
+		<div class="col-<%= size %> bg-success">
 			<span>col-<%= size %></span>
 		</div>
 		<% end %>
 
 		<% if left > 0 : %>
-		<div class="col-<%= left %> yellow">
+		<div class="col-<%= left %> bg-warning">
 			<span>col-<%= left %></span>
 		</div>
 		<% end %>
@@ -434,13 +432,13 @@
 	<% left = cols % size %>
 	<div class="row">
 		<% for col in [1..times] : %>
-		<div class="col-<%= size %> gray">
+		<div class="col-<%= size %> bg-success">
 			<span>col-<%= size %></span>
 		</div>
 		<% end %>
 
 		<% if left > 0 : %>
-		<div class="col-<%= left %> yellow">
+		<div class="col-<%= left %> bg-warning">
 			<span>col-<%= left %></span>
 		</div>
 		<% end %>

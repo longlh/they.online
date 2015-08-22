@@ -4,6 +4,51 @@ _CHAT_LIST_NOTIFICATON_WIDTH = 30px
 
 _VISITOR_AVATOR_WIDTH = 40px
 
+_CHAT_EDITOR_HEIGHT = 50px
+
+.chat-window
+	position relative
+
+	.chat-editor
+		position absolute
+		bottom 0
+		left 0
+		right 0
+		height _CHAT_EDITOR_HEIGHT
+		border-top 1px solid BORDER_COLOR
+
+	.chat-conversation
+		position absolute
+		top 0
+		left 0
+		right 0
+		bottom _CHAT_EDITOR_HEIGHT
+
+		.chat-messages
+			padding _CHAT_LIST_PADDING
+			margin-bottom _CHAT_LIST_PADDING
+
+			&.sticky
+				position absolute
+				left 0
+				right 0
+				bottom 0
+
+			.chat-message
+				clearfix()
+				padding _CHAT_LIST_PADDING
+
+				.chat-content
+					@extend .bg-complete-light
+					@extend .pull-right
+					border-radius (BORDER_RADIUS * 3)
+					padding _CHAT_LIST_PADDING
+					line-height (TEXT_BASE_SIZE * 1.5)
+
+					&.self
+						@extend .bg-success-light
+						@extend .pull-left
+
 .chat-list
 	li
 		clearfix()
