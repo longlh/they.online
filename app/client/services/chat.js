@@ -10,7 +10,8 @@
 			var session = storage.get('session');
 			var self = {};
 
-			var conversations = self.conversations = {};
+			var conversations = self.conversations = [];
+			var indexes = {};
 
 			self.connect = function() {
 				socket.emit('message', {
@@ -22,16 +23,17 @@
 
 				// listen server
 				socket.on('message', function(command) {
-					console.log(command);
 					if (command.code === 'CHAT') {
-						var conversation = conversations[command.data.visitor];
+						var conversation = indexes[command.data.visitor];
 
 						if (!conversation) {
 							// TODO use class Visitor for better logic handling
-							conversations[command.data.visitor] = conversation = new Conversation({
+							indexes[command.data.visitor] = conversation = new Conversation({
 								id: command.data.visitor,
 								name: 'Anonymous'
 							});
+
+							conversations.push(conversation);
 
 							Emitter.emit('conversation:start', conversation);
 						}

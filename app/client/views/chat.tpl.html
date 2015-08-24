@@ -21,7 +21,7 @@
 </div>
 <div class="sidebar-right scroll-y">
 	<ul class="chat-list">
-		<li data-ng-repeat="(id, conversation) in conversations" data-ng-click="join(conversation)"
+		<li data-ng-repeat="conversation in conversations|orderBy:'-update'" data-ng-click="join(conversation)"
 			data-ng-class="{'bg-active':conversation == activeConversation}">
 			<div class="visitor-avatar thumb thumb-40 thumb-circular">
 				<img src="http://pages.revox.io/dashboard/latest/angular/assets/img/profiles/2x.jpg" width="40" height="40">
@@ -30,7 +30,7 @@
 				<span data-ng-show="conversation.unread">{{conversation.unread}}</span>
 			</div>
 			<div class="visitor-name">
-				<span>{{::conversation.visitor.name}} [{{::id}}]</span>
+				<span>{{::conversation.visitor.name}} [{{::conversation.visitor.id}}]</span>
 			</div>
 		</li>
 		<!--
