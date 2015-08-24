@@ -15,7 +15,7 @@ _CHAT_EDITOR_SEND_BUTTON_WIDTH = 50px
 		bottom 0
 		left 0
 		right 0
-		height _CHAT_EDITOR_HEIGHT
+		size false _CHAT_EDITOR_HEIGHT
 		border-top 1px solid BORDER_COLOR
 		overflow hidden
 
@@ -97,18 +97,18 @@ _CHAT_EDITOR_SEND_BUTTON_WIDTH = 50px
 			border-top 1px solid BORDER_COLOR
 
 		.visitor-avatar
-			float left
+			@extend .pull-left
+			@extend .text-center
 			margin-top ((_CHAT_LIST_HEIGHT - _VISITOR_AVATOR_WIDTH) / 2)
 			margin-left _CHAT_LIST_PADDING
-			text-align center
 			font-size 24px
 
 		.visitor-unread-message
-			float right
+			@extend .text-color-warning
+			@extend .text-center
+			@extend .pull-right
 			width _CHAT_LIST_NOTIFICATON_WIDTH
 			margin-right _CHAT_LIST_PADDING
-			color COLOR_WARNING
-			text-align center
 			font-weight 600
 
 		.visitor-name

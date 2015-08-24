@@ -40,30 +40,39 @@
 			// Emitter.emit('agent:active');
 
 			function activate() {
-				Emitter.on('visitor:join', function(visitor) {
-					if (!$scope.interactiveVisitor) {
-						$scope.interact(visitor);
-					}
+				var deregistors = [];
+				$scope.conversations = chat.conversations;
+				$scope.replies = {};
+				$scope.activeConversation = null;
 
-					$scope.$digest();
+				deregistors.push(
+					Emitter.on('conversation:start', function(conversation) {
+						if (!$scope.activeConversation) {
+							$scope.join(conversation);
+						}
+
+						$scope.$digest();
+					})
+				);
+
+				deregistors.push(
+					Emitter.on('chat:receive', function(message) {
+						if ($scope.activeConversation && $scope.activeConversation.visitor.id === message.visitor) {
+							$scope.activeConversation.read();
+						}
+
+						$scope.$digest();
+					})
+				);
+
+				$scope.$on('$destroy', function() {
+					_.forEach(deregistors, function(off) {
+						off();
+					});
 				});
 
-				Emitter.on('chat:receive', function() {
-					$scope.$digest();
-				});
-			}
-
-			$scope.visitors = chat.visitors;
-			$scope.messages = [];
-			$scope.replies = {};
-			$scope.interactiveVisitor = null;
-
-			for (var i = 0; i < 10; i++) {
-				$scope.messages.push({
-					content: 'xxxxxxxxxxxxxxxasdasdddddddddddddddd - ' + i,
-					self: i % 3 === 0,
-					id: i
-				});
+				// join first conversation in list
+				$scope.join(_.find($scope.conversations));
 			}
 
 			$scope.sendMessage = function(event) {
@@ -72,8 +81,12 @@
 				console.log($scope.replies[$scope.interactiveVisitor]);
 			};
 
-			$scope.interact = function(visitor) {
-				$scope.interactiveVisitor = visitor;
+			$scope.join = function(conversation) {
+				$scope.activeConversation = conversation;
+
+				if (conversation) {
+					conversation.read();
+				}
 			};
 
 			activate();

@@ -2,14 +2,15 @@
 	'use strict';
 
 	angular.module(APP).factory('/services/chat', [
+		'/models/conversation',
 		'/services/event-emitter',
 		'/services/socket',
 		'/services/storage',
-		function(Emitter, socket, storage) {
+		function(Conversation, Emitter, socket, storage) {
 			var session = storage.get('session');
 			var self = {};
 
-			var visitors = self.visitors = {};
+			var conversations = self.conversations = {};
 
 			self.connect = function() {
 				socket.emit('message', {
@@ -21,21 +22,22 @@
 
 				// listen server
 				socket.on('message', function(command) {
+					console.log(command);
 					if (command.code === 'CHAT') {
-						var visitor = visitors[command.data.visitor];
+						var conversation = conversations[command.data.visitor];
 
-						if (!visitor) {
+						if (!conversation) {
 							// TODO use class Visitor for better logic handling
-							visitors[command.data.visitor] = visitor = {
-								name: 'Anonymous',
-								messages: []
-							};
+							conversations[command.data.visitor] = conversation = new Conversation({
+								id: command.data.visitor,
+								name: 'Anonymous'
+							});
 
-							Emitter.emit('visitor:join', visitor);
+							Emitter.emit('conversation:start', conversation);
 						}
 
 						// store message
-						visitor.messages.push(command.data);
+						conversation.appendMessage(command.data);
 
 						Emitter.emit('chat:receive', command.data);
 					}

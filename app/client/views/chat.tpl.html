@@ -1,7 +1,7 @@
 <div class="chat-window full-height has-sidebar-right">
 	<div class="chat-conversation scroll-y">
 		<div class="chat-messages">
-			<div class="chat-message" data-ng-repeat="message in interactiveVisitor.messages">
+			<div class="chat-message" data-ng-repeat="message in activeConversation.messages">
 				<div class="chat-content" data-ng-class="::{'self':message.self}">
 					<span>{{::message.chat}}</span>
 				</div>
@@ -21,15 +21,16 @@
 </div>
 <div class="sidebar-right scroll-y">
 	<ul class="chat-list">
-		<li data-ng-repeat="(id, visitor) in visitors" data-ng-click="interact(visitor)"
-			data-ng-class="{'bg-active':visitor == interactiveVisitor}">
+		<li data-ng-repeat="(id, conversation) in conversations" data-ng-click="join(conversation)"
+			data-ng-class="{'bg-active':conversation == activeConversation}">
 			<div class="visitor-avatar thumb thumb-40 thumb-circular">
 				<img src="http://pages.revox.io/dashboard/latest/angular/assets/img/profiles/2x.jpg" width="40" height="40">
 			</div>
 			<div class="visitor-unread-message">
+				<span data-ng-show="conversation.unread">{{conversation.unread}}</span>
 			</div>
 			<div class="visitor-name">
-				<span>{{::visitor.name}} [{{::id}}]</span>
+				<span>{{::conversation.visitor.name}} [{{::id}}]</span>
 			</div>
 		</li>
 		<!--
