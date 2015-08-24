@@ -10,10 +10,10 @@ exports._requires = [
 	'/models/agent'
 ];
 exports._factory = function(_, Promise, uuid, env, cache, Agent) {
-	function storeSession(res, sid, data) {
+	function storeSession(res, sid, agent) {
 		res.locals._session = {
 			id: sid,
-			data: data
+			agent: agent
 		};
 	}
 

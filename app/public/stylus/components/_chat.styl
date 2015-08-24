@@ -5,6 +5,7 @@ _CHAT_LIST_NOTIFICATON_WIDTH = 30px
 _VISITOR_AVATOR_WIDTH = 40px
 
 _CHAT_EDITOR_HEIGHT = 50px
+_CHAT_EDITOR_SEND_BUTTON_WIDTH = 50px
 
 .chat-window
 	position relative
@@ -16,6 +17,42 @@ _CHAT_EDITOR_HEIGHT = 50px
 		right 0
 		height _CHAT_EDITOR_HEIGHT
 		border-top 1px solid BORDER_COLOR
+		overflow hidden
+
+		.chat-input-form
+			clearfix()
+
+			.chat-message-send
+				@extend .pull-right
+				size _CHAT_EDITOR_SEND_BUTTON_WIDTH _CHAT_EDITOR_HEIGHT
+				border none
+				outline none
+				background COLOR_BORDER
+
+				&:hover
+				&:focus
+				&:active
+					border none
+					outline none
+
+
+			.chat-input-wrapper
+				margin-right _CHAT_EDITOR_SEND_BUTTON_WIDTH
+				size false _CHAT_EDITOR_HEIGHT
+
+				.chat-input
+					@extend .bg-white
+					display block
+					size 100%
+					border none
+					outline none
+					padding _CHAT_LIST_PADDING
+
+					&:hover
+					&:focus
+					&:active
+						border none
+						outline none
 
 	.chat-conversation
 		position absolute

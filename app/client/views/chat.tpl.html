@@ -1,18 +1,38 @@
 <div class="chat-window full-height has-sidebar-right">
 	<div class="chat-conversation scroll-y">
 		<div class="chat-messages">
-			<div class="chat-message" data-ng-repeat="message in messages|orderBy:'id':true">
+			<div class="chat-message" data-ng-repeat="message in interactiveVisitor.messages">
 				<div class="chat-content" data-ng-class="::{'self':message.self}">
-					<span>{{::message.content}}</span>
+					<span>{{::message.chat}}</span>
 				</div>
 			</div>
 		</div>
 	</div>
 	<div class="chat-editor bg-white">
+		<form class="chat-input-form" data-ng-submit="sendMessage($event)">
+			<button type="submit" class="chat-message-send">
+				<i class="fa fa-send-o"></i>
+			</button>
+			<div class="chat-input-wrapper">
+				<input type="text" class="chat-input" data-ng-model="replies[interactiveVisitor]">
+			</div>
+		</form>
 	</div>
 </div>
 <div class="sidebar-right scroll-y">
 	<ul class="chat-list">
+		<li data-ng-repeat="(id, visitor) in visitors" data-ng-click="interact(visitor)"
+			data-ng-class="{'bg-active':visitor == interactiveVisitor}">
+			<div class="visitor-avatar thumb thumb-40 thumb-circular">
+				<img src="http://pages.revox.io/dashboard/latest/angular/assets/img/profiles/2x.jpg" width="40" height="40">
+			</div>
+			<div class="visitor-unread-message">
+			</div>
+			<div class="visitor-name">
+				<span>{{::visitor.name}} [{{::id}}]</span>
+			</div>
+		</li>
+		<!--
 		<li class="bg-active">
 			<div class="visitor-avatar thumb thumb-40 thumb-circular">
 				<img src="http://pages.revox.io/dashboard/latest/angular/assets/img/profiles/2x.jpg" width="40" height="40">
@@ -65,5 +85,6 @@
 				<span>Anonymous 3</span>
 			</div>
 		</li>
+		-->
 	</ul>
 </div>

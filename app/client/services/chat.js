@@ -1,74 +1,50 @@
 ;(function() {
 	'use strict';
 
-	function reply(socket, storage) {
-		return function(visitor, message) {
-			socket.emit('message', {
-				code: 'CHAT',
-				data: {
-					visitor: visitor,
-					agent: storage.get('session').data._id,
-					chat: message
-				}
-			});
-		};
-	}
-
-	function handleDisconnect() {
-
-	}
-
-	function handleMessage(Emitter, Conversation, conversations) {
-		return function(message) {
-			// switch cases
-			if (message.code === 'CHAT') {
-				conversations[message.data.visitor] = conversations[message.data.visitor] || new Conversation(message.data.visitor);
-
-				conversations[message.data.visitor].push(message);
-				Emitter.emit('message:receive', message);
-			}
-		};
-	}
-
-	function connect(socket, storage) {
-		return function() {
-			console.log('Connecting...');
-
-			socket.on('connect', function() {
-				console.log('Connected! Join channel.');
-
-				var agent = storage.get('session').data;
-
-				socket.emit('message', {
-					code: 'AGENT_JOIN',
-					data: {
-						agent: agent._id
-					}
-				});
-			});
-		};
-	}
-
 	angular.module(APP).factory('/services/chat', [
-		'/models/conversation',
 		'/services/event-emitter',
 		'/services/socket',
 		'/services/storage',
-		function(Conversation, Emitter, socket, storage) {
-			var conversations = {};
-
-			storage.put('conversations', conversations);
-
-			// init socket
-			socket.on('disconnect', handleDisconnect);
-
-			socket.on('message', handleMessage(Emitter, Conversation, conversations));
-
+		function(Emitter, socket, storage) {
+			var session = storage.get('session');
 			var self = {};
 
-			self.connect = connect(socket, storage);
+			var visitors = self.visitors = {};
 
-			self.reply = reply(socket, storage);
+			self.connect = function() {
+				socket.emit('message', {
+					code: 'AGENT_JOIN',
+					data: {
+						agent: session.agent._id
+					}
+				});
+
+				// listen server
+				socket.on('message', function(command) {
+					if (command.code === 'CHAT') {
+						var visitor = visitors[command.data.visitor];
+
+						if (!visitor) {
+							// TODO use class Visitor for better logic handling
+							visitors[command.data.visitor] = visitor = {
+								name: 'Anonymous',
+								messages: []
+							};
+
+							Emitter.emit('visitor:join', visitor);
+						}
+
+						// store message
+						visitor.messages.push(command.data);
+
+						Emitter.emit('chat:receive', command.data);
+					}
+				});
+			};
+
+			self.sendMessage = function(visitor, message) {
+
+			};
 
 			return self;
 		}

@@ -21,7 +21,7 @@
 				instantiation: {
 					construct: function() {
 						// convert raw data to Agent object
-						this.data = new Agent(this.data);
+						this.agent = new Agent(this.agent);
 					}
 				}
 			});

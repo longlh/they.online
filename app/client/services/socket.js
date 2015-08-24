@@ -6,6 +6,7 @@
 		function(io) {
 			var socket = io();
 
+			// handle common tasks here
 			socket.on('disconnect', function() {
 				console.warn('Disconnected.');
 				console.log('Reconnecting...');
