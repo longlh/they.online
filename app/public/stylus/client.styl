@@ -1,0 +1,89 @@
+@import 'kouto-swiss'
+
+@import 'base/_var'
+
+_CLIENT_WIDTH = 300px
+_CHAT_LIST_PADDING = 10px
+
+.easychat-client
+	meyer-reset()
+	box-sizing-reset()
+	normalize()
+
+	font-family font-stack(TEXT_FONT_STACK)
+	font-size TEXT_BASE_SIZE
+	color TEXT_COLOR
+
+	position fixed
+	bottom 0
+	right 0
+	border 1px solid BORDER_COLOR
+
+	&.hidden
+		.easychat-client-header
+			background COLOR_PASSIVE
+
+			.easychat-client-unread
+				display block
+
+		.easychat-client-message-list
+			display none
+
+		.easychat-client-input
+			display none
+
+	.easychat-client-header
+		clearfix()
+		size _CLIENT_WIDTH 35px
+		line-height 35px
+		padding 0 _CHAT_LIST_PADDING
+		cursor pointer
+		background COLOR_ACTIVE
+		font-weight 600
+
+		.easychat-client-unread
+			display none
+			float right
+			background COLOR_DANGER
+			color COLOR_WHITE
+			line-height 24px
+			margin-top 5px
+			padding 0 _CHAT_LIST_PADDING
+			border-radius BORDER_RADIUS
+
+	.easychat-client-message-list
+		size _CLIENT_WIDTH 300px
+		overflow-x hidden
+		overflow-y auto
+		background COLOR_WHITE
+		border-top 1px solid BORDER_COLOR
+
+		.easychat-message
+			clearfix()
+			padding _CHAT_LIST_PADDING
+
+			.easychat-message-content
+				float right
+				background COLOR_COMPLETE_LIGHT
+				border-radius (BORDER_RADIUS * 3)
+				padding _CHAT_LIST_PADDING
+				line-height (TEXT_BASE_SIZE * 1.5)
+
+				&.self
+					float left
+					background COLOR_SUCCESS_LIGHT
+
+	.easychat-client-input
+		size _CLIENT_WIDTH false
+		border-top 1px solid BORDER_COLOR
+
+		input
+			size 100% 35px
+			border none
+			padding 0 10px
+
+			&:hover
+			&:active
+			&:focus
+				border none
+				outline none

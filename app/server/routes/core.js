@@ -24,6 +24,13 @@ exports._factory = function(app, filter, util) {
 		});
 	});
 
+	// simulator
+	app.get('/simu/:id?', function(req, res, next) {
+		res.render('simu', {
+			id: req.params.id
+		});
+	});
+
 	app.get('/test', function(req, res, next) {
 		res.render('test');
 	});
