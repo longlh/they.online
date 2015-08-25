@@ -1,4 +1,4 @@
-<div class="chat-window full-height has-sidebar-right">
+<div class="chat-window full-height has-sidebar-right" data-ng-show="activeConversation">
 	<div class="chat-conversation scroll-y">
 		<div class="chat-messages">
 			<div class="chat-message" data-ng-repeat="message in activeConversation.messages">
@@ -14,7 +14,7 @@
 				<i class="fa fa-send-o"></i>
 			</button>
 			<div class="chat-input-wrapper">
-				<input type="text" class="chat-input" data-ng-model="replies[interactiveVisitor]">
+				<input type="text" class="chat-input" data-ng-model="replies[activeConversation.visitor.id]">
 			</div>
 		</form>
 	</div>

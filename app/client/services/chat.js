@@ -14,7 +14,7 @@
 			var indexes = {};
 
 			self.connect = function() {
-				socket.emit('message', {
+				socket.emit('command', {
 					code: 'AGENT_JOIN',
 					data: {
 						agent: session.agent._id
@@ -22,7 +22,7 @@
 				});
 
 				// listen server
-				socket.on('message', function(command) {
+				socket.on('command', function(command) {
 					if (command.code === 'CHAT') {
 						var conversation = indexes[command.data.visitor];
 
@@ -31,7 +31,7 @@
 							indexes[command.data.visitor] = conversation = new Conversation({
 								id: command.data.visitor,
 								name: 'Anonymous'
-							});
+							}, session.agent._id);
 
 							conversations.push(conversation);
 
@@ -47,7 +47,17 @@
 			};
 
 			self.sendMessage = function(visitor, message) {
+				console.log(visitor, message);
 
+				socket.emit('command', {
+					code: 'CHAT',
+					data: {
+						agent: session.agent._id,
+						chat: message,
+						visitor: visitor,
+						from: session.agent._id
+					}
+				});
 			};
 
 			return self;

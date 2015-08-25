@@ -28,12 +28,13 @@
 				var message = input.value;
 
 				if (message) {
-					socket.emit('message', {
+					socket.emit('command', {
 						code: 'CHAT',
 						data: {
 							visitor: localStorage.visitor,
 							agent: agent,
-							chat: message
+							chat: message,
+							from: localStorage.visitor
 						}
 					});
 
@@ -49,7 +50,7 @@
 					localStorage.visitor = Date.now();
 				}
 
-				socket.emit('message', {
+				socket.emit('command', {
 					code: 'VISITOR_JOIN',
 					data: {
 						visitor: localStorage.visitor,
@@ -58,7 +59,7 @@
 				});
 			});
 
-			socket.on('message', function(message) {
+			socket.on('command', function(message) {
 				if (message.code === 'CHAT') {
 					append(container, message.data.chat);
 				}

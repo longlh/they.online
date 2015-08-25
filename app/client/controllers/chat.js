@@ -78,7 +78,11 @@
 			$scope.sendMessage = function(event) {
 				event.preventDefault();
 
-				console.log($scope.replies[$scope.interactiveVisitor]);
+				var visitorId = $scope.activeConversation.visitor.id;
+				chat.sendMessage(visitorId, $scope.replies[visitorId]);
+
+				// reset textbox
+				$scope.replies[visitorId] = null;
 			};
 
 			$scope.join = function(conversation) {

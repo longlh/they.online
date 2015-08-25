@@ -13,7 +13,7 @@ exports._factory = function(Promise, UUID, socketIO, httpServer) {
 	// socket connected
 	io.on('connection', function(socket) {
 		// listen message
-		socket.on('message', function(message) {
+		socket.on('command', function(message) {
 			// handle JOIN
 			if (message.code === 'VISITOR_JOIN') {
 				console.log('Visitor [' +
@@ -43,15 +43,16 @@ exports._factory = function(Promise, UUID, socketIO, httpServer) {
 						id: UUID.v4(),
 						chat: message.data.chat,
 						agent: message.data.agent,
-						visitor: message.data.visitor
+						visitor: message.data.visitor,
+						from: message.data.from
 					}
 				};
 
 				// boardcast to all visitor's devices
-				io.to(message.data.visitor + '_' + message.data.agent).emit('message', reply);
+				io.to(message.data.visitor + '_' + message.data.agent).emit('command', reply);
 
 				// boardcast to agent
-				io.to(message.data.agent).emit('message', reply);
+				io.to(message.data.agent).emit('command', reply);
 			}
 		});
 
