@@ -1,0 +1,68 @@
+<% extend 'layouts/base' %>
+
+<% block 'end_head' : %>
+<!-- block `end_head` begin -->
+
+<link rel="stylesheet" href="/build/css/sign-on.pages.css">
+
+<!-- block `end_head` end -->
+<% end %>
+
+<div class="full-height login-wrapper">
+	<div class="bg-pic">
+		<img src="http://pages.revox.io/dashboard/latest/angular/assets/img/demo/new-york-city-buildings-sunrise-morning-hd-wallpaper.jpg" alt="" height="100%">
+	</div>
+	<div class="login-container bg-white pull-right full-height">
+		<div class="break break-large">
+		</div>
+		<div class="gs-16 gs-fluid">
+			<div class="row">
+				<div class="col-12-offset-2">
+					<h1>Easychat</h1>
+					<form action="/sign-up" method="post" class="form form-stack">
+						<div class="form-group">
+							<label class="label" for="tenant">Tenant</label>
+							<span class="help">Name of your company or organization</span>
+							<div class="form-control">
+								<input type="text" name="tenantName" id="tenant" class="input input-single-line">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="label" for="uid">Admin account</label>
+							<span class="help"></span>
+							<div class="form-control">
+								<input type="text" name="admin" id="uid" class="input input-single-line">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="label" for="pwd">Admin Password</label>
+							<div class="form-control">
+								<input type="password" name="adminPassword" id="pwd" class="input input-single-line">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="label" for="cpwd">Confirm password</label>
+							<div class="form-control">
+								<input type="confirmPassword" name="confirmPassword" id="cpwd" class="input input-single-line">
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="form-control">
+								<div class="checkbox">
+									<input type="checkbox" id="term">
+									<label for="term"><i></i><span>Accept our <a href="/terms-conditions">Terms & Conditions</a></span></label>
+								</div>
+							</div>
+						</div>
+						<div class="form-group cf">
+							<div class="contact pull-right text-small">
+								<span class="text-color-hint">Need help? <a href="/support">Contact support</a></span>
+							</div>
+							<button class="button button-complete text-upper">Sign up</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

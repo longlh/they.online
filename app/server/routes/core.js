@@ -31,7 +31,5 @@ exports._factory = function(app, filter, util) {
 		});
 	});
 
-	app.get('/test', function(req, res, next) {
-		res.render('test');
-	});
+	app.get('/test', util.render('test'));
 };

@@ -41,5 +41,11 @@ exports._factory = function(_) {
 		};
 	};
 
+	self.redirect = function(dest) {
+		return function(req, res, next) {
+			res.redirect(dest);
+		};
+	};
+
 	return self;
 };

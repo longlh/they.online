@@ -12,7 +12,7 @@ exports._factory = function(_) {
 			return next();
 		}
 
-		res.redirect('/signin');
+		res.redirect('/sign-on');
 	};
 
 	self.blockUnauthenticated = function(req, res, next) {
