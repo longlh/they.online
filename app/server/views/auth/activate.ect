@@ -1,0 +1,62 @@
+<% extend 'auth/_base' %>
+
+<div class="gs-16 gs-fluid">
+	<div class="row">
+		<div class="col-12-offset-2">
+			<h1>Finish your registration</h1>
+			<form action="/registration/activate/<%= @_registration._id %>" method="post" class="form form-stack">
+				<div class="form-group">
+					<label class="label">Tenant name</label>
+					<div class="form-control">
+						<input type="text" class="input input-single-line" disabled
+							value="<%= @_registration.tenantName %>">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="label">Primary email</label>
+					<div class="form-control">
+						<input type="email" class="input input-single-line" disabled
+							value="<%= @_registration.email %>">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="label">Primary domain</label>
+					<div class="form-control">
+						<input type="url" class="input input-single-line" disabled
+							value="<%= @_registration.domain %>">
+					</div>
+				</div>
+				<div class="break">
+				</div>
+				<div class="form-group">
+					<label class="label">Administrator Name</label>
+					<div class="form-control">
+						<input type="text" name="name" class="input input-single-line">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="label">Administrator Account</label>
+					<div class="form-control">
+						<input type="text" name="account" class="input input-single-line">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="label">Password</label>
+					<div class="form-control">
+						<input type="password" name="password" class="input input-single-line">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="label">Confirm</label>
+					<span class="help">Re-type the password</span>
+					<div class="form-control">
+						<input type="password" name="confirmPassword" class="input input-single-line">
+					</div>
+				</div>
+				<div class="form-group">
+					<button class="button button-complete text-upper">Create Account</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

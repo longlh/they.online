@@ -17,12 +17,7 @@ exports._factory = function(app, auth, session, util) {
 			}), session.serialize, util.redirect('/'));
 
 	app.route('/sign-up')
-			.get(util.render('auth/sign-up'))
-			.post(function(req, res, next) {
-				console.log(req.body);
-
-				res.redirect('/sign-up');
-			});
+			.get(util.render('auth/sign-up'));
 
 	app.get('/sign-out', session.destroy, util.redirect('/'));
 };

@@ -6,17 +6,23 @@ exports._requires = [
 ];
 exports._factory = function(db) {
 	var schema = new db.Schema({
-		displayName: {
+		name: {
 			type: String,
 			required: true
 		},
+		emails: [{
+			value: String,
+			primary: Boolean
+		}],
+		domains: [{
+			value: String
+		}],
+		biography: String,
 		plan: {
 			type: String,
 			default: 'free'
 		}
 	});
 
-	var model = db.model('Tenant', schema);
-
-	return model;
+	return db.model('Tenant', schema);
 };

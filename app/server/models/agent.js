@@ -65,7 +65,7 @@ exports._factory = function(_, crypto, db) {
 
 	// main document
 	var agentSchema = db.Schema({
-		displayName: String,
+		name: String,
 		tenant: {
 			type: db.Schema.Types.ObjectId,
 			ref: 'Tenant',
@@ -88,7 +88,5 @@ exports._factory = function(_, crypto, db) {
 		}
 	};
 
-	var model = db.model('Agent', agentSchema);
-
-	return model;
+	return db.model('Agent', agentSchema);
 };

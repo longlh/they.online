@@ -50,5 +50,19 @@ exports._factory = function(Promise, Tenant) {
 		}).catch(next);
 	};
 
+	self.create = function(req, res, next) {
+		var tenant = res.locals._tenant = new Tenant({
+			displayName: req.body.displayName
+		});
+
+		tenant.save(function(err, tenant, affectedRows) {
+			if (err) {
+				return next(err);
+			}
+
+			next();
+		});
+	};
+
 	return self;
 };

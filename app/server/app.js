@@ -9,6 +9,7 @@ exports._activations = [
 	'/config/assets',
 	'/config/view-engine',
 	'/routes/auth',
+	'/routes/registration',
 	'/routes/core',
 	'/routes/agent',
 	'/routes/api'

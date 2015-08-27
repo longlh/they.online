@@ -36,8 +36,17 @@ p
 	margin 0 0 10px 0
 	line-height (TEXT_BASE_SIZE * 1.5)
 
-a, a:visited
+a
+	color TEXT_COLOR_SUCCESS
 	text-decoration none
+
+	&:visited
+		color inherit
+		text-decoration inherit
+
+	&.underline
+		text-decoration underline
+
 
 .text-left
 	text-align left
