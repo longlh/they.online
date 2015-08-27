@@ -21,13 +21,13 @@ exports._factory = function(_, crypto, db) {
 		hashedPassword: String
 	});
 
-	accountSchema.index({
-		uid: 1,
-		kind: -1
-	}, {
-		unique: true,
-		sparse: true
-	});
+	// accountSchema.index({
+	// 	uid: 1,
+	// 	kind: -1
+	// }, {
+	// 	unique: true,
+	// 	sparse: true
+	// });
 
 	// methods
 	accountSchema.methods = {
