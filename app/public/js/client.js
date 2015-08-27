@@ -155,13 +155,15 @@
 		}
 	}
 
-	exports._startEasyChat = function(host, agent) {
-		injectStyle(host);
+	exports.they = {
+		online: function(host, agent) {
+			injectStyle(host);
 
-		ui(createHeader(), createMessageList(), createForm());
+			ui(createHeader(), createMessageList(), createForm());
 
-		updateUnread();
+			updateUnread();
 
-		connect(io(host), agent);
+			connect(io(host), agent);
+		}
 	};
 })(window);

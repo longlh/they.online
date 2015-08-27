@@ -1,5 +1,5 @@
 <div class="page">
-	<div class="gs-16 gs-fluid gs-padding">
+	<div class="gs-16 gs-fluid">
 		<div class="row">
 			<div class="col-8">
 				<form data-ng-submit="save()" class="form form-stack panel panel-default">
@@ -11,7 +11,14 @@
 							<label class="label">Tenant name</label>
 							<span class="help">Your tenant name will be displayed to vistors</span>
 							<div class="form-control">
-								<input type="text" data-ng-model="tenant.displayName" class="input input-single-line">
+								<input type="text" data-ng-model="tenant.name" class="input input-single-line">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="label">Email</label>
+							<span class="help">We will contact with you via this email</span>
+							<div class="form-control">
+								<input type="text" data-ng-model="tenant.email" class="input input-single-line">
 							</div>
 						</div>
 						<div class="form-group">
@@ -24,22 +31,22 @@
 												<option value="free">Free</option>
 											</select>
 										</div>
-										<div class="col-7-offset-1">
-											<span class="help">Free plan has very limited functionalities</span>
+										<div class="col-8 text-right">
+											<span class="help">Free plan has very limited functionalities. <a class="text-color-success underline">Learn more</a>.</span>
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="label">Description</label>
+							<label class="label">Biography</label>
 							<span class="help">Information about your tenant, optional</span>
 							<div class="form-control">
-								<textarea rows="5" data-ng-model="tenant.description" class="input input-multi-line"></textarea>
+								<textarea rows="5" data-ng-model="tenant.biography" class="input input-multi-line"></textarea>
 							</div>
 						</div>
 						<div class="form-group">
-							<button class="button button-primary">Update</button>
+							<button class="button button-primary">Save</button>
 						</div>
 					</div>
 				</form>
@@ -47,13 +54,13 @@
 			<div class="col-8">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						<div class="panel-title">Install EasyChat on your website</div>
+						<div class="panel-title">Install <span class="text-color-success">they.online</span> on your website</div>
 					</div>
 					<div class="panel-body form form-stack">
 						<p class="">This is your embedded script for your tenant. Please copy and paste it into every webpage you want to use EasyChat.</p>
 						<div class="form-group">
 							<div class="form-control">
-								<textarea rows="3" readonly class="input input-multi-line no-resize">xxxxx</textarea>
+								<textarea rows="6" readonly class="input input-multi-line no-resize">{{::script}}</textarea>
 							</div>
 						</div>
 					</div>

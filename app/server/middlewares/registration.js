@@ -39,8 +39,8 @@ exports._factory = function(_, Promise, UUID, Registration, Tenant, Agent, mail)
 
 			mail.send({
 				to: registration.email,
-				subject: 'EasyChat - Active your account',
-				html: '<h1>' + registration.code + '</h1>'
+				subject: 'Welcome to they.online',
+				html: '<a href="http://192.168.164.128:3000/registration/activate/' + registration.code + '">Active your account</h1>'
 			}).then(function(result) {
 				console.log('Mail sent!', result);
 			}).catch(function(err) {
@@ -85,12 +85,10 @@ exports._factory = function(_, Promise, UUID, Registration, Tenant, Agent, mail)
 
 		var tenant = new Tenant({
 			name: registration.tenantName,
-			emails: [{
-				value: registration.email,
-				primary: true
-			}],
+			email: registration.email,
 			domains: [{
-				value: registration.domain
+				value: registration.domain,
+				active: true
 			}]
 		});
 

@@ -10,12 +10,13 @@ exports._factory = function(db) {
 			type: String,
 			required: true
 		},
-		emails: [{
-			value: String,
-			primary: Boolean
-		}],
+		email: {
+			type: String,
+			required: true
+		},
 		domains: [{
-			value: String
+			value: String,
+			active: Boolean
 		}],
 		biography: String,
 		plan: {

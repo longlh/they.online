@@ -38,7 +38,10 @@ exports._factory = function(Promise, Tenant) {
 	self.update = function(req, res, next) {
 		// specify tenant's fields should be updated
 		var query = Tenant.findByIdAndUpdate(res.locals._tenant._id, {
-			displayName: req.body.displayName
+			name: req.body.name,
+			email: req.body.email,
+			plan: req.body.plan,
+			biography: req.body.biography
 		}, {
 			new: true
 		});
@@ -48,20 +51,6 @@ exports._factory = function(Promise, Tenant) {
 
 			next();
 		}).catch(next);
-	};
-
-	self.create = function(req, res, next) {
-		var tenant = res.locals._tenant = new Tenant({
-			displayName: req.body.displayName
-		});
-
-		tenant.save(function(err, tenant, affectedRows) {
-			if (err) {
-				return next(err);
-			}
-
-			next();
-		});
 	};
 
 	return self;

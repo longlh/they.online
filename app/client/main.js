@@ -24,12 +24,12 @@
 			}).caseInsensitiveMatch = true;
 		}
 	]).run([
-		'data',
+		'SESSION',
 		'/models/session',
 		'/services/storage',
-		function(data, Session, storage) {
+		function(SESSION, Session, storage) {
 			// deserialize session from server-pass data
-			var session = new Session(data);
+			var session = new Session(SESSION);
 
 			storage.put('session', session);
 		}

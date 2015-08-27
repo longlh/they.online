@@ -26,7 +26,12 @@ var APP = 'easy-chat';
 <% if @_session : %>
 <script>
 <!--
-	angular.module(APP).constant('data', <%- JSON.stringify(@_session) %>);
+	angular.module(APP).constant('SESSION', <%- JSON.stringify(@_session) %>);
+
+	angular.module(APP).constant('ENV', {
+		port: <%- JSON.stringify(@_env.port) %>,
+		host: <%- JSON.stringify(@_env.host) %>
+	});
 -->
 </script>
 <% end %>

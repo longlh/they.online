@@ -30,5 +30,11 @@ exports._factory = function(express, bodyParser, cookieParser, path, env) {
 	app.enable('trust proxy');
 	app.disable('x-powered-by');
 
+	app.use(function(req, res, next) {
+		res.locals._env = env;
+
+		next();
+	});
+
 	return app;
 };
