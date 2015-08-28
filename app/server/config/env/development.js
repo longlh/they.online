@@ -12,7 +12,7 @@ exports._factory = function() {
 			expiry: 60 * 60 * 1000 // 1 hour
 		},
 		mail: {
-			from: 'no-reply@indie.codes',
+			from: 'no-reply@they.online',
 			region: 'us-west-2',
 			accessKeyId: 'AKIAI6W6J2H4K4W3OZKA',
 			secretAccessKey: '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'
