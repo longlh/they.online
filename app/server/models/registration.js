@@ -18,10 +18,6 @@ exports._factory = function(db) {
 			type: String,
 			required: true
 		},
-		domain: {
-			type: String,
-			required: true
-		},
 		used: {
 			type: Boolean,
 			default: false

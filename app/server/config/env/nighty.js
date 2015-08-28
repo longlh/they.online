@@ -3,13 +3,13 @@
 exports._ = '/config/env/nighty';
 exports._factory = function() {
 	return {
-		host: 'they.online',
+		debug: true,
+		host: 'nighty.they.online',
 		port: 4000,
 		db: 'mongodb://localhost/they-online-nighty',
 		session: {
-			cookie: '_sid',
-			// expiry: 1 * 10 * 1000 // 1 hour
-			expiry: 60 * 60 * 1000 // 1 hour
+			cookie: '_sid_nighty',
+			expiry: 24 * 60 * 60 * 1000 // 1 day
 		},
 		mail: {
 			from: 'no-reply@they.online',

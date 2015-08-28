@@ -1,8 +1,7 @@
 {
   "name": "easy-chat",
-  "main": "index.js",
-  "version": "0.0.1",
-  "homepage": "https://github.com/longlh/easy-chat",
+  "version": "1.0.0",
+  "homepage": "https://github.com/longlh/they.online",
   "authors": [
     "Luc Hoang Long <d@dapps.me>"
   ],
@@ -15,8 +14,6 @@
     "tests"
   ],
   "dependencies": {
-    "crossroads": "~0.12.0",
-    "requirejs": "~2.1.19",
     "angular": "~1.4.3",
     "angular-route": "~1.4.3",
     "angular-resource": "~1.4.3",

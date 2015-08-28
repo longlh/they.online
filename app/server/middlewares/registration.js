@@ -19,9 +19,8 @@ exports._factory = function(_, Promise, UUID, Registration, Tenant, Agent, mail)
 
 		var registration = new Registration({
 			code: UUID.v4(),
-			tenantName: data.name || 'Tenant',
-			email: data.email || 'reg@dapps.me',
-			domain: data.domain || 'dapps.me'
+			tenantName: data.name || 'dapps.me',
+			email: data.email || 'reg@dapps.me'
 		});
 
 		// save the registration
@@ -71,6 +70,10 @@ exports._factory = function(_, Promise, UUID, Registration, Tenant, Agent, mail)
 			}
 
 			return Promise.resolve(query.exec()).then(function(registration) {
+				if (!registration || registration.used) {
+					return next(new Error('Registration is invalid'));
+				}
+
 				res.locals._registration = registration;
 
 				next();
@@ -84,12 +87,7 @@ exports._factory = function(_, Promise, UUID, Registration, Tenant, Agent, mail)
 		// TODO check registration is used or not
 
 		var tenant = new Tenant({
-			name: registration.tenantName,
-			email: registration.email,
-			domains: [{
-				value: registration.domain,
-				active: true
-			}]
+			name: registration.tenantName
 		});
 
 		tenant.save(function(error, tenant) {
@@ -100,10 +98,14 @@ exports._factory = function(_, Promise, UUID, Registration, Tenant, Agent, mail)
 			res.locals._tenant = tenant;
 
 			next();
+
+			registration = null;
 		});
 	};
 
 	self.activateAgent = function(req, res, next) {
+		var registration = res.locals._registration;
+
 		var agent = new Agent({
 			name: req.body.name,
 			tenant: res.locals._tenant._id,
@@ -112,7 +114,7 @@ exports._factory = function(_, Promise, UUID, Registration, Tenant, Agent, mail)
 
 		agent.accounts.push({
 			kind: 'internal',
-			uid: req.body.account,
+			uid: registration.email,
 			password: req.body.password
 		});
 
@@ -124,6 +126,9 @@ exports._factory = function(_, Promise, UUID, Registration, Tenant, Agent, mail)
 			res.locals._agent = agent;
 
 			next();
+
+			agent = null;
+			registration = null;
 		});
 	};
 

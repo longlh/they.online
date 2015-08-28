@@ -3,9 +3,10 @@
 exports._ = '/config/env/development';
 exports._factory = function() {
 	return {
+		debug: true,
 		host: '192.168.164.128:3000',
 		port: 3000,
-		db: 'mongodb://localhost/easy-chat-dev',
+		db: 'mongodb://localhost/they-online-dev',
 		session: {
 			cookie: '_sid',
 			// expiry: 1 * 10 * 1000 // 1 hour

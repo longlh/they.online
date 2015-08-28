@@ -1,5 +1,5 @@
 {
-  "name": "easy-chat",
+  "name": "they.online",
   "version": "1.0.0",
   "description": "Easy-integrated chat system for static websites, blogs, e-commerces...",
   "main": "index.js",
@@ -39,7 +39,7 @@
   "scripts": {},
   "repository": {
     "type": "git",
-    "url": "https://github.com/longlh/easy-chat.git"
+    "url": "https://github.com/longlh/they.online.git"
   },
   "author": {
     "name": "Luc Hoang Long",
@@ -47,7 +47,7 @@
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/longlh/easy-chat/issues"
+    "url": "https://github.com/longlh/they.online/issues"
   },
-  "homepage": "https://github.com/longlh/easy-chat#readme"
+  "homepage": "https://github.com/longlh/they.online#readme"
 }

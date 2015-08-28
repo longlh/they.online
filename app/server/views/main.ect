@@ -37,7 +37,7 @@ var APP = <%- JSON.stringify(@_env.applicationName) %>;
 
 <!-- block `end_body` end -->
 <% end %>
-<div id="page-container" class="full-height">
+<div id="page-container" class="full-height" data-ng-controller="/controllers/container">
 	<header class="header-navbar">
 		<div class="pull-right thumb thumb-32 thumb-circular user-avatar">
 			<a href="/sign-out">
@@ -45,7 +45,7 @@ var APP = <%- JSON.stringify(@_env.applicationName) %>;
 			</a>
 		</div>
 		<div class="pull-right text-large text-color-hint user-name">
-			<span>Luc Hoang Long</span>
+			<span data-ng-cloak>{{session.agent.name}}</span>
 		</div>
 	</header>
 	<nav class="sidebar">
@@ -64,10 +64,10 @@ var APP = <%- JSON.stringify(@_env.applicationName) %>;
 				</li>
 				<li>
 					<a href="#/tenant">
-						<span class="title">Organization</span>
+						<span class="title">Tenant</span>
 					</a>
 					<span class="thumb thumb-40">
-						<i class="fa fa-users fa-fw"></i>
+						<i class="fa fa-building-o fa-fw"></i>
 					</span>
 				</li>
 				<li>
@@ -82,7 +82,7 @@ var APP = <%- JSON.stringify(@_env.applicationName) %>;
 			</ul>
 		</div>
 	</nav>
-	<main class="main-container full-height" data-ng-view>
+	<main class="main-container full-height" data-ng-view data-ng-cloak>
 	</main>
 	<footer id="page-footer">
 	</footer>
