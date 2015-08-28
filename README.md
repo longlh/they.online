@@ -1,2 +1,3 @@
-# easy-chat
-Easy-integrated chat system for static websites, blog, e-commerce...
+# They Online
+And they are on your website right now!  
+Let us help you to connect with your visitors, just some simple steps need to implemented.
