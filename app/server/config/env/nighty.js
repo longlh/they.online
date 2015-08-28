@@ -3,7 +3,7 @@
 exports._ = '/config/env/nighty';
 exports._factory = function() {
 	return {
-		host: '192.168.164.128',
+		host: 'they.online',
 		port: 4000,
 		db: 'mongodb://localhost/they-online-nighty',
 		session: {

@@ -17,7 +17,7 @@
 <script src="/lib/angular-resource/angular-resource.min.js"></script>
 <script>
 <!--
-var APP = 'easy-chat';
+var APP = <%- JSON.stringify(@_env.applicationName) %>;
 -->
 </script>
 <% for file in @assets : %>
@@ -29,7 +29,6 @@ var APP = 'easy-chat';
 	angular.module(APP).constant('SESSION', <%- JSON.stringify(@_session) %>);
 
 	angular.module(APP).constant('ENV', {
-		port: <%- JSON.stringify(@_env.port) %>,
 		host: <%- JSON.stringify(@_env.host) %>
 	});
 -->

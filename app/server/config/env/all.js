@@ -12,6 +12,7 @@ exports._factory = function(_, path, specifiedConfiguration) {
 	var defaults = {
 		_root: path.resolve(__dirname, '../../../..'),
 		_profile: profile,
+		applicationName: 'they.online',
 		session: {
 			cookie: '_sid',
 			// expiry: 1 * 10 * 1000 // 1 hour

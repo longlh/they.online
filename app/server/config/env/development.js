@@ -3,7 +3,7 @@
 exports._ = '/config/env/development';
 exports._factory = function() {
 	return {
-		host: '192.168.164.128',
+		host: '192.168.164.128:3000',
 		port: 3000,
 		db: 'mongodb://localhost/easy-chat-dev',
 		session: {
