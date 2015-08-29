@@ -4,6 +4,11 @@
 <!-- block `end_head` begin -->
 
 <link rel="stylesheet" href="/build/css/main.css">
+<style>
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}
+</style>
 
 <!-- block `end_head` end -->
 <% end %>
@@ -37,7 +42,7 @@ var APP = <%- JSON.stringify(@_env.applicationName) %>;
 
 <!-- block `end_body` end -->
 <% end %>
-<div id="page-container" class="full-height" data-ng-controller="/controllers/container">
+<div id="page-container" class="full-height" data-ng-controller="/controllers/container" data-ng-cloak>
 	<header class="header-navbar">
 		<div class="pull-right thumb thumb-32 thumb-circular user-avatar">
 			<a href="/sign-out">
@@ -45,7 +50,7 @@ var APP = <%- JSON.stringify(@_env.applicationName) %>;
 			</a>
 		</div>
 		<div class="pull-right text-large text-color-hint user-name">
-			<span data-ng-cloak>{{session.agent.name}}</span>
+			<span>{{session.agent.name}}</span>
 		</div>
 	</header>
 	<nav class="sidebar">

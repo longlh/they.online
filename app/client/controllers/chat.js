@@ -5,10 +5,10 @@
 		'@lodash',
 		'$scope',
 		'$timeout',
-		'/services/event-emitter',
+		'/services/event-hub',
 		'/services/chat',
 		'/services/storage',
-		function(_, $scope, $timeout, Emitter, chat, storage) {
+		function(_, $scope, $timeout, EventHub, chat, storage) {
 			function activate() {
 				$scope.conversations = chat.conversations;
 				$scope.replies = {};
@@ -21,7 +21,7 @@
 			var deregistors = [];
 
 			deregistors.push(
-				Emitter.on('conversation:start', function(conversation) {
+				EventHub.on('conversation:start', function(conversation) {
 					if (!$scope.activeConversation) {
 						$scope.join(conversation);
 					}
@@ -31,7 +31,7 @@
 			);
 
 			deregistors.push(
-				Emitter.on('chat:receive', function(message) {
+				EventHub.on('chat:receive', function(message) {
 					if ($scope.activeConversation && $scope.activeConversation.visitor.id === message.visitor) {
 						$scope.activeConversation.read();
 					}
@@ -65,10 +65,6 @@
 				if (conversation) {
 					conversation.read();
 				}
-			};
-
-			$scope.reload = function() {
-				activate();
 			};
 
 			activate();

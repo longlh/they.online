@@ -3,10 +3,11 @@
 
 	angular.module(APP).factory('/services/chat', [
 		'/models/conversation',
-		'/services/event-emitter',
+		'/services/event-hub',
+		'/services/command',
 		'/services/socket',
 		'/services/storage',
-		function(Conversation, Emitter, socket, storage) {
+		function(Conversation, EventHub, command, socket, storage) {
 			var session = storage.get('session');
 			var self = {};
 
@@ -14,49 +15,45 @@
 			var indexes = {};
 
 			self.connect = function() {
-				socket.emit('command', {
-					code: 'AGENT_JOIN',
-					data: {
+				command.ready(function() {
+					command.send('AGENT_JOIN', {
 						agent: session.agent._id
-					}
+					});
 				});
 
-				// listen server
-				socket.on('command', function(command) {
+				command.receive(function(command) {
 					if (command.code === 'CHAT') {
-						var conversation = indexes[command.data.visitor];
+						var data = command.data;
+						var visitor = data.visitor;
+
+						var conversation = indexes[visitor];
 
 						if (!conversation) {
-							// TODO use class Visitor for better logic handling
-							indexes[command.data.visitor] = conversation = new Conversation({
-								id: command.data.visitor,
+							indexes[visitor] = conversation = new Conversation({
+								id: visitor,
 								name: 'Anonymous'
 							}, session.agent._id);
 
 							conversations.push(conversation);
 
-							Emitter.emit('conversation:start', conversation);
+							EventHub.emit('conversation:start', conversation);
 						}
 
 						// store message
-						conversation.appendMessage(command.data);
+						conversation.appendMessage(data);
 
-						Emitter.emit('chat:receive', command.data);
+						// emit
+						EventHub.emit('chat:receive', command.data);
 					}
 				});
 			};
 
 			self.sendMessage = function(visitor, message) {
-				console.log(visitor, message);
-
-				socket.emit('command', {
-					code: 'CHAT',
-					data: {
-						agent: session.agent._id,
-						chat: message,
-						visitor: visitor,
-						from: session.agent._id
-					}
+				command.send('CHAT', {
+					agent: session.agent._id,
+					chat: message,
+					visitor: visitor,
+					from: session.agent._id
 				});
 			};
 
