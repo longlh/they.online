@@ -2,31 +2,28 @@
 
 exports._ = '/chat';
 exports._requires = [
-	'/chat/container'
+	'/socket',
+	'/chat/container',
+	'/chat/instructions'
 ];
-exports._factory = function(container) {
-	var self = {};
+exports._factory = function(socketServer, container, instructions) {
+	var self = {
+		execute: function(command) {
+			var socket = this;
+			instructions.execute(command.code, socket, command.data);
+		},
+		disconnect: function() {
+			var socket = this;
 
-	self.handle = function(socket) {
-		socket.on('command', self.execute);
-	};
-
-	self.execute = function(command) {
-		var socket = this;
-		var instruction = instructions[command.code];
-
-		if (instruction) {
-			instruction.call(this, socket, command.data);
+			instructions.execute('offline', socket);
 		}
 	};
 
-	self.agentOnline = function(socket, data) {
-		console.log('AgentId: ' + data.agent);
-	};
+	// socket connected
+	socketServer.on('connection', function(socket) {
+		// listen command
+		socket.on('command', self.execute);
 
-	var instructions = {
-		'agent:online': self.agentOnline
-	};
-
-	return self;
+		socket.on('disconnect', self.disconnect);
+	});
 };

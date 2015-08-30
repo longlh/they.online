@@ -2,7 +2,8 @@
 
 exports._ = '/chat/container';
 exports._factory = function() {
-	var self = {};
+	var self = {
+	};
 
 	return self;
 };

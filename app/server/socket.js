@@ -5,16 +5,16 @@ exports._requires = [
 	'@bluebird',
 	'@node-uuid',
 	'@socket.io',
-	'/http',
+	'/http'
+];
+exports._activations = [
 	'/chat'
 ];
-exports._factory = function(Promise, UUID, io, httpServer, chat) {
+exports._factory = function(Promise, UUID, io, httpServer) {
 	var socketServer = io(httpServer);
 
 	// socket connected
 	socketServer.on('connection', function(socket) {
-		chat.handle(socket);
-
 		// listen command
 		socket.on('command', function(command) {
 			// handle JOIN

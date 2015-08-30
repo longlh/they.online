@@ -118,7 +118,7 @@
 			}
 
 			socket.emit('command', {
-				code: 'VISITOR_JOIN',
+				code: 'visitor:online',
 				data: {
 					visitor: localStorage.visitor,
 					agent: agent
