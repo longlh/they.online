@@ -3,14 +3,11 @@
 exports._ = '/http';
 exports._requires = [
 	'@http',
-	'/config/express'
+	'/app'
 ];
 exports._activations = [
-	'/app',
 	'/socket'
 ];
 exports._factory = function(http, app) {
-	var httpServer = http.Server(app);
-
-	return httpServer;
+	return http.Server(app);
 };

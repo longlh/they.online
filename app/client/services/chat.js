@@ -16,7 +16,10 @@
 
 			self.connect = function() {
 				command.ready(function() {
-					command.send('AGENT_JOIN', {
+					// command.send('AGENT_JOIN', {
+					// 	agent: session.agent._id
+					// });
+					command.send('agent:online', {
 						agent: session.agent._id
 					});
 				});

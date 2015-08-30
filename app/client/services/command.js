@@ -2,10 +2,8 @@
 	'use strict';
 
 	angular.module(APP).factory('/services/command', [
-		'/services/emitter',
 		'/services/socket',
-		function(Emitter, socket) {
-			// var emitter = new Emitter();
+		function(socket) {
 			var self = {};
 
 			self.ready = function(ready) {
@@ -19,8 +17,7 @@
 			self.send = function(code, data) {
 				socket.emit('command', {
 					code: code,
-					data: data,
-					from: socket.id
+					data: data
 				});
 			};
 

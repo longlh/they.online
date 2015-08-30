@@ -5,54 +5,57 @@ exports._requires = [
 	'@bluebird',
 	'@node-uuid',
 	'@socket.io',
-	'/http'
+	'/http',
+	'/chat'
 ];
-exports._factory = function(Promise, UUID, socketIO, httpServer) {
-	var io = socketIO(httpServer);
+exports._factory = function(Promise, UUID, io, httpServer, chat) {
+	var socketServer = io(httpServer);
 
 	// socket connected
-	io.on('connection', function(socket) {
-		// listen message
-		socket.on('command', function(message) {
+	socketServer.on('connection', function(socket) {
+		chat.handle(socket);
+
+		// listen command
+		socket.on('command', function(command) {
 			// handle JOIN
-			if (message.code === 'VISITOR_JOIN') {
+			if (command.code === 'VISITOR_JOIN') {
 				console.log('Visitor [' +
-						message.data.visitor +
+						command.data.visitor +
 						'] connected with agent [' +
-						message.data.agent +
+						command.data.agent +
 						'], socket [' +
 						socket.id +
 						']');
 
 				// join room
-				socket.join(message.data.visitor + '_' + message.data.agent);
-			} else if (message.code === 'AGENT_JOIN') {
+				socket.join(command.data.visitor + '_' + command.data.agent);
+			} else if (command.code === 'AGENT_JOIN') {
 				console.log('Agent [' +
-						message.data.agent +
+						command.data.agent +
 						'] is online, socket [' +
 						socket.id +
 						']');
 
 				// join room
-				socket.join(message.data.agent);
-			} else if (message.code === 'CHAT') {
+				socket.join(command.data.agent);
+			} else if (command.code === 'CHAT') {
 				var reply = {
 					code: 'CHAT',
 					from: socket.id,
 					data: {
 						id: UUID.v4(),
-						chat: message.data.chat,
-						agent: message.data.agent,
-						visitor: message.data.visitor,
-						from: message.data.from
+						chat: command.data.chat,
+						agent: command.data.agent,
+						visitor: command.data.visitor,
+						from: command.data.from
 					}
 				};
 
 				// boardcast to all visitor's devices
-				io.to(message.data.visitor + '_' + message.data.agent).emit('command', reply);
+				socketServer.to(command.data.visitor + '_' + command.data.agent).emit('command', reply);
 
 				// boardcast to agent
-				io.to(message.data.agent).emit('command', reply);
+				socketServer.to(command.data.agent).emit('command', reply);
 			}
 		});
 
@@ -61,8 +64,10 @@ exports._factory = function(Promise, UUID, socketIO, httpServer) {
 			console.log('[' +
 					socket.id +
 					'] disconnected');
+
+			socket = null;
 		});
 	});
 
-	return io;
+	return socketServer;
 };
