@@ -2,11 +2,13 @@
 
 exports._ = '/chat/instructions/agent-online';
 exports._requires = [
+	'@lodash',
 	'/models/agent',
 	'/chat/instructions',
 	'/chat/container',
+	'/socket'
 ];
-exports._factory = function(Agent, instructions, container) {
+exports._factory = function(_, Agent, instructions, container, socketServer) {
 	instructions.set('agent:online', function(socket, data) {
 		/*
 			TODO
@@ -18,7 +20,16 @@ exports._factory = function(Agent, instructions, container) {
 		*/
 
 		Agent.findById(data.agent).exec(function(err, agent) {
-			console.log(agent);
+			console.log(container.waiting[agent.tenant]);
+
+			_.forEach(container.waiting[agent.tenant], function(waitingSocket) {
+				socketServer.to(waitingSocket).emit('command', {
+					code: 'visitor:accept',
+					data: {
+						agent: agent._id
+					}
+				});
+			});
 		});
 	});
 };

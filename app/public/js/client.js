@@ -121,12 +121,14 @@
 				code: 'visitor:online',
 				data: {
 					visitor: localStorage.visitor,
-					agent: agent
+					tenant: agent
 				}
 			});
 		});
 
 		socket.on('command', function(command) {
+			console.log(command);
+
 			if (command.code === 'CHAT') {
 				appendMessage(command.data);
 			}
