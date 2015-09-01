@@ -20,16 +20,20 @@ exports._factory = function(_, Agent, instructions, container, socketServer) {
 		*/
 
 		Agent.findById(data.agent).exec(function(err, agent) {
-			console.log(container.waiting[agent.tenant]);
+			container.sockets = container.sockets || {};
 
-			_.forEach(container.waiting[agent.tenant], function(waitingSocket) {
-				socketServer.to(waitingSocket).emit('command', {
-					code: 'visitor:accept',
-					data: {
-						agent: agent._id
-					}
-				});
-			});
+			container.sockets[socket.id] = {
+				agent: agent.id,
+			};
+
+			container.agents = container.agents || {};
+			container.agents[agent.id] = container.agents[agent.id] || [];
+
+			container.agents[agent.id].push(socket.id);
+
+			if (container.agents[agent.id].length === 1) {
+				console.log('Agent [' + agent.id + '] is online');
+			}
 		});
 	});
 };

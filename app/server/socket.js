@@ -58,15 +58,6 @@ exports._factory = function(Promise, UUID, io, httpServer) {
 				socketServer.to(command.data.agent).emit('command', reply);
 			}
 		});
-
-		// socket disconnected
-		socket.on('disconnect', function() {
-			console.log('[' +
-					socket.id +
-					'] disconnected');
-
-			socket = null;
-		});
 	});
 
 	return socketServer;

@@ -21,24 +21,18 @@ exports._factory = function(_, instructions, container, socketServer) {
 				- if no agent online -> push to waiting visitors
 				- if agents online -> connect with this tenant -> return `visitor:connected`
 		*/
-		var tenant = data.tenant;
+		container.sockets = container.sockets || {};
+		container.sockets[socket.id] = {
+			visitor: data.visitor
+		};
 
-		// check tenant
-		var agent = container.getOnlineAgent(tenant);
+		container.visitors = container.visitors || {};
+		container.visitors[data.visitor] = container.visitors[data.visitor] || [];
 
-		if (agent) {
-			// connect two client
-			socket.emit('command', {
-				code: 'visitor:accept',
-				data: {
-					agent: agent
-				}
-			});
-		} else {
-			// add to waiting list
-			container.wait(data.tenant, socket.id);
+		container.visitors[data.visitor].push(socket.id);
+
+		if (container.visitors[data.visitor].length === 1) {
+			console.log('Visitor [' + data.visitor + '] is online');
 		}
-
-		console.log(container);
 	});
 };
