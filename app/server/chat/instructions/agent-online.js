@@ -47,8 +47,15 @@ exports._factory = function(_, Agent, instructions, container, socketServer) {
 					container.connect(agent.id, visitor);
 				});
 
-				console.log(container.connections);
+				// remove waiting list
+				if (waitingVisitors) {
+					waitingVisitors.length = 0;
+				}
+
+				delete container.waiting[agent.tenant];
 			}
+
+			console.log(container);
 		});
 	});
 };

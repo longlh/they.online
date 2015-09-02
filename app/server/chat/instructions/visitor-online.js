@@ -23,7 +23,8 @@ exports._factory = function(_, instructions, container, socketServer) {
 		*/
 		container.sockets = container.sockets || {};
 		container.sockets[socket.id] = {
-			visitor: data.visitor
+			visitor: data.visitor,
+			tenant: data.tenant
 		};
 
 		container.visitors = container.visitors || {};
@@ -40,11 +41,6 @@ exports._factory = function(_, instructions, container, socketServer) {
 				// connect with the online agent
 				console.log('Agent online');
 				container.connect(agent, data.visitor);
-				// container.connections[data.visitor] = agent;
-				// container.connections[agent] = container.connections[agent] || [];
-				// container.connections[agent].push(data.visitor);
-
-				console.log(container.connections);
 			} else {
 				// add to wait list
 				container.wait(data.tenant, data.visitor);
@@ -54,5 +50,7 @@ exports._factory = function(_, instructions, container, socketServer) {
 
 			// TODO emit [command] visitor:online to agent
 		}
+
+		console.log(container);
 	});
 };
