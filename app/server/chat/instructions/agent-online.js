@@ -24,6 +24,7 @@ exports._factory = function(_, Agent, instructions, container, socketServer) {
 
 			container.sockets[socket.id] = {
 				agent: agent.id,
+				tenant: agent.tenant
 			};
 
 			container.agents = container.agents || {};
@@ -33,6 +34,20 @@ exports._factory = function(_, Agent, instructions, container, socketServer) {
 
 			if (container.agents[agent.id].length === 1) {
 				console.log('Agent [' + agent.id + '] is online');
+
+				container.tenants = container.tenants || {};
+				container.tenants[agent.tenant] = container.tenants[agent.tenant] || [];
+				container.tenants[agent.tenant].push(agent.id);
+
+				// TODO emit [command] agent:online to tenant's waiting list
+				var waitingVisitors = container.waiting[agent.tenant];
+
+				// connect with waiting visitors
+				_.forEach(waitingVisitors, function(visitor) {
+					container.connect(agent.id, visitor);
+				});
+
+				console.log(container.connections);
 			}
 		});
 	});

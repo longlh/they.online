@@ -7,11 +7,15 @@ exports._requires = [
 exports._factory = function(_) {
 	var self = {
 		waiting: {},
-		onlineAgents: {}
+		tenants: {},
+		sockets: {},
+		agents: {},
+		visitors: {},
+		connections: {}
 	};
 
 	self.getOnlineAgent = function(tenant) {
-		var onlineAgents = this.onlineAgents[tenant];
+		var onlineAgents = this.tenants[tenant];
 
 		if (_.isArray(onlineAgents) && onlineAgents.length) {
 			return onlineAgents[0];
@@ -20,18 +24,42 @@ exports._factory = function(_) {
 		return null;
 	};
 
-	self.addOnlineAgent = function(tenant, id) {
-
+	self.connect = function(agent, visitor) {
+		this.connections[visitor] = agent;
+		this.connections[agent] = this.connections[agent] || [];
+		this.connections[agent].push(visitor);
 	};
 
-	self.removeOnlineAgent = function(tenant, id) {
+	self.visitorDisconnect = function(visitor) {
+		var agent = this.connections[visitor];
 
+		var visitors = this.connections[agent];
+
+		if (visitors && visitors.length === 1) {
+			return self.agentDisconnect(agent);
+		}
+
+		_.pull(visitors, visitor);
+		delete this.connections[visitor];
 	};
 
-	self.wait = function(tenant, id) {
+	self.agentDisconnect = function(agent) {
+		if (!this.connections[agent]) {
+			return;
+		}
+
+		_.forEach(this.connections[agent], function(visitor) {
+			delete this.connections[visitor];
+		}, this);
+
+		this.connections[agent].length = 0;
+		delete this.connections[agent];
+	};
+
+	self.wait = function(tenant, visitor) {
 		this.waiting[tenant] = this.waiting[tenant] || [];
 
-		this.waiting[tenant].push(id);
+		this.waiting[tenant].push(visitor);
 	};
 
 	return self;

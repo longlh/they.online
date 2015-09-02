@@ -33,6 +33,26 @@ exports._factory = function(_, instructions, container, socketServer) {
 
 		if (container.visitors[data.visitor].length === 1) {
 			console.log('Visitor [' + data.visitor + '] is online');
+
+			var agent = container.getOnlineAgent(data.tenant);
+
+			if (agent) {
+				// connect with the online agent
+				console.log('Agent online');
+				container.connect(agent, data.visitor);
+				// container.connections[data.visitor] = agent;
+				// container.connections[agent] = container.connections[agent] || [];
+				// container.connections[agent].push(data.visitor);
+
+				console.log(container.connections);
+			} else {
+				// add to wait list
+				container.wait(data.tenant, data.visitor);
+				console.log('Agent offline');
+				console.log(container.waiting);
+			}
+
+			// TODO emit [command] visitor:online to agent
 		}
 	});
 };

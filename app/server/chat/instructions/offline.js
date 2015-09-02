@@ -15,7 +15,10 @@ exports._factory = function(_, instructions, container) {
 
 		// get owner info of the disconnected socket
 		var info = container.sockets[socket.id];
+		delete container.sockets[socket.id];
 		var onlineSockets;
+
+		console.log(info);
 
 		if (info.agent) {
 			onlineSockets = container.agents[info.agent];
@@ -26,6 +29,12 @@ exports._factory = function(_, instructions, container) {
 			// if no socket remain, notify the agent is offline
 			if (onlineSockets.length === 0) {
 				console.log('Agent [' + info.agent + '] is offline');
+
+				_.pull(container.tenants[info.tenant], info.agent);
+
+				container.agentDisconnect(info.agent);
+
+				// TODO emit [command]visitor:offline to visitors
 			}
 		} else if (info.visitor) {
 			onlineSockets = container.visitors[info.visitor];
@@ -36,6 +45,17 @@ exports._factory = function(_, instructions, container) {
 			// if no socket remain, notify the agent is offline
 			if (onlineSockets.length === 0) {
 				console.log('Visitor [' + info.visitor + '] is offline');
+
+				// remove from connections
+				container.visitorDisconnect(info.visitor);
+
+				// if (container.connnections[connectedAgent].length === 0) {
+				// 	delete container.connections[connectedAgent];
+				// }
+
+				console.log(container.connections);
+
+				// TODO emit [command] visitor:offline to agents
 			}
 		}
 	});
