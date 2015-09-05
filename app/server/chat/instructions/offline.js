@@ -3,10 +3,11 @@
 exports._ = '/chat/instructions/offline';
 exports._requires = [
 	'@lodash',
+	'/socket',
 	'/chat/instructions',
 	'/chat/container'
 ];
-exports._factory = function(_, instructions, container) {
+exports._factory = function(_, socketServer, instructions, container) {
 	instructions.set('offline', function(socket) {
 		/*
 			TODO
@@ -33,7 +34,13 @@ exports._factory = function(_, instructions, container) {
 				console.log('Must notify to Visitors', connectedVisitors);
 
 				_.forEach(connectedVisitors, function(visitor) {
-					console.log('Sockets: ', container.visitors[visitor]);
+					socketServer.to(visitor + '_' + info.tenant).emit('command', {
+						code: 'agent:offline',
+						data: {
+							agent: info.agent,
+							visitor: visitor
+						}
+					});
 				});
 
 				// clear data

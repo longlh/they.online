@@ -56,6 +56,10 @@ exports._factory = function(_, Agent, instructions, container, socketServer) {
 			} else {
 				console.log('Agent [' + agent.id + '] is online, just activated new client.');
 			}
+
+			// join rooms
+			// 1. {agent}: all sockets of an agent
+			socket.join(agent.id);
 		});
 	});
 };

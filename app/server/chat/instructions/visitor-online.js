@@ -28,11 +28,16 @@ exports._factory = function(_, instructions, container, socketServer) {
 		};
 
 		container.visitors = container.visitors || {};
-		container.visitors[data.visitor] = container.visitors[data.visitor] || [];
+		var sockets = container.visitors[data.visitor] = container.visitors[data.visitor] || [];
 
-		container.visitors[data.visitor].push(socket.id);
+		// prevent dupplicate when visitor reconnect
+		_.pull(sockets, socket.id);
 
-		if (container.visitors[data.visitor].length === 1) {
+		var firstSocket = sockets.length === 0;
+
+		sockets.push(socket.id);
+
+		if (firstSocket) {
 			console.log('Visitor [' + data.visitor + '] is online');
 
 			var agent = container.getOnlineAgent(data.tenant);
@@ -61,5 +66,12 @@ exports._factory = function(_, instructions, container, socketServer) {
 				console.log('Still waiting...');
 			}
 		}
+
+		// join rooms
+		// 1. {visitor}_{tenant}: all sockets in conversation of a visitor with a tenant
+		socket.join(data.visitor + '_' + data.tenant);
+
+		// clear pointers
+		sockets = null;
 	});
 };

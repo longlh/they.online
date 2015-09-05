@@ -111,6 +111,18 @@
 		notification.innerHTML = unread ? unread : '';
 	}
 
+	function requestAgent(socket, agent) {
+		console.log('request agent');
+
+		socket.emit('command', {
+			code: 'visitor:online',
+			data: {
+				visitor: localStorage.visitor,
+				tenant: agent
+			}
+		});
+	}
+
 	function connect(socket, agent) {
 		console.log('connecting...');
 		socket.on('connect', function() {
@@ -119,14 +131,7 @@
 				localStorage.visitor = Date.now();
 			}
 
-			console.log('request agent');
-			socket.emit('command', {
-				code: 'visitor:online',
-				data: {
-					visitor: localStorage.visitor,
-					tenant: agent
-				}
-			});
+			requestAgent(socket, agent);
 		});
 
 		socket.on('command', function(command) {
@@ -134,8 +139,8 @@
 
 			if (command.code === 'CHAT') {
 				appendMessage(command.data);
-			} else if (command.code === '') {
-
+			} else if (command.code === 'agent:offline') {
+				requestAgent(socket, agent);
 			}
 		});
 
