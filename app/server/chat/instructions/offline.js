@@ -8,85 +8,87 @@ exports._requires = [
 	'/chat/container'
 ];
 exports._factory = function(_, socketServer, instructions, container) {
-	instructions.set('offline', function(socket) {
-		/*
-			TODO
-			- find which agent or visitor disconnected using `socket.id`
-		*/
+	function agentOffline(socket, agent, tenant) {
+		var onlineSockets = container.agents[agent];
 
+		// remove the disconnected socket from agent's socket list
+		_.pull(onlineSockets, socket.id);
+
+		// if no socket remain, notify the agent is offline
+		if (onlineSockets && onlineSockets.length === 0) {
+			var connectedVisitors = container.connections[agent];
+
+			_.forEach(connectedVisitors, function(visitor) {
+				socketServer.to(visitor + '_' + tenant).emit('command', {
+					code: 'agent:offline',
+					data: {
+						agent: agent,
+						visitor: visitor
+					}
+				});
+			});
+
+			// clear data
+			delete container.agents[agent];
+			console.log('Agent [' + agent + '] is offline');
+
+			_.pull(container.tenants[tenant], agent);
+
+			if (container.tenants[tenant] && container.tenants[tenant].length === 0) {
+				delete container.tenants[tenant];
+			}
+
+			container.agentDisconnect(agent);
+		}
+	}
+
+	function visitorOffline(socket, visitor, tenant) {
+		var onlineSockets = container.visitors[visitor];
+
+		// remove the disconnected socket from agent's socket list
+		_.pull(onlineSockets, socket.id);
+
+		// if no socket remain, notify the agent is offline
+		if (onlineSockets && onlineSockets.length === 0) {
+			// emit [command] visitor:offline to connected agents
+			console.log(container.connections);
+			var connectedAgent = container.connections[visitor];
+
+			socketServer.to(connectedAgent).emit('command', {
+				code: 'visitor:offline',
+				data: {
+					visitor: visitor,
+					agent: connectedAgent
+				}
+			});
+
+			// clear data of offline visitor
+			delete container.visitors[visitor];
+			console.log('Visitor [' + visitor + '] is offline');
+
+			// remove from connections
+			container.visitorDisconnect(visitor);
+
+			//remove from waiting list
+			var waiting = container.waiting[tenant];
+
+			_.pull(waiting, visitor);
+
+			if (waiting && waiting.length === 0) {
+				delete container.waiting[tenant];
+			}
+		}
+	}
+
+	instructions.set('offline', function(socket) {
 		// get owner info of the disconnected socket
 		var info = container.sockets[socket.id];
 		delete container.sockets[socket.id];
-		var onlineSockets;
 
 		if (info.agent) {
-			onlineSockets = container.agents[info.agent];
-
-			// remove the disconnected socket from agent's socket list
-			_.pull(onlineSockets, socket.id);
-
-			// if no socket remain, notify the agent is offline
-			if (onlineSockets && onlineSockets.length === 0) {
-				// TODO emit [command] agent:offline to conntected visitors
-				// -> visitors must emit [command] visitor:online again
-				var connectedVisitors = container.connections[info.agent];
-
-				console.log('Must notify to Visitors', connectedVisitors);
-
-				_.forEach(connectedVisitors, function(visitor) {
-					socketServer.to(visitor + '_' + info.tenant).emit('command', {
-						code: 'agent:offline',
-						data: {
-							agent: info.agent,
-							visitor: visitor
-						}
-					});
-				});
-
-				// clear data
-				delete container.agents[info.agent];
-				console.log('Agent [' + info.agent + '] is offline');
-
-				_.pull(container.tenants[info.tenant], info.agent);
-
-				if (container.tenants[info.tenant] && container.tenants[info.tenant].length === 0) {
-					delete container.tenants[info.tenant];
-				}
-
-				container.agentDisconnect(info.agent);
-			}
+			agentOffline(socket, info.agent, info.tenant);
 		} else if (info.visitor) {
-			onlineSockets = container.visitors[info.visitor];
-
-			// remove the disconnected socket from agent's socket list
-			_.pull(onlineSockets, socket.id);
-
-			// if no socket remain, notify the agent is offline
-			if (onlineSockets && onlineSockets.length === 0) {
-				// TODO emit [command] visitor:offline to connected agents
-				console.log(container.connections);
-				var connectedAgent = container.connections[info.visitor];
-
-				console.log('Must notify to Agent [' + connectedAgent + ']');
-				console.log('Sockets: ', container.agents[connectedAgent]);
-
-				// clear data of offline visitor
-
-				delete container.visitors[info.visitor];
-				console.log('Visitor [' + info.visitor + '] is offline');
-
-				// remove from connections
-				container.visitorDisconnect(info.visitor);
-
-				//remove from waiting list
-				var waiting = container.waiting[info.tenant];
-
-				_.pull(waiting, info.visitor);
-
-				if (waiting && waiting.length === 0) {
-					delete container.waiting[info.tenant];
-				}
-			}
+			visitorOffline(socket, info.visitor, info.tenant);
 		}
 	});
 };

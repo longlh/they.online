@@ -16,15 +16,14 @@
 
 			self.connect = function() {
 				command.ready(function() {
-					// command.send('AGENT_JOIN', {
-					// 	agent: session.agent._id
-					// });
 					command.send('agent:online', {
 						agent: session.agent._id
 					});
 				});
 
 				command.receive(function(command) {
+					console.log(command);
+
 					if (command.code === 'CHAT') {
 						var data = command.data;
 						var visitor = data.visitor;
