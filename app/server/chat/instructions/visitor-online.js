@@ -3,11 +3,11 @@
 exports._ = '/chat/instructions/visitor-online';
 exports._requires = [
 	'@lodash',
+	'/socket',
 	'/chat/instructions',
-	'/chat/container',
-	'/socket'
+	'/chat/container'
 ];
-exports._factory = function(_, instructions, container, socketServer) {
+exports._factory = function(_, socketServer, instructions, container) {
 	instructions.set('visitor:online', function(socket, data) {
 		/*
 			FIXME
@@ -46,6 +46,14 @@ exports._factory = function(_, instructions, container, socketServer) {
 				// connect with the online agent
 				console.log('Agent online');
 				container.connect(agent, data.visitor);
+
+				socket.emit('command', {
+					code: 'agent:online',
+					data: {
+						agent: agent,
+						visitor: data.visitor
+					}
+				});
 			} else {
 				// add to wait list
 				container.wait(data.tenant, data.visitor);
@@ -62,6 +70,14 @@ exports._factory = function(_, instructions, container, socketServer) {
 			if (connectedAgent) {
 				// connect with the agent
 				console.log('Connecting with Agent [' + connectedAgent + ']');
+
+				socket.emit('command', {
+					code: 'agent:online',
+					data: {
+						agent: connectedAgent,
+						visitor: data.visitor
+					}
+				});
 			} else {
 				console.log('Still waiting...');
 			}

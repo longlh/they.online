@@ -4,18 +4,17 @@ exports._ = '/chat/instructions/agent-online';
 exports._requires = [
 	'@lodash',
 	'/models/agent',
+	'/socket',
 	'/chat/instructions',
-	'/chat/container',
-	'/socket'
+	'/chat/container'
 ];
-exports._factory = function(_, Agent, instructions, container, socketServer) {
+exports._factory = function(_, Agent, socketServer, instructions, container) {
 	instructions.set('agent:online', function(socket, data) {
 		/*
 			TODO
-			- find agent by `data.agent`
-			- push socket to agent.sockets
-			- find tenant by agent.tenant
-			- push agent to tenant.onlineAgents
+			- find agent by `data.agent`: done
+			- push socket to agent.sockets: done
+			- mark agent as online: done
 			- notify all tenant's waiting visitors that an agent online
 		*/
 
@@ -45,6 +44,14 @@ exports._factory = function(_, Agent, instructions, container, socketServer) {
 				// connect with waiting visitors
 				_.forEach(waitingVisitors, function(visitor) {
 					container.connect(agent.id, visitor);
+
+					socketServer.to(visitor + '_' + agent.tenant).emit('command', {
+						code: 'agent:online',
+						data: {
+							agent: agent.id,
+							visitor: visitor
+						}
+					});
 				});
 
 				// remove waiting list
