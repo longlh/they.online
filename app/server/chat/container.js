@@ -28,6 +28,8 @@ exports._factory = function(_) {
 		this.connections[visitor] = agent;
 		this.connections[agent] = this.connections[agent] || [];
 		this.connections[agent].push(visitor);
+
+		console.log('Agent [' + agent + '] - Visitor [' + visitor + ']... Connected!');
 	};
 
 	self.visitorDisconnect = function(visitor) {

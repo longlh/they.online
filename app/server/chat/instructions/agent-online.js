@@ -53,9 +53,9 @@ exports._factory = function(_, Agent, instructions, container, socketServer) {
 				}
 
 				delete container.waiting[agent.tenant];
+			} else {
+				console.log('Agent [' + agent.id + '] is online, just activated new client.');
 			}
-
-			console.log(container);
 		});
 	});
 };

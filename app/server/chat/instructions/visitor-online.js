@@ -44,13 +44,22 @@ exports._factory = function(_, instructions, container, socketServer) {
 			} else {
 				// add to wait list
 				container.wait(data.tenant, data.visitor);
-				console.log('Agent offline');
-				console.log(container.waiting);
+				console.log('Agent offline, waiting...');
 			}
 
 			// TODO emit [command] visitor:online to agent
-		}
+		} else {
+			console.log('Visitor [' + data.visitor + '] is online, just activated new client');
 
-		console.log(container);
+			// get current connections state
+			var connectedAgent = container.connections[data.visitor];
+
+			if (connectedAgent) {
+				// connect with the agent
+				console.log('Connecting with Agent [' + connectedAgent + ']');
+			} else {
+				console.log('Still waiting...');
+			}
+		}
 	});
 };

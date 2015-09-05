@@ -112,11 +112,14 @@
 	}
 
 	function connect(socket, agent) {
+		console.log('connecting...');
 		socket.on('connect', function() {
+			console.log('connected!');
 			if (!localStorage.visitor) {
 				localStorage.visitor = Date.now();
 			}
 
+			console.log('request agent');
 			socket.emit('command', {
 				code: 'visitor:online',
 				data: {
@@ -131,6 +134,8 @@
 
 			if (command.code === 'CHAT') {
 				appendMessage(command.data);
+			} else if (command.code === '') {
+
 			}
 		});
 

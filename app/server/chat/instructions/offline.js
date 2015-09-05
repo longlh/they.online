@@ -26,6 +26,17 @@ exports._factory = function(_, instructions, container) {
 
 			// if no socket remain, notify the agent is offline
 			if (onlineSockets && onlineSockets.length === 0) {
+				// TODO emit [command] agent:offline to conntected visitors
+				// -> visitors must emit [command] visitor:online again
+				var connectedVisitors = container.connections[info.agent];
+
+				console.log('Must notify to Visitors', connectedVisitors);
+
+				_.forEach(connectedVisitors, function(visitor) {
+					console.log('Sockets: ', container.visitors[visitor]);
+				});
+
+				// clear data
 				delete container.agents[info.agent];
 				console.log('Agent [' + info.agent + '] is offline');
 
@@ -36,10 +47,6 @@ exports._factory = function(_, instructions, container) {
 				}
 
 				container.agentDisconnect(info.agent);
-
-				// TODO move all connected visitors to waiting list
-
-				// TODO emit [command]visitor:offline to visitors
 			}
 		} else if (info.visitor) {
 			onlineSockets = container.visitors[info.visitor];
@@ -49,6 +56,15 @@ exports._factory = function(_, instructions, container) {
 
 			// if no socket remain, notify the agent is offline
 			if (onlineSockets && onlineSockets.length === 0) {
+				// TODO emit [command] visitor:offline to connected agents
+				console.log(container.connections);
+				var connectedAgent = container.connections[info.visitor];
+
+				console.log('Must notify to Agent [' + connectedAgent + ']');
+				console.log('Sockets: ', container.agents[connectedAgent]);
+
+				// clear data of offline visitor
+
 				delete container.visitors[info.visitor];
 				console.log('Visitor [' + info.visitor + '] is offline');
 
@@ -63,11 +79,7 @@ exports._factory = function(_, instructions, container) {
 				if (waiting && waiting.length === 0) {
 					delete container.waiting[info.tenant];
 				}
-
-				// TODO emit [command] visitor:offline to agents
 			}
 		}
-
-		console.log(container);
 	});
 };
