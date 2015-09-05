@@ -85,6 +85,10 @@ exports._factory = function(_, socketServer, instructions, container) {
 		var info = container.sockets[socket.id];
 		delete container.sockets[socket.id];
 
+		if (!info) {
+			return;
+		}
+
 		if (info.agent) {
 			agentOffline(socket, info.agent, info.tenant);
 		} else if (info.visitor) {

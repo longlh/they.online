@@ -14,6 +14,32 @@ exports._factory = function(_) {
 		connections: {}
 	};
 
+	self.socketConnect = function(socket, data) {
+		this.sockets[socket.id] = data;
+	};
+
+	self.agentOnline = function(socket, agent, tenant) {
+		this.agents[agent] = this.agents[agent] || [];
+
+		var isFirst = this.agents[agent].length === 0;
+
+		// prevent dupplicate data
+		_.pull(this.agents[agent], socket.id);
+
+		this.agents[agent].push(socket.id);
+
+		if (isFirst) {
+			this.tenants[tenant] = this.tenants[tenant] || [];
+
+			// prevent dupplicate data
+			_.pull(this.tenants[tenant], agent);
+
+			this.tenants[tenant].push(agent);
+		}
+
+		return isFirst;
+	};
+
 	self.getOnlineAgent = function(tenant) {
 		var onlineAgents = this.tenants[tenant];
 

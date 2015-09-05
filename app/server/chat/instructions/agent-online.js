@@ -3,12 +3,13 @@
 exports._ = '/chat/instructions/agent-online';
 exports._requires = [
 	'@lodash',
+	'@bluebird',
 	'/models/agent',
 	'/socket',
 	'/chat/instructions',
 	'/chat/container'
 ];
-exports._factory = function(_, Agent, socketServer, instructions, container) {
+exports._factory = function(_, Promise, Agent, socketServer, instructions, container) {
 	instructions.set('agent:online', function(socket, data) {
 		/*
 			TODO
@@ -18,30 +19,30 @@ exports._factory = function(_, Agent, socketServer, instructions, container) {
 			- notify all tenant's waiting visitors that an agent online
 		*/
 
-		Agent.findById(data.agent).exec(function(err, agent) {
-			container.sockets = container.sockets || {};
+		var query = Agent.findById(data.agent);
 
-			container.sockets[socket.id] = {
+		Promise.resolve(query.exec()).then(function(agent) {
+			if (!agent) {
+				return Promise.reject(new Error('Agent no found!'));
+			}
+
+			// join rooms
+			// 1. {agent}: all sockets of an agent
+			socket.join(agent.id);
+
+			container.socketConnect(socket, {
 				agent: agent.id,
 				tenant: agent.tenant
-			};
+			});
 
-			container.agents = container.agents || {};
-			container.agents[agent.id] = container.agents[agent.id] || [];
+			var firstAgent = container.agentOnline(socket, agent.id, agent.tenant);
 
-			container.agents[agent.id].push(socket.id);
-
-			if (container.agents[agent.id].length === 1) {
+			if (firstAgent) {
 				console.log('Agent [' + agent.id + '] is online');
 
-				container.tenants = container.tenants || {};
-				container.tenants[agent.tenant] = container.tenants[agent.tenant] || [];
-				container.tenants[agent.tenant].push(agent.id);
+				var waitingVisitors = container.waiting[agent.tenat];
 
-				// TODO emit [command] agent:online to tenant's waiting list
-				var waitingVisitors = container.waiting[agent.tenant];
-
-				// connect with waiting visitors
+				// connect & emit [command] agent:online to tenant's waiting visitors
 				_.forEach(waitingVisitors, function(visitor) {
 					container.connect(agent.id, visitor);
 
@@ -60,13 +61,13 @@ exports._factory = function(_, Agent, socketServer, instructions, container) {
 				}
 
 				delete container.waiting[agent.tenant];
+
 			} else {
 				console.log('Agent [' + agent.id + '] is online, just activated new client.');
 			}
 
-			// join rooms
-			// 1. {agent}: all sockets of an agent
-			socket.join(agent.id);
+		}).catch(function(err) {
+			console.error(err);
 		});
 	});
 };
