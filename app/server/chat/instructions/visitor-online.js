@@ -9,33 +9,16 @@ exports._requires = [
 ];
 exports._factory = function(_, socketServer, instructions, container) {
 	instructions.set('visitor:online', function(socket, data) {
-		/*
-			FIXME
-			Use socket.io room instead of array & hash object
-		*/
+		// join rooms
+		// 1. {visitor}_{tenant}: all sockets in conversation of a visitor with a tenant
+		socket.join(data.visitor + '_' + data.tenant);
 
-		/*
-			TODO
-			- find tenant by `data.tenant`
-			- check tenant.onlineAgents
-				- if no agent online -> push to waiting visitors
-				- if agents online -> connect with this tenant -> return `visitor:connected`
-		*/
-		container.sockets = container.sockets || {};
-		container.sockets[socket.id] = {
+		container.socketConnect(socket.id, {
 			visitor: data.visitor,
 			tenant: data.tenant
-		};
+		});
 
-		container.visitors = container.visitors || {};
-		var sockets = container.visitors[data.visitor] = container.visitors[data.visitor] || [];
-
-		// prevent dupplicate when visitor reconnect
-		_.pull(sockets, socket.id);
-
-		var firstSocket = sockets.length === 0;
-
-		sockets.push(socket.id);
+		var firstSocket = container.visitorOnline(socket.id, data.visitor);
 
 		if (firstSocket) {
 			console.log('Visitor [' + data.visitor + '] is online');
@@ -44,7 +27,6 @@ exports._factory = function(_, socketServer, instructions, container) {
 
 			if (agent) {
 				// connect with the online agent
-				console.log('Agent online');
 				container.connect(agent, data.visitor);
 
 				socket.emit('command', {
@@ -57,10 +39,7 @@ exports._factory = function(_, socketServer, instructions, container) {
 			} else {
 				// add to wait list
 				container.wait(data.tenant, data.visitor);
-				console.log('Agent offline, waiting...');
 			}
-
-			// TODO emit [command] visitor:online to agent
 		} else {
 			console.log('Visitor [' + data.visitor + '] is online, just activated new client');
 
@@ -78,16 +57,7 @@ exports._factory = function(_, socketServer, instructions, container) {
 						visitor: data.visitor
 					}
 				});
-			} else {
-				console.log('Still waiting...');
 			}
 		}
-
-		// join rooms
-		// 1. {visitor}_{tenant}: all sockets in conversation of a visitor with a tenant
-		socket.join(data.visitor + '_' + data.tenant);
-
-		// clear pointers
-		sockets = null;
 	});
 };

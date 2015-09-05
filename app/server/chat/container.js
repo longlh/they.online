@@ -15,7 +15,7 @@ exports._factory = function(_) {
 	};
 
 	self.socketConnect = function(socket, data) {
-		this.sockets[socket.id] = data;
+		this.sockets[socket] = data;
 	};
 
 	self.agentOnline = function(socket, agent, tenant) {
@@ -24,9 +24,9 @@ exports._factory = function(_) {
 		var isFirst = this.agents[agent].length === 0;
 
 		// prevent dupplicate data
-		_.pull(this.agents[agent], socket.id);
+		_.pull(this.agents[agent], socket);
 
-		this.agents[agent].push(socket.id);
+		this.agents[agent].push(socket);
 
 		if (isFirst) {
 			this.tenants[tenant] = this.tenants[tenant] || [];
@@ -36,6 +36,19 @@ exports._factory = function(_) {
 
 			this.tenants[tenant].push(agent);
 		}
+
+		return isFirst;
+	};
+
+	self.visitorOnline = function(socket, visitor, tenant) {
+		var sockets = this.visitors[visitor] = this.visitors[visitor] || [];
+
+		// prevent dupplicate data
+		_.pull(sockets, visitor);
+
+		var isFirst = sockets.length === 0;
+
+		sockets.push(socket);
 
 		return isFirst;
 	};
