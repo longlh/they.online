@@ -52,7 +52,8 @@
 			}
 		};
 
-		var text = document.createTextNode('EasyChat');
+		var text = document.createElement('div');
+		text.innerHTML = '<span>They <span class="text-color-success">Online</span></span>';
 		header.appendChild(text);
 
 		notification = document.createElement('div');
