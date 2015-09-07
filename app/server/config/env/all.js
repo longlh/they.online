@@ -17,7 +17,8 @@ exports._factory = function(_, path, specifiedConfiguration) {
 			cookie: '_sid',
 			// expiry: 1 * 10 * 1000 // 1 hour
 			expiry: 60 * 60 * 1000 // 1 hour
-		}
+		},
+		development: true
 	};
 
 	return _.assign(defaults, specifiedConfiguration);
