@@ -52,14 +52,14 @@
 			}
 		};
 
-		var text = document.createElement('div');
-		text.innerHTML = '<span>They <span class="text-color-success">Online</span></span>';
-		header.appendChild(text);
-
 		notification = document.createElement('div');
 		notification.className = 'easychat-client-unread';
 
 		header.appendChild(notification);
+
+		var text = document.createElement('div');
+		text.innerHTML = '<span>They <span class="text-color-success">Online</span></span>';
+		header.appendChild(text);
 
 		return header;
 	}
