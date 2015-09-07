@@ -46,6 +46,10 @@
 
 						// emit
 						EventHub.emit('chat:receive', command.data);
+					} else if (command.code === 'visitor:online') {
+						console.log('Visitor online', command.data);
+					} else if (command.code === 'visitor:offline') {
+						console.log('Visitor offline', command.data);
 					}
 				});
 			};

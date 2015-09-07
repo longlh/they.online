@@ -44,7 +44,7 @@ exports._factory = function(_) {
 		var sockets = this.visitors[visitor] = this.visitors[visitor] || [];
 
 		// prevent dupplicate data
-		_.pull(sockets, visitor);
+		_.pull(sockets, socket);
 
 		var isFirst = sockets.length === 0;
 
@@ -98,9 +98,20 @@ exports._factory = function(_) {
 	};
 
 	self.wait = function(tenant, visitor) {
+		console.log('Visitor [' + visitor + '] is waiting for an Agent of Tenant [' + tenant + ']');
+
 		this.waiting[tenant] = this.waiting[tenant] || [];
 
 		this.waiting[tenant].push(visitor);
+	};
+
+	self.clearWait = function(tenant) {
+		if (this.waiting[tenant]) {
+			this.waiting[tenant].length = 0;
+			delete this.waiting[tenant];
+		}
+
+		console.log('Clear waiting queue of tenant [' + tenant + ']');
 	};
 
 	return self;

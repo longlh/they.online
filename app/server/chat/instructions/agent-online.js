@@ -36,6 +36,7 @@ exports._factory = function(_, Promise, Agent, socketServer, instructions, conta
 
 				// connect & emit [command] agent:online to tenant's waiting visitors
 				_.forEach(waitingVisitors, function(visitor) {
+					console.log('Visitor [' + visitor + '] is waiting, connect with him...');
 					container.connect(agent.id, visitor);
 
 					socketServer.to(visitor + '_' + agent.tenant).emit('command', {
@@ -48,11 +49,7 @@ exports._factory = function(_, Promise, Agent, socketServer, instructions, conta
 				});
 
 				// remove waiting list
-				if (waitingVisitors) {
-					waitingVisitors.length = 0;
-				}
-
-				delete container.waiting[agent.tenant];
+				container.clearWait(agent.tenant);
 
 			} else {
 				console.log('Agent [' + agent.id + '] is online, just activated new client.');

@@ -26,11 +26,21 @@ exports._factory = function(_, socketServer, instructions, container) {
 			var agent = container.getOnlineAgent(data.tenant);
 
 			if (agent) {
-				// connect with the online agent
+				// connect visitor with agent
 				container.connect(agent, data.visitor);
 
-				socket.emit('command', {
+				// notify to the visitor
+				socketServer.to(data.visitor + '_' + data.tenant).emit('command', {
 					code: 'agent:online',
+					data: {
+						agent: agent,
+						visitor: data.visitor
+					}
+				});
+
+				// notify to the agent
+				socketServer.to(agent).emit('command', {
+					code: 'visitor:online',
 					data: {
 						agent: agent,
 						visitor: data.visitor
@@ -39,6 +49,8 @@ exports._factory = function(_, socketServer, instructions, container) {
 			} else {
 				// add to wait list
 				container.wait(data.tenant, data.visitor);
+
+				console.log(container.waiting);
 			}
 		} else {
 			console.log('Visitor [' + data.visitor + '] is online, just activated new client');

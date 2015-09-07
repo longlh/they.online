@@ -113,9 +113,8 @@
 	}
 
 	function requestAgent(socket, tenant) {
+		// clear previous agent information
 		agent = null;
-
-		console.log('request agent from Tenant [' + tenant + ']');
 
 		socket.emit('command', {
 			code: 'visitor:online',
@@ -127,9 +126,7 @@
 	}
 
 	function connect(socket, tenant) {
-		console.log('connecting...');
 		socket.on('connect', function() {
-			console.log('connected!');
 			if (!localStorage.visitor) {
 				localStorage.visitor = Date.now();
 			}
@@ -138,14 +135,14 @@
 		});
 
 		socket.on('command', function(command) {
-			console.log(command);
-
 			if (command.code === 'chat:bound') {
 				appendMessage(command.data);
 			} else if (command.code === 'agent:offline') {
-				requestAgent(socket, agent);
+				console.log('Agent [' + agent + '] offline');
+
+				requestAgent(socket, tenant);
 			} else if (command.code === 'agent:online') {
-				console.log('Connected with Agent[' + command.data.agent + ']');
+				console.log('Connected with Agent [' + command.data.agent + ']');
 
 				agent = command.data.agent;
 			}
@@ -164,6 +161,7 @@
 				code: 'chat',
 				data: {
 					visitor: localStorage.visitor,
+					tenant: tenant,
 					agent: agent,
 					chat: message,
 					from: localStorage.visitor
