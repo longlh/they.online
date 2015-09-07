@@ -1,6 +1,7 @@
 ;(function(exports) {
 	'use strict';
 
+	var agent;
 	var messageList;
 	var input;
 	var form;
@@ -111,19 +112,21 @@
 		notification.innerHTML = unread ? unread : '';
 	}
 
-	function requestAgent(socket, agent) {
-		console.log('request agent');
+	function requestAgent(socket, tenant) {
+		agent = null;
+
+		console.log('request agent from Tenant [' + tenant + ']');
 
 		socket.emit('command', {
 			code: 'visitor:online',
 			data: {
 				visitor: localStorage.visitor,
-				tenant: agent
+				tenant: tenant
 			}
 		});
 	}
 
-	function connect(socket, agent) {
+	function connect(socket, tenant) {
 		console.log('connecting...');
 		socket.on('connect', function() {
 			console.log('connected!');
@@ -131,16 +134,20 @@
 				localStorage.visitor = Date.now();
 			}
 
-			requestAgent(socket, agent);
+			requestAgent(socket, tenant);
 		});
 
 		socket.on('command', function(command) {
 			console.log(command);
 
-			if (command.code === 'CHAT') {
+			if (command.code === 'chat:bound') {
 				appendMessage(command.data);
 			} else if (command.code === 'agent:offline') {
 				requestAgent(socket, agent);
+			} else if (command.code === 'agent:online') {
+				console.log('Connected with Agent[' + command.data.agent + ']');
+
+				agent = command.data.agent;
 			}
 		});
 
@@ -154,7 +161,7 @@
 			}
 
 			socket.emit('command', {
-				code: 'CHAT',
+				code: 'chat',
 				data: {
 					visitor: localStorage.visitor,
 					agent: agent,
@@ -168,14 +175,14 @@
 	}
 
 	exports.they = {
-		online: function(host, agent) {
+		online: function(host, tenant) {
 			injectStyle(host);
 
 			ui(createHeader(), createMessageList(), createForm());
 
 			updateUnread();
 
-			connect(io(host), agent);
+			connect(io(host), tenant);
 		}
 	};
 })(window);

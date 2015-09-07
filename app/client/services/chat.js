@@ -24,7 +24,7 @@
 				command.receive(function(command) {
 					console.log(command);
 
-					if (command.code === 'CHAT') {
+					if (command.code === 'chat:bound') {
 						var data = command.data;
 						var visitor = data.visitor;
 
@@ -51,7 +51,7 @@
 			};
 
 			self.sendMessage = function(visitor, message) {
-				command.send('CHAT', {
+				command.send('chat', {
 					agent: session.agent._id,
 					chat: message,
 					visitor: visitor,

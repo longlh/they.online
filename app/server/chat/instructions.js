@@ -7,7 +7,8 @@ exports._requires = [
 exports._activations = [
 	'/chat/instructions/agent-online',
 	'/chat/instructions/visitor-online',
-	'/chat/instructions/offline'
+	'/chat/instructions/offline',
+	'/chat/instructions/chat'
 ];
 exports._factory = function(_) {
 	var self = {
