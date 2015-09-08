@@ -55,6 +55,12 @@ module.exports = function(grunt) {
 				dest: 'build/out/fonts/',
 				flatten: true,
 				expand: true
+			},
+			img: {
+				cwd: 'app/public/img',
+				src: '**',
+				dest: 'build/out/img',
+				expand: true
 			}
 		},
 		stylus: {
@@ -133,6 +139,7 @@ module.exports = function(grunt) {
 		'clean',
 		'static',
 		'copy:font',
+		'copy:img',
 		'stylus:dev',
 		'develop:dev',
 		'watch'

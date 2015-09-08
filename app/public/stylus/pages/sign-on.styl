@@ -4,7 +4,6 @@ html, body
 	height 100%
 
 .login-wrapper
-	clearfix()
 
 	.login-container
 		width 500px
@@ -16,6 +15,18 @@ html, body
 	.bg-pic
 		margin-right 500px
 		overflow hidden
+		position relative
 
-		img
-			height 100%
+		.background
+			background url('/build/img/bg_sign_up.jpg') no-repeat center bottom
+			background-size cover
+
+		.introduction-wrapper
+			position absolute
+			padding 30px
+			bottom 0
+			left 0
+			right 0
+
+			.introduction
+				max-width 500px
