@@ -1,0 +1,46 @@
+@import '../main'
+
+body
+	@extend .bg-white
+
+.landing-wrapper
+	background url('/build/img/bg_landing.jpg') no-repeat center center
+	background-size cover
+	height 370px
+	position relative
+
+	.overlay
+		position absolute
+		top 0
+		left 0
+		right 0
+		bottom 0
+		background COLOR_BLACK
+		opacity .4
+
+	.landing
+		position relative
+		z-index 1
+		padding 50px 20px
+
+		.landing-promotion
+			padding-bottom 40px
+			max-width 600px
+			margin 0 auto
+
+		.landing-buttons
+			.landing-button
+				margin 0 15px
+
+				.button
+					width 150px
+
+.landing-steps
+	padding-top 60px
+
+	.steps
+		padding-top 60px
+
+		.step
+			font-size 100px
+			padding-bottom 30px

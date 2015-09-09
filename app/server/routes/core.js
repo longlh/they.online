@@ -7,7 +7,8 @@ exports._requires = [
 	'/middlewares/util'
 ];
 exports._factory = function(app, filter, util) {
-	// integrating site
+	app._get('landing', '/', util.render('landing'));
+
 	app._get('backend.main', '/manager', filter.requireAuthentication, util.render('main'));
 
 	app.get('/test', util.render('test'));

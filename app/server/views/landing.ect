@@ -1,0 +1,52 @@
+<% extend '_base' %>
+
+<% block 'end_head' : %>
+<link rel="stylesheet" href="/build/css/landing.pages.css">
+<% end %>
+
+<div class="landing-wrapper">
+	<div class="overlay">
+	</div>
+	<div class="landing">
+		<div class="landing-promotion text-center text-color-white">
+			<h1>They <span class="text-color-success">Online</span></h1>
+			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+		</div>
+		<div class="landing-buttons text-center">
+			<a href="<%= @_url('auth.sign-on') %>" class="landing-button">
+				<button type="button" class="button text-upper">Sign On</button>
+			</a>
+			<a href="<%= @_url('auth.sign-up') %>" class="landing-button">
+				<button type="button" class="button button-success text-upper">Join</button>
+			</a>
+		</div>
+	</div>
+</div>
+<div class="landing-steps gs-12 gs-fluid gs-padding">
+	<div class="row">
+		<div class="col text-center">
+			<h2>Easy as 1, 2, 3</h2>
+		</div>
+	</div>
+	<div class="steps row text-center">
+		<div class="col-4">
+			<div class="step">
+				<i class="fa fa-code fa-fw"></i>
+			</div>
+			<span>1. Get embedded script</span>
+		</div>
+		<div class="col-4">
+			<div class="step">
+				<i class="fa fa-paste fa-fw"></i>
+			</div>
+			<span>2. Paste into your website</span>
+		</div>
+		<div class="col-4">
+			<div class="step">
+				<i class="fa fa-comments-o fa-fw"></i>
+			</div>
+			<span>3. Chat with visitors</span>
+		</div>
+	</div>
+</div>
+
