@@ -30,16 +30,21 @@ exports._factory = function(_, Promise, UUID, Registration, Tenant, Agent, mail)
 				return next(err);
 			}
 
-			// redirect & send email
-			res.redirect('/sign-up');
+			// registration succeed
+			next();
 
 			// send email
 			console.log('Sending mail...');
 
+			var activateUrl = 'http://' + res.locals._env.host + res.locals._url('auth.registration.activate', {
+				id: registration.code
+			});
+			var html = '<a href="' + activateUrl + '">Active your account</a>';
+
 			mail.send({
 				to: registration.email,
 				subject: 'Welcome to they.online',
-				html: '<a href="http://' + res.locals._env.host + '/registration/activate/' + registration.code + '">Active your account</h1>'
+				html: html
 			}).then(function(result) {
 				console.log('Mail sent!', result);
 			}).catch(function(err) {

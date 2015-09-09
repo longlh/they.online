@@ -8,6 +8,9 @@ exports._requires = [
 	'@path',
 	'/config/env'
 ];
+exports._activations = [
+	'/config/route'
+];
 exports._factory = function(express, bodyParser, cookieParser, path, env) {
 	var app = express();
 

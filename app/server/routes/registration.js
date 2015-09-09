@@ -7,10 +7,11 @@ exports._requires = [
 	'/middlewares/util'
 ];
 exports._factory = function(app, registration, util) {
-	app.route('/registration')
-			.post(registration.accept);
+	app._route('auth.registration', '/registration')
+			.post(registration.accept,
+					util.redirect('auth.sign-on'));
 
-	app.route('/registration/activate/:id')
+	app._route('auth.registration.activate', '/registration/activate/:id')
 			.get(registration.identify({
 				code: 'id'
 			}), util.render('auth/activate'))
@@ -18,5 +19,5 @@ exports._factory = function(app, registration, util) {
 					registration.activateTenant,
 					registration.activateAgent,
 					registration.finish,
-					util.redirect('/'));
+					util.redirect('backend.main'));
 };

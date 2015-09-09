@@ -10,14 +10,14 @@ exports._requires = [
 exports._factory = function(app, auth, session, util) {
 	app.use(session.deserialize);
 
-	app.route('/sign-on')
+	app._route('auth.sign-on', '/sign-on')
 			.get(util.render('auth/sign-on'))
 			.post(auth.authenticate('local', {
 				session: false
-			}), session.serialize, util.redirect('/'));
+			}), session.serialize, util.redirect('backend.main'));
 
-	app.route('/sign-up')
+	app._route('auth.sign-up', '/sign-up')
 			.get(util.render('auth/sign-up'));
 
-	app.get('/sign-out', session.destroy, util.redirect('/'));
+	app._get('auth.sign-out', '/sign-out', session.destroy, util.redirect('auth.sign-on'));
 };

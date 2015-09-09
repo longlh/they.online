@@ -4,7 +4,7 @@
 	<div class="row">
 		<div class="col-12-offset-2">
 			<h1>Join us</h1>
-			<form action="/registration" method="post" class="form form-stack">
+			<form action="<%= @_url('auth.registration') %>" method="post" class="form form-stack">
 				<div class="form-group">
 					<label class="label" for="name">Tenant name</label>
 					<span class="help">Name of your company or organization</span>

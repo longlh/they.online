@@ -45,7 +45,7 @@ var APP = <%- JSON.stringify(@_env.applicationName) %>;
 <div id="page-container" class="full-height" data-ng-controller="/controllers/container" data-ng-cloak>
 	<header class="header-navbar">
 		<div class="pull-right thumb thumb-32 thumb-circular user-avatar">
-			<a href="/sign-out">
+			<a href="<%= @_url('auth.sign-out') %>">
 				<img src="http://pages.revox.io/dashboard/latest/angular/assets/img/profiles/avatar.jpg" width="32" height="32">
 			</a>
 		</div>

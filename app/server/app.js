@@ -11,7 +11,6 @@ exports._activations = [
 	'/routes/auth',
 	'/routes/registration',
 	'/routes/core',
-	'/routes/agent',
 	'/routes/api'
 ];
 exports._factory = function(app, auth) {

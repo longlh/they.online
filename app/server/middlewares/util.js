@@ -41,9 +41,13 @@ exports._factory = function(_) {
 		};
 	};
 
-	self.redirect = function(dest) {
+	self.redirect = function(dest, routeParams, absoluteUrl) {
 		return function(req, res, next) {
-			res.redirect(dest);
+			if (!absoluteUrl) {
+				return res._redirect(dest, routeParams);
+			}
+
+			return res.redirect(dest);
 		};
 	};
 
