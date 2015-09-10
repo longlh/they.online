@@ -71,26 +71,32 @@
 						}
 					};
 				};
-
-				// set default options
-				_.defaults(options.resource, {
-					methods: {}
-				});
-
-				_.defaults(options.resource.methods, _.clone(DEFAULT_METHODS, true));
-
-				_.forEach(options.resource.methods, function iterate(method, name) {
-					if (!method) {
-						options.resource.methods[name] = undefined;
-						return;
-					}
-
+				var injectIntercepter = function(method) {
 					method.interceptor = method.interceptor || {};
 
 					method.interceptor.response = transform(method.interceptor.response);
+				};
+
+				var methods = {};
+
+				options.resource.methods = options.resource.methods || {};
+
+				_.forEach(options.resource.methods, function(method, name) {
+					if (method) {
+						methods[name] = method;
+						injectIntercepter(method);
+					}
 				});
 
-				var Resource = $resource(options.resource.path, options.resource.defaultParameters, options.resource.methods);
+				_.forEach(DEFAULT_METHODS, function(method, name) {
+					if (options.resource.methods[name] !== false) {
+						// console.log('use default [' + name + '] method...');
+						methods[name] = _.clone(method, true);
+						injectIntercepter(methods[name]);
+					}
+				});
+
+				var Resource = $resource(options.resource.path, options.resource.defaultParameters, methods);
 
 				var proto = new Resource();
 
@@ -137,7 +143,7 @@
 				// $delete -> delete
 				// $save -> save
 				// ...
-				_.forEach(options.resource.methods, function iterate(method, name) {
+				_.forEach(methods, function iterate(method, name) {
 					if (method) {
 						if (_.isFunction(proto['$' + name])) {
 							proto[name] = proto['$' + name];
@@ -145,13 +151,16 @@
 					}
 				});
 
-				_.forEach(options.resource.methods, function iterate(meta, method) {
+				_.forEach(methods, function iterate(meta, method) {
 					if (meta && _.isFunction(Resource[method])) {
 						Model[method] = function() {
 							return Resource[method].apply(Model, arguments).$promise;
 						};
 					}
 				});
+
+				// clear
+				methods = undefined;
 
 				return {
 					class: Model,
