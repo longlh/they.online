@@ -12,7 +12,7 @@
 			function activate() {
 				$scope.conversations = chat.conversations;
 				$scope.replies = {};
-				$scope.activeConversation = null;
+				$scope.activeConversation = undefined;
 
 				// join first conversation in list
 				$scope.join(_.find($scope.conversations));
@@ -55,7 +55,7 @@
 					chat.sendMessage(visitorId, $scope.replies[visitorId]);
 
 					// reset textbox
-					$scope.replies[visitorId] = null;
+					$scope.replies[visitorId] = undefined;
 				}
 			};
 

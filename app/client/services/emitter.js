@@ -16,20 +16,20 @@
 
 					if (_.isArray(handlers)) {
 						_.pull(handlers, handler);
-
-						if (handlers.length === 0) {
-							delete this.handlers[event];
-						}
 					}
 
-					event = null;
-					handlers = null;
-					handler = null;
+					event = undefined;
+					handlers = undefined;
+					handler = undefined;
 				}.bind(this);
 			};
 
 			proto.dispose = function() {
-				this.handlers = null;
+				// empty array
+				if (this.handlers) {
+					this.handlers.length = 0;
+				}
+				this.handlers = undefined;
 			};
 
 			proto.on = function(event, handler) {

@@ -50,8 +50,8 @@ exports._factory = function(_, crypto, db) {
 			var raw = this.toObject();
 
 			// omit sensitive data
-			delete raw.salt;
-			delete raw.hashedPassword;
+			raw.salt = undefined;
+			raw.hashedPassword = undefined;
 
 			return raw;
 		}

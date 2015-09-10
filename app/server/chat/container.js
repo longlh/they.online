@@ -60,7 +60,7 @@ exports._factory = function(_) {
 			return onlineAgents[0];
 		}
 
-		return null;
+		return undefined;
 	};
 
 	self.connect = function(agent, visitor) {
@@ -81,7 +81,7 @@ exports._factory = function(_) {
 		}
 
 		_.pull(visitors, visitor);
-		delete this.connections[visitor];
+		this.connections[visitor] = undefined;
 	};
 
 	self.agentDisconnect = function(agent) {
@@ -90,11 +90,12 @@ exports._factory = function(_) {
 		}
 
 		_.forEach(this.connections[agent], function(visitor) {
-			delete this.connections[visitor];
+			//delete
+			this.connections[visitor] = undefined;
 		}, this);
 
+		// empty array
 		this.connections[agent].length = 0;
-		delete this.connections[agent];
 	};
 
 	self.wait = function(tenant, visitor) {
@@ -107,8 +108,8 @@ exports._factory = function(_) {
 
 	self.clearWait = function(tenant) {
 		if (this.waiting[tenant]) {
+			// empty array
 			this.waiting[tenant].length = 0;
-			delete this.waiting[tenant];
 		}
 
 		console.log('Clear waiting queue of tenant [' + tenant + ']');

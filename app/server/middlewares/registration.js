@@ -104,7 +104,7 @@ exports._factory = function(_, Promise, UUID, Registration, Tenant, Agent, mail)
 
 			next();
 
-			registration = null;
+			registration = undefined;
 		});
 	};
 
@@ -132,8 +132,8 @@ exports._factory = function(_, Promise, UUID, Registration, Tenant, Agent, mail)
 
 			next();
 
-			agent = null;
-			registration = null;
+			agent = undefined;
+			registration = undefined;
 		});
 	};
 

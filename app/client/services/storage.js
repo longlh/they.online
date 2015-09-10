@@ -15,7 +15,7 @@
 			};
 
 			self.clear = function(key) {
-				delete storage[key];
+				storage[key] = undefined;
 			};
 
 			self.clearAll = function() {

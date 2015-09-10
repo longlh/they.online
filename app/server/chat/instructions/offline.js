@@ -29,14 +29,10 @@ exports._factory = function(_, socketServer, instructions, container) {
 			});
 
 			// clear data
-			delete container.agents[agent];
+			container.agents[agent] = undefined;
 			console.log('Agent [' + agent + '] is offline');
 
 			_.pull(container.tenants[tenant], agent);
-
-			if (container.tenants[tenant] && container.tenants[tenant].length === 0) {
-				delete container.tenants[tenant];
-			}
 
 			container.agentDisconnect(agent);
 		}
@@ -63,7 +59,7 @@ exports._factory = function(_, socketServer, instructions, container) {
 			});
 
 			// clear data of offline visitor
-			delete container.visitors[visitor];
+			container.visitors[visitor] = undefined;
 			console.log('Visitor [' + visitor + '] is offline');
 
 			// remove from connections
@@ -73,17 +69,13 @@ exports._factory = function(_, socketServer, instructions, container) {
 			var waiting = container.waiting[tenant];
 
 			_.pull(waiting, visitor);
-
-			if (waiting && waiting.length === 0) {
-				delete container.waiting[tenant];
-			}
 		}
 	}
 
 	instructions.set('offline', function(socket) {
 		// get owner info of the disconnected socket
 		var info = container.sockets[socket.id];
-		delete container.sockets[socket.id];
+		container.sockets[socket.id] = undefined;
 
 		if (!info) {
 			return;

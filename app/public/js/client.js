@@ -115,7 +115,7 @@
 
 	function requestAgent(socket, tenant) {
 		// clear previous agent information
-		agent = null;
+		agent = undefined;
 
 		socket.emit('command', {
 			code: 'visitor:online',

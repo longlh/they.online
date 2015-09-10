@@ -81,7 +81,7 @@
 
 				_.forEach(options.resource.methods, function iterate(method, name) {
 					if (!method) {
-						delete options.resource.methods[name];
+						options.resource.methods[name] = undefined;
 						return;
 					}
 
@@ -123,10 +123,10 @@
 							var result = proto.toJSON.apply(this);
 
 							_.forEach(this._ignore, function iterate(prop) {
-								delete result[prop];
+								result[prop] = undefined;
 							});
 
-							delete result._ignore;
+							result._ignore = undefined;
 
 							return result;
 						}
