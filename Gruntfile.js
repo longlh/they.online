@@ -18,7 +18,6 @@ module.exports = function(grunt) {
 				src: [
 					'index.js',
 					'app/*.js',
-					'app/config/**/*.js',
 					'app/server/**/*.js'
 				],
 				options: {
@@ -27,7 +26,8 @@ module.exports = function(grunt) {
 			},
 			client: {
 				src: [
-					'app/client/**/*.js'
+					'app/client/**/*.js',
+					'app/public/**/*.js'
 				],
 				options: {
 					jshintrc: 'build/rules/.jshintrc-client'

@@ -170,7 +170,7 @@
 			});
 
 			input.value = '';
-		}
+		};
 	}
 
 	exports.they = {
@@ -181,7 +181,7 @@
 
 			updateUnread();
 
-			connect(io(host), tenant);
+			connect(exports.io(host), tenant);
 		}
 	};
 })(window);
