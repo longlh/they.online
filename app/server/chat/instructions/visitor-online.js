@@ -49,8 +49,6 @@ exports._factory = function(_, socketServer, instructions, container) {
 			} else {
 				// add to wait list
 				container.wait(data.tenant, data.visitor);
-
-				console.log(container.waiting);
 			}
 		} else {
 			console.log('Visitor [' + data.visitor + '] is online, just activated new client');

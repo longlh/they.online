@@ -4,8 +4,8 @@ exports._ = '/config/env/development';
 exports._factory = function() {
 	return {
 		debug: true,
-		host: '192.168.164.128:3000',
-		port: 3000,
+		host: 'dev.they.online',
+		port: 3500,
 		db: 'mongodb://localhost/they-online-dev',
 		session: {
 			cookie: '_sid',

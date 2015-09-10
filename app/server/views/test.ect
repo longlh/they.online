@@ -15,11 +15,10 @@
 <% end %>
 
 <% block 'end_body' : %>
-<script>
+<script src="/public/js/integration/embed.js"></script>
 <!--
-!function(){var t="55e03f6a0d50b0500d070fb7",n="//192.168.164.128:3000",c=function(t,n){var e=t.shift();if(!e)return n();var o=document.createElement("script");o.src=e,o.onload=function(){c(t,n)},document.body.appendChild(o)};c([n+"/socket.io/socket.io.js",n+"/public/js/client.js"],function(){they.online(n,t)})}();
+!function(){var t="55e03f6a0d50b0500d070fb7",n="//dev.they.online",c=function(t,n){var e=t.shift();if(!e)return n();var o=document.createElement("script");o.src=e,o.onload=function(){c(t,n)},document.body.appendChild(o)};c([n+"/socket.io/socket.io.js",n+"/public/js/integration/main.js"],function(){they.online(n,t)})}();
 -->
-</script>
 <% end %>
 
 <h1>Panels</h1>
