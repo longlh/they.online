@@ -4,12 +4,13 @@
 	di.register('/services/socket', [
 		'@socket.io',
 		'/data/env',
-		function(io, env) {
-			console.log('x');
-
+		'/services/event-hub',
+		function(io, env, eventHub) {
 			var socket = io(env.host);
 
-			console.log(socket);
+			socket.on('connect', function() {
+				eventHub.emit('socket:connected');
+			});
 
 			return socket;
 		}

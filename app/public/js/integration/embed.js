@@ -15,6 +15,8 @@
 		host + '/public/js/integration/models/conversation.js',
 		host + '/public/js/integration/models/visitor.js',
 		host + '/public/js/integration/services/chat.js',
+		host + '/public/js/integration/services/emitter.js',
+		host + '/public/js/integration/services/event-hub.js',
 		host + '/public/js/integration/services/http.js',
 		host + '/public/js/integration/services/socket.js',
 		host + '/public/js/integration/views/main.js',

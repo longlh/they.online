@@ -2,11 +2,12 @@
 	'use strict';
 
 	di.register('/services/chat', [
+		'/services/event-hub',
 		'/services/socket',
 		'/data/env',
 		'/models/conversation',
 		'/models/visitor',
-		function(socket, env, conversation, visitor) {
+		function(eventHub, socket, env, conversation, visitor) {
 			function requestAgent() {
 				socket.emit('command', {
 					code: 'visitor:online',
@@ -17,9 +18,7 @@
 				});
 			}
 
-			socket.on('connect', function() {
-				requestAgent();
-			});
+			eventHub.on('socket:connected', requestAgent);
 
 			socket.on('command', function(command) {
 				if (command.code === 'chat:bound') {
