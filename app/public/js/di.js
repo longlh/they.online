@@ -1,9 +1,17 @@
 ;(function(exports) {
 	'use strict';
 
+	var _ = exports._;
+
 	var Dependency = function(args) {
-		this.factory = args.pop();
-		this.requires = args;
+		if (_.isArray(args)) {
+			// factory type
+			this.factory = args.pop();
+			this.requires = args;
+		} else {
+			// value type
+			this.value = args;
+		}
 	};
 
 	var Context = function() {
@@ -28,10 +36,16 @@
 		return this;
 	};
 
-	proto.get = function(name) {
+	proto.resolve = function(name) {
 		// look at cache
-		if (this.cache[name]) {
-			return this.cache[name];
+		var cached = this.cache[name];
+
+		if (cached) {
+			if (cached.value) {
+				return Promise.resolve(cached.value);
+			}
+
+			return cached.promise;
 		}
 
 		// look at container
@@ -41,19 +55,52 @@
 			throw new Error('Dependency [' + name + '] is not registered yet!');
 		}
 
-		// resolve requires
-		var requires = dependency.requires.map(function(name) {
-			return this.get(name);
-		}, this);
+		var self = this;
 
-		this.cache[name] = dependency.factory.apply(this, requires);
+		cached = this.cache[name] = {};
 
-		return this.cache[name];
+		// value type
+		if (dependency.value) {
+			cached.value = dependency.value;
+			cached.promise = Promise.resolve(cached.value);
+
+			return cached.promise;
+		}
+
+		// factory
+		var requires = [];
+		var resolve = function(requires, promise, name) {
+			return promise.then(function() {
+				return self.resolve(name);
+			}).then(function(module) {
+				requires.push(module);
+
+				return module;
+			});
+		};
+
+		cached.promise = _.reduce(dependency.requires, function(promise, name) {
+			// resolve require and push to requires array
+			return resolve(requires, promise, name);
+		}, Promise.resolve()).then(function() {
+			return dependency.factory.apply(self, requires);
+		}).then(function(module) {
+			cached.value = module;
+
+			return module;
+		}).catch().finally(function() {
+			// clear pointers
+			requires.length = 0;
+			requires = undefined;
+			self = undefined;
+		});
+
+		return cached.promise;
 	};
 
 	proto.bootstrap = function() {
-		this.autoload.forEach(function(name) {
-			this.get(name);
+		_.forEach(this.autoload, function(name) {
+			this.resolve(name);
 		}, this);
 	};
 

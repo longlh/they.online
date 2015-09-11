@@ -117,7 +117,7 @@ module.exports = function(grunt) {
 				files: [
 					'<%= jshint.client.src %>'
 				],
-				tasks: ['jscs:client', 'jshint:client', 'develop']
+				tasks: ['jscs:client', 'jshint:client']
 			},
 			stylus: {
 				files: [

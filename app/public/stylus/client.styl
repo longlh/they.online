@@ -5,7 +5,7 @@
 _CLIENT_WIDTH = 300px
 _CHAT_LIST_PADDING = 10px
 
-.easychat-client
+.they-online-client
 	meyer-reset()
 	box-sizing-reset()
 	normalize()
@@ -18,6 +18,55 @@ _CHAT_LIST_PADDING = 10px
 	bottom 0
 	right 0
 	border 1px solid BORDER_COLOR
+
+	.cf
+		clearfix()
+
+	.to-header
+		size _CLIENT_WIDTH 35px
+		padding 0 _CHAT_LIST_PADDING
+		line-height 35px
+		cursor pointer
+
+		.to-unread-indicator
+			float right
+			padding 0 _CHAT_LIST_PADDING
+			border-radius BORDER_RADIUS
+			color COLOR_WHITE
+			background COLOR_DANGER
+			margin-top 5px
+			line-height 24px
+
+		.to-application-name
+			margin-right 40px
+			font-weight 400
+
+			.to-online
+				color TEXT_COLOR_SUCCESS
+
+	.to-conversation
+		padding _CHAT_LIST_PADDING
+		border-top 1px solid BORDER_COLOR
+		border-bottom 1px solid BORDER_COLOR
+		background COLOR_WHITE
+		size _CLIENT_WIDTH 300px
+		overflow-x hidden
+		overflow-y auto
+
+	.to-chat-form
+		input
+			size 100% 35px
+			border none
+			padding 0 10px
+
+			&:hover
+			&:active
+			&:focus
+				border none
+				outline none
+
+	.to-hidden
+		display none
 
 	&.hidden
 		.easychat-client-header

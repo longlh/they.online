@@ -1,13 +1,7 @@
 ;(function(di) {
 	'use strict';
 
-	di.register('@bluebird', [
-		function() {
-			return window.Promise;
-		}
-	]).register('@ractive', [
-		function() {
-			return window.Ractive;
-		}
-	]);
+	di.register('@bluebird', window.Promise)
+			.register('@ractive', window.Ractive)
+			.register('@lodash', window._);
 })(window.__('they.online'));

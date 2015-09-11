@@ -1,1 +1,21 @@
-<h1>xxx</h1>
+<div class="to-header cf" on-click="hidden.toggle">
+	{{#if hidden && unread}}
+	<div class="to-unread-indicator">
+		<span>{{unread}}</span>
+	</div>
+	{{/if}}
+	<div class="to-application-name">
+		<span class="to-they">They <span class="to-online">Online</span>
+	</div>
+</div>
+<div class="to-conversation {{ hidden ? 'to-hidden' : ''}}">
+{{#each messages}}
+	<p>{{content}}</p>
+{{/each}}
+</div>
+<div class="to-chat-form {{ hidden ? 'to-hidden' : ''}}">
+	<form on-submit="message.send">
+		<input type="text" value="{{message}}">
+	</form>
+</div>
+

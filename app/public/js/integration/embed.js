@@ -6,13 +6,16 @@
 
 	var scripts = [
 		host + '/socket.io/socket.io.js',
+		host + '/lib/lodash/lodash.min.js',
 		host + '/lib/ractive/ractive.min.js',
 		host + '/lib/bluebird/js/browser/bluebird.min.js',
 		host + '/public/js/di.js',
 		host + '/public/js/integration/main.js',
 		host + '/public/js/integration/import.js',
+		host + '/public/js/integration/models/conversation.js',
 		host + '/public/js/integration/services/http.js',
-		host + '/public/js/integration/services/view.js'
+		host + '/public/js/integration/views/main.js',
+		host + '/public/js/integration/views/container.js'
 	];
 
 	function load(scripts, done) {
@@ -37,17 +40,11 @@
 
 	load(scripts, function() {
 		if (typeof window.__ !== 'undefined') {
-			var context = window.__('they.online');
-
-			context.register('/data/env', [
-				function() {
-					return {
-						protocol: 'http',
-						tenant: tenant,
-						host: host
-					};
-				}
-			]).bootstrap();
+			window.__('they.online').register('/data/env', {
+				protocol: 'http',
+				tenant: tenant,
+				host: host
+			}).bootstrap();
 		}
 	});
 })(window);
