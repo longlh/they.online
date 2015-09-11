@@ -1,7 +1,9 @@
 ;(function(di) {
 	'use strict';
 
-	di.register('@bluebird', window.Promise)
+	di.register('@lodash', window._)
+			.register('@socket.io', window.io)
+			.register('@bluebird', window.Promise)
 			.register('@ractive', window.Ractive)
-			.register('@lodash', window._);
+			.register('@local-storage', window.localStorage);
 })(window.__('they.online'));

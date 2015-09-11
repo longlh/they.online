@@ -2,14 +2,25 @@
 	'use strict';
 
 	di.register('/main', [
-		'/models/conversation',
 		'/views/main',
-		function(conversation, view) {
+		'/services/socket',
+		'/data/env',
+		'/models/visitor',
+		function(view, socket, env, visitor) {
 			view.on('message.send', function(event) {
 				event.original.preventDefault();
 				var message = view.get('message');
 
-				conversation.append(message);
+				socket.emit('command', {
+					code: 'chat',
+					data: {
+						visitor: visitor.id,
+						tenant: env.tenant,
+						agent: env.agent,
+						chat: message,
+						from: visitor.id
+					}
+				});
 
 				view.set('message', undefined);
 
