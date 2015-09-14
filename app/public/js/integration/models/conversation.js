@@ -3,19 +3,30 @@
 
 	di.register('/models/conversation', [
 		'/views/main',
-		function(view) {
-			var messages = [];
+		'/models/visitor',
+		function(view, visitor) {
+			// internal storage
+			var _messages = [];
 
 			// bind
-			view.set('messages', messages);
+			view.set('messages', _messages);
 
-			return {
-				append: function(message) {
-					messages.push({
-						content: message
-					});
-				}
+			var self = {};
+
+			self.parseCommand = function(command) {
+				var message = {
+					self: visitor.id === command.data.from,
+					content: command.data.chat
+				};
+
+				self.append(message);
 			};
+
+			self.append =  function(message) {
+				_messages.push(message);
+			};
+
+			return self;
 		}
 	]);
 })(window.__('they.online'));

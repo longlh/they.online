@@ -43,16 +43,17 @@
 				this.handlers[event].push(handler);
 
 				if (this.waiting[event]) {
-					var queue;
-					while (!!(queue = this.waiting[event].shift())) {
-						this.emit(event, queue.data);
+					var reEmit;
+
+					while (!!(reEmit = this.waiting[event].shift())) {
+						this.emit(event, reEmit.data);
 					}
 				}
 
 				return dehandler(this, event, handler);
 			};
 
-			proto.emit = function(event, data) {
+			proto.emit = function(event, data, delay) {
 				var handlers = this.handlers[event];
 
 				_.forEach(handlers, function(handler) {
@@ -61,7 +62,7 @@
 
 				var hasHandlers = handlers && handlers.length > 0;
 
-				if (!hasHandlers) {
+				if (delay && !hasHandlers) {
 					this.waiting[event] = this.waiting[event] || [];
 					this.waiting[event].push({
 						data: data

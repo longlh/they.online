@@ -24,7 +24,9 @@
 				if (command.code === 'chat:bound') {
 					console.log(visitor.id === command.data.from);
 
-					conversation.append(command.data.chat);
+					conversation.parseCommand(command);
+
+					// conversation.append(command.data.chat);
 				} else if (command.code === 'agent:offline') {
 					env.agent = undefined;
 					requestAgent();

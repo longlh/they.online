@@ -6,7 +6,7 @@
 		function(env) {
 			var link = document.createElement('link');
 			link.rel = 'stylesheet';
-			link.href = env.host + '/build/css/client.css';
+			link.href = env.host + '/build/css/embed.css';
 
 			document.body.appendChild(link);
 

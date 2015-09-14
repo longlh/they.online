@@ -9,7 +9,7 @@
 			var socket = io(env.host);
 
 			socket.on('connect', function() {
-				eventHub.emit('socket:connected');
+				eventHub.emit('socket:connected', socket, true);
 			});
 
 			return socket;
