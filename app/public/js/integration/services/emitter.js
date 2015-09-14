@@ -6,7 +6,7 @@
 		function(_) {
 			function empty() {}
 
-			function dehandler(target, event, handler) {
+			function dehandle(target, event, handler) {
 				if (!event || !handler) {
 					return empty;
 				}
@@ -35,7 +35,7 @@
 
 			proto.on = function(event, handler) {
 				if (!event || !_.isFunction(handler)) {
-					return dehandler(this);
+					return dehandle(this);
 				}
 
 				this.handlers[event] = this.handlers[event] || [];
@@ -50,7 +50,7 @@
 					}
 				}
 
-				return dehandler(this, event, handler);
+				return dehandle(this, event, handler);
 			};
 
 			proto.emit = function(event, data, delay) {

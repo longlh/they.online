@@ -4,13 +4,13 @@
 	angular.module(APP).factory('/services/emitter', [
 		'@lodash',
 		function(_) {
-			var Emitter = function() {
-				this.handlers = {};
-			};
+			function empty() {}
 
-			var proto = Emitter.prototype;
+			function dehandle(target, event, handler) {
+				if (!event || !handler) {
+					return empty;
+				}
 
-			proto.createDehandler = function(event, handler) {
 				return function() {
 					var handlers = this.handlers[event];
 
@@ -18,18 +18,33 @@
 						_.pull(handlers, handler);
 					}
 
+					// clear pointers
 					event = undefined;
 					handlers = undefined;
 					handler = undefined;
-				}.bind(this);
+					target = undefined;
+				}.bind(target);
+			}
+
+			var Emitter = function() {
+				this.handlers = {};
+				this.waiting = {};
 			};
+
+			var proto = Emitter.prototype;
 
 			proto.dispose = function() {
 				// empty array
 				if (this.handlers) {
 					this.handlers.length = 0;
 				}
+
+				if (this.waiting) {
+					this.waiting.length = 0;
+				}
+
 				this.handlers = undefined;
+				this.waiting = undefined;
 			};
 
 			proto.on = function(event, handler) {
@@ -42,17 +57,34 @@
 
 				this.handlers[event].push(handler);
 
-				return this.createDehandler(event, handler);
+				if (this.waiting[event]) {
+					var reEmit;
+
+					while (!!(reEmit = this.waiting[event].shift())) {
+						this.emit(event, reEmit.data);
+					}
+				}
+
+				return dehandle(this, event, handler);
 			};
 
-			proto.emit = function(event, data) {
+			proto.emit = function(event, data, delay) {
 				var handlers = this.handlers[event];
 
 				_.forEach(handlers, function(handler) {
 					handler.call(this, data);
 				}, this);
 
-				return !!handlers;
+				var hasHandlers = handlers && handlers.length > 0;
+
+				if (delay && !hasHandlers) {
+					this.waiting[event] = this.waiting[event] || [];
+					this.waiting[event].push({
+						data: data
+					});
+				}
+
+				return hasHandlers;
 			};
 
 			return Emitter;
