@@ -9,19 +9,19 @@ exports._requires = [
 exports._factory = function(Promise, glob, app) {
 	function convert(files, version) {
 		return files.map(function(file) {
-			return file.replace(/^app\/client/, '/app') + '?' + version;
+			return file.replace(/^src\/client/, '/src') + '?' + version;
 		});
 	}
 
 	return new Promise(function(resolve, reject) {
 		// TODO support array of patterns
-		glob('app/client/*/**/*.js', function(err, files) {
+		glob('src/client/*/**/*.js', function(err, files) {
 			if (err) {
 				return reject(err);
 			}
 
-			files.unshift('app/client/import.js');
-			files.unshift('app/client/main.js');
+			files.unshift('src/client/import.js');
+			files.unshift('src/client/main.js');
 			resolve(files);
 		});
 	}).then(function(files) {

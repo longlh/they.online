@@ -1,11 +1,10 @@
 'use strict';
 
-var linker = require('di-linker');
+var linker = require('../di-linker');
 
 linker([
-	'./app/main.js',
-	'./app/server/**/*.js',
-	'./app/config/**/*.js'
+	'./src/main.js',
+	'./src/server/**/*.js'
 ], require).bootstrap('/main', function(err, main) {
 	if (err) {
 		return console.error(err);

@@ -10,7 +10,7 @@ exports._requires = [
 ];
 exports._factory = function(_, path, specifiedConfiguration) {
 	var defaults = {
-		_root: path.resolve(__dirname, '../../../..'),
+		_root: path.resolve(__dirname, '../../..'),
 		_profile: profile,
 		applicationName: 'they.online',
 		session: {
@@ -20,6 +20,8 @@ exports._factory = function(_, path, specifiedConfiguration) {
 		},
 		development: true
 	};
+
+	console.log(defaults._root);
 
 	return _.assign(defaults, specifiedConfiguration);
 };

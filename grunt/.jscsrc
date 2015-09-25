@@ -1,0 +1,6 @@
+{
+	"preset": "google",
+	"validateIndentation": "\t",
+	"maximumLineLength": 99999,
+	"requireCamelCaseOrUpperCaseIdentifiers": "ignoreProperties"
+}

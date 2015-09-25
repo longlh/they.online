@@ -17,26 +17,26 @@ module.exports = function(grunt) {
 			server: {
 				src: [
 					'index.js',
-					'app/*.js',
-					'app/server/**/*.js'
+					'src/*.js',
+					'src/server/**/*.js'
 				],
 				options: {
-					jshintrc: 'build/rules/.jshintrc-server'
+					jshintrc: 'grunt/.jshintrc-server'
 				}
 			},
 			client: {
 				src: [
-					'app/client/**/*.js',
-					'app/public/**/*.js'
+					'src/client/**/*.js',
+					'src/public/**/*.js'
 				],
 				options: {
-					jshintrc: 'build/rules/.jshintrc-client'
+					jshintrc: 'grunt/.jshintrc-client'
 				}
 			}
 		},
 		jscs: {
 			options: {
-				config: 'build/rules/.jscsrc'
+				config: 'grunt/.jscsrc'
 			},
 			server: {
 				src: [
@@ -57,7 +57,7 @@ module.exports = function(grunt) {
 				expand: true
 			},
 			img: {
-				cwd: 'app/public/img',
+				cwd: 'src/public/img',
 				src: '**',
 				dest: 'build/out/img',
 				expand: true
@@ -71,7 +71,7 @@ module.exports = function(grunt) {
 			},
 			dev: {
 				files: [{
-					cwd: 'app/public/stylus',
+					cwd: 'src/public/stylus',
 					src: [
 						'*.styl',
 						'!_*.styl'
@@ -80,7 +80,7 @@ module.exports = function(grunt) {
 					ext: '.css',
 					expand: true
 				}, {
-					cwd: 'app/public/stylus',
+					cwd: 'src/public/stylus',
 					src: [
 						'*/*.styl',
 						'!*/_*.styl'
@@ -121,7 +121,7 @@ module.exports = function(grunt) {
 			},
 			stylus: {
 				files: [
-					'app/**/*.styl'
+					'src/**/*.styl'
 				],
 				tasks: ['clean:css', 'stylus:dev']
 			}

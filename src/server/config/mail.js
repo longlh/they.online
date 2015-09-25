@@ -20,7 +20,7 @@ exports._factory = function(_, Promise, path, ect, nodemailer, transport, env) {
 	var transporter = nodemailer.createTransport(sender);
 	var send = Promise.promisify(transporter.sendMail, transporter);
 
-	var templateDir = path.resolve(env._root, 'app/mail');
+	var templateDir = path.resolve(env._root, 'mail');
 	var engine = ect({
 		watch: true,
 		ext: '.ect',
