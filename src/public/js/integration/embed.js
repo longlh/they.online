@@ -6,10 +6,8 @@
 
 	var scripts = [
 		host + '/socket.io/socket.io.js',
-		host + '/lib/lodash/lodash.min.js',
 		host + '/lib/ractive/ractive.min.js',
-		host + '/lib/bluebird/js/browser/bluebird.min.js',
-		host + '/public/js/di.js',
+		host + '/lib/di-linker/browser/dist/di-linker.standalone.js',
 		host + '/public/js/integration/main.js',
 		host + '/public/js/integration/import.js',
 		host + '/public/js/integration/models/conversation.js',

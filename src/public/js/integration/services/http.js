@@ -2,7 +2,7 @@
 	'use strict';
 
 	di.register('/services/http', [
-		'@bluebird',
+		'@promise',
 		function(Promise) {
 			return {
 				get: function(url) {
