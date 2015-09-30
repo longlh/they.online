@@ -1,7 +1,7 @@
 'use strict';
 
-exports._ = '/config/mail';
-exports._requires = [
+exports.name = '/config/mail';
+exports.requires = [
 	'@lodash',
 	'@bluebird',
 	'@path',
@@ -10,7 +10,7 @@ exports._requires = [
 	'@nodemailer-ses-transport',
 	'/config/env'
 ];
-exports._factory = function(_, Promise, path, ect, nodemailer, transport, env) {
+exports.factory = function(_, Promise, path, ect, nodemailer, transport, env) {
 	var sender = transport({
 		accessKeyId: env.mail.accessKeyId,
 		secretAccessKey: env.mail.secretAccessKey,

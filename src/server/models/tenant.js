@@ -1,10 +1,10 @@
 'use strict';
 
-exports._ = '/models/tenant';
-exports._requires = [
+exports.name = '/models/tenant';
+exports.requires = [
 	'/config/db'
 ];
-exports._factory = function(db) {
+exports.factory = function(db) {
 	var schema = new db.Schema({
 		name: {
 			type: String,

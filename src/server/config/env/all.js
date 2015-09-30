@@ -2,13 +2,13 @@
 
 var profile = process.env.NODE_ENV || 'development';
 
-exports._ = '/config/env';
-exports._requires = [
+exports.name = '/config/env';
+exports.requires = [
 	'@lodash',
 	'@path',
-	exports._ + '/' + profile
+	exports.name + '/' + profile
 ];
-exports._factory = function(_, path, specifiedConfiguration) {
+exports.factory = function(_, path, specifiedConfiguration) {
 	var defaults = {
 		_root: path.resolve(__dirname, '../../..'),
 		_profile: profile,
@@ -20,8 +20,6 @@ exports._factory = function(_, path, specifiedConfiguration) {
 		},
 		development: true
 	};
-
-	console.log(defaults._root);
 
 	return _.assign(defaults, specifiedConfiguration);
 };

@@ -1,12 +1,12 @@
 'use strict';
 
-exports._ = '/config/redis';
-exports._requires = [
+exports.name = '/config/redis';
+exports.requires = [
 	'@bluebird',
 	'@redis',
 	'/config/env'
 ];
-exports._factory = function(Promise, redis, env) {
+exports.factory = function(Promise, redis, env) {
 	var client = redis.createClient();
 
 	// promisify

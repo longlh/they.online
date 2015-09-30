@@ -1,12 +1,12 @@
 'use strict';
 
-exports._ = '/models/agent';
-exports._requires = [
+exports.name = '/models/agent';
+exports.requires = [
 	'@lodash',
 	'@crypto',
 	'/config/db'
 ];
-exports._factory = function(_, crypto, db) {
+exports.factory = function(_, crypto, db) {
 	// sub-document
 	var accountSchema = new db.Schema({
 		uid: {

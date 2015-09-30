@@ -1,10 +1,10 @@
 'use strict';
 
-exports._ = '/config/cache';
-exports._requires = [
+exports.name = '/config/cache';
+exports.requires = [
 	'/config/redis'
 ];
-exports._factory = function(redis) {
+exports.factory = function(redis) {
 	var self = {};
 
 	self.get = function(key, expiry) {

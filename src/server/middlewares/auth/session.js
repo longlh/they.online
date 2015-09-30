@@ -1,7 +1,7 @@
 'use strict';
 
-exports._ = '/middlewares/auth/session';
-exports._requires = [
+exports.name = '/middlewares/auth/session';
+exports.requires = [
 	'@lodash',
 	'@bluebird',
 	'@node-uuid',
@@ -9,7 +9,7 @@ exports._requires = [
 	'/config/cache',
 	'/models/agent'
 ];
-exports._factory = function(_, Promise, uuid, env, cache, Agent) {
+exports.factory = function(_, Promise, uuid, env, cache, Agent) {
 	function storeSession(res, sid, agent) {
 		res.locals._session = {
 			id: sid,

@@ -1,13 +1,13 @@
 'use strict';
 
-exports._ = '/http';
-exports._requires = [
+exports.name = '/http';
+exports.requires = [
 	'@http',
 	'/app'
 ];
-exports._activations = [
+exports.activations = [
 	'/socket'
 ];
-exports._factory = function(http, app) {
+exports.factory = function(http, app) {
 	return http.Server(app);
 };

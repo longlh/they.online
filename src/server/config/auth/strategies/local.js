@@ -1,12 +1,12 @@
 'use strict';
 
-exports._ = '/config/auth/strategies/local';
-exports._requires = [
+exports.name = '/config/auth/strategies/local';
+exports.requires = [
 	'@bluebird',
 	'@passport-local',
 	'/models/agent'
 ];
-exports._factory = function(Promise, local, Agent) {
+exports.factory = function(Promise, local, Agent) {
 	return new local.Strategy({
 		usernameField: 'email',
 		passwordField: 'password'

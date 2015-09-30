@@ -1,16 +1,16 @@
 'use strict';
 
-exports._ = '/chat/instructions';
-exports._requires = [
+exports.name = '/chat/instructions';
+exports.requires = [
 	'@lodash'
 ];
-exports._activations = [
+exports.activations = [
 	'/chat/instructions/agent-online',
 	'/chat/instructions/visitor-online',
 	'/chat/instructions/offline',
 	'/chat/instructions/chat'
 ];
-exports._factory = function(_) {
+exports.factory = function(_) {
 	var self = {
 		instructions: {}
 	};

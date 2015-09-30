@@ -1,10 +1,10 @@
 'use strict';
 
-exports._ = '/models/registration';
-exports._requires = [
+exports.name = '/models/registration';
+exports.requires = [
 	'/config/db'
 ];
-exports._factory = function(db) {
+exports.factory = function(db) {
 	var registrationSchema = db.Schema({
 		code: {
 			type: String,

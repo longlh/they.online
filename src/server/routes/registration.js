@@ -1,12 +1,12 @@
 'use strict';
 
-exports._ = '/routes/registration';
-exports._requires = [
+exports.name = '/routes/registration';
+exports.requires = [
 	'/app',
 	'/middlewares/registration',
 	'/middlewares/util'
 ];
-exports._factory = function(app, registration, util) {
+exports.factory = function(app, registration, util) {
 	app._route('auth.registration', '/registration')
 			.post(registration.accept,
 					util.redirect('auth.sign-on'));

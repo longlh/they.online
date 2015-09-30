@@ -1,16 +1,16 @@
 'use strict';
 
-exports._ = '/socket';
-exports._requires = [
+exports.name = '/socket';
+exports.requires = [
 	'@bluebird',
 	'@node-uuid',
 	'@socket.io',
 	'/http'
 ];
-exports._activations = [
+exports.activations = [
 	'/chat'
 ];
-exports._factory = function(Promise, UUID, io, httpServer) {
+exports.factory = function(Promise, UUID, io, httpServer) {
 	var socketServer = io(httpServer);
 
 	return socketServer;

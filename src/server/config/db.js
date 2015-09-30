@@ -1,11 +1,11 @@
 'use strict';
 
-exports._ = '/config/db';
-exports._requires = [
+exports.name = '/config/db';
+exports.requires = [
 	'@mongoose',
 	'/config/env'
 ];
-exports._factory = function(mongoose, config) {
+exports.factory = function(mongoose, config) {
 	mongoose.connect(config.db);
 
 	return mongoose;

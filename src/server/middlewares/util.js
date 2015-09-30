@@ -1,10 +1,10 @@
 'use strict';
 
-exports._ = '/middlewares/util';
-exports._requires = [
+exports.name = '/middlewares/util';
+exports.requires = [
 	'@lodash'
 ];
-exports._factory = function(_) {
+exports.factory = function(_) {
 	var self = {};
 
 	self.render = function(template) {

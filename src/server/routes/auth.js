@@ -1,13 +1,13 @@
 'use strict';
 
-exports._ = '/routes/auth';
-exports._requires = [
+exports.name = '/routes/auth';
+exports.requires = [
 	'/app',
 	'/config/auth',
 	'/middlewares/auth/session',
 	'/middlewares/util'
 ];
-exports._factory = function(app, auth, session, util) {
+exports.factory = function(app, auth, session, util) {
 	app.use(session.deserialize);
 
 	app._route('auth.sign-on', '/sign-on')

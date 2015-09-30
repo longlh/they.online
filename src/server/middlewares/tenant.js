@@ -1,11 +1,11 @@
 'use strict';
 
-exports._ = '/middlewares/tenant';
-exports._requires = [
+exports.name = '/middlewares/tenant';
+exports.requires = [
 	'@bluebird',
 	'/models/tenant'
 ];
-exports._factory = function(Promise, Tenant) {
+exports.factory = function(Promise, Tenant) {
 	var self = {};
 
 	self.current = function(req, res, next) {

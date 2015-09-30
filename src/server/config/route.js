@@ -1,10 +1,10 @@
 'use strict';
 
-exports._ = '/config/route';
-exports._requires = [
+exports.name = '/config/route';
+exports.requires = [
 	'@reverse-route',
 	'/config/express'
 ];
-exports._factory = function(reverseRoute, app) {
+exports.factory = function(reverseRoute, app) {
 	reverseRoute(app);
 };

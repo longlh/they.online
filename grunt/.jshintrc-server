@@ -22,8 +22,7 @@
     "predef": [ // Extra globals.
         "require",
         "exports",
-        "module",
-        "rek"
+        "module"
     ],
     "indent": 4, // Specify indentation spacing
     "devel": true, // Allow development statements e.g. `console.log();`.

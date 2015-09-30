@@ -1,16 +1,14 @@
 'use strict';
 
-var linker = require('../di-linker');
+var linker = require('di-linker');
 
 linker([
-	'./src/main.js',
-	'./src/server/**/*.js'
-], require).bootstrap('/main', function(err, main) {
-	if (err) {
-		return console.error(err);
-	}
-
+	'src/main.js',
+	'src/server/**/*.js'
+], require).then(function(context) {
+	return context.bootstrap(['/main']);
+}).then(function() {
 	console.log('Modules linked... Application started!');
-}).on('error', function(err) {
+}).catch(function(err) {
 	console.error(err);
 });

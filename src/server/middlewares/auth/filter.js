@@ -1,10 +1,10 @@
 'use strict';
 
-exports._ = '/middlewares/auth/filter';
-exports._requires = [
+exports.name = '/middlewares/auth/filter';
+exports.requires = [
 	'@lodash'
 ];
-exports._factory = function(_) {
+exports.factory = function(_) {
 	var self = {};
 
 	self.requireAuthentication = function(req, res, next) {

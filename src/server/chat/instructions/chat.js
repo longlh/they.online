@@ -1,13 +1,13 @@
 'use strict';
 
-exports._ = '/chat/instructions/chat';
-exports._requires = [
+exports.name = '/chat/instructions/chat';
+exports.requires = [
 	'@lodash',
 	'/socket',
 	'/chat/instructions',
 	'/chat/container'
 ];
-exports._factory = function(_, socketServer, instructions, container) {
+exports.factory = function(_, socketServer, instructions, container) {
 	instructions.set('chat', function(socket, data) {
 		var info = container.sockets[socket.id];
 

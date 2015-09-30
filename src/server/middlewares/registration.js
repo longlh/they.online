@@ -1,7 +1,7 @@
 'use strict';
 
-exports._ = '/middlewares/registration';
-exports._requires = [
+exports.name = '/middlewares/registration';
+exports.requires = [
 	'@lodash',
 	'@bluebird',
 	'@node-uuid',
@@ -10,7 +10,7 @@ exports._requires = [
 	'/models/agent',
 	'/config/mail'
 ];
-exports._factory = function(_, Promise, UUID, Registration, Tenant, Agent, mail) {
+exports.factory = function(_, Promise, UUID, Registration, Tenant, Agent, mail) {
 	var self = {};
 
 	self.accept = function(req, res, next) {

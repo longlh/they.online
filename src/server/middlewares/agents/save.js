@@ -1,11 +1,11 @@
 'use strict';
 
-exports._ = '/middlewares/agents/save';
-exports._requires = [
+exports.name = '/middlewares/agents/save';
+exports.requires = [
 	'/models/agent',
 	'/models/tenant'
 ];
-exports._factory = function(Agent, Tenant) {
+exports.factory = function(Agent, Tenant) {
 	return function(req, res, next) {
 		var tenant = new Tenant({
 			displayName: 'Tenant [' + Date.now() + ']',

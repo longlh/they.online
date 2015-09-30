@@ -1,17 +1,17 @@
 'use strict';
 
-exports._ = '/config/express';
-exports._requires = [
+exports.name = '/config/express';
+exports.requires = [
 	'@express',
 	'@body-parser',
 	'@cookie-parser',
 	'@path',
 	'/config/env'
 ];
-exports._activations = [
+exports.activations = [
 	'/config/route'
 ];
-exports._factory = function(express, bodyParser, cookieParser, path, env) {
+exports.factory = function(express, bodyParser, cookieParser, path, env) {
 	var app = express();
 
 	// use static middleware in `development` profile

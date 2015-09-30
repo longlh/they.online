@@ -1,13 +1,13 @@
 'use strict';
 
-exports._  = '/config/view-engine';
-exports._requires = [
+exports.name = '/config/view-engine';
+exports.requires = [
 	'@ect',
 	'@path',
 	'/app',
 	'/config/env'
 ];
-exports._factory = function(ect, path, app, env) {
+exports.factory = function(ect, path, app, env) {
 	var templateDir = path.resolve(env._root, 'server/views');
 
 	var engine = ect({

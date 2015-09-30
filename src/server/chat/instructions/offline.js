@@ -1,13 +1,13 @@
 'use strict';
 
-exports._ = '/chat/instructions/offline';
-exports._requires = [
+exports.name = '/chat/instructions/offline';
+exports.requires = [
 	'@lodash',
 	'/socket',
 	'/chat/instructions',
 	'/chat/container'
 ];
-exports._factory = function(_, socketServer, instructions, container) {
+exports.factory = function(_, socketServer, instructions, container) {
 	function agentOffline(socket, agent, tenant) {
 		var onlineSockets = container.agents[agent];
 

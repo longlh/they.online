@@ -1,11 +1,11 @@
 'use strict';
 
-exports._ = '/config/auth';
-exports._requires = [
+exports.name = '/config/auth';
+exports.requires = [
 	'@passport',
 	'/config/auth/strategies/local'
 ];
-exports._factory = function(passport, localStrategy) {
+exports.factory = function(passport, localStrategy) {
 	// config
 	passport.use(localStrategy);
 

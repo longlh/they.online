@@ -1,12 +1,12 @@
 'use strict';
 
-exports._ = '/chat';
-exports._requires = [
+exports.name = '/chat';
+exports.requires = [
 	'/socket',
 	'/chat/container',
 	'/chat/instructions'
 ];
-exports._factory = function(socketServer, container, instructions) {
+exports.factory = function(socketServer, container, instructions) {
 	var self = {
 		execute: function(command) {
 			var socket = this;

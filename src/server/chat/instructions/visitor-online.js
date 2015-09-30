@@ -1,13 +1,13 @@
 'use strict';
 
-exports._ = '/chat/instructions/visitor-online';
-exports._requires = [
+exports.name = '/chat/instructions/visitor-online';
+exports.requires = [
 	'@lodash',
 	'/socket',
 	'/chat/instructions',
 	'/chat/container'
 ];
-exports._factory = function(_, socketServer, instructions, container) {
+exports.factory = function(_, socketServer, instructions, container) {
 	instructions.set('visitor:online', function(socket, data) {
 		// join rooms
 		// 1. {visitor}_{tenant}: all sockets in conversation of a visitor with a tenant

@@ -1,11 +1,11 @@
 'use strict';
 
-exports._ = '/app';
-exports._requires = [
+exports.name = '/app';
+exports.requires = [
 	'/config/express',
 	'/config/auth'
 ];
-exports._activations = [
+exports.activations = [
 	'/config/assets',
 	'/config/view-engine',
 	'/routes/auth',
@@ -13,7 +13,7 @@ exports._activations = [
 	'/routes/core',
 	'/routes/api'
 ];
-exports._factory = function(app, auth) {
+exports.factory = function(app, auth) {
 	app.use(auth.initialize());
 	app.use(auth.session());
 

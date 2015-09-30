@@ -1,7 +1,7 @@
 'use strict';
 
-exports._ = '/chat/instructions/agent-online';
-exports._requires = [
+exports.name = '/chat/instructions/agent-online';
+exports.requires = [
 	'@lodash',
 	'@bluebird',
 	'/models/agent',
@@ -9,7 +9,7 @@ exports._requires = [
 	'/chat/instructions',
 	'/chat/container'
 ];
-exports._factory = function(_, Promise, Agent, socketServer, instructions, container) {
+exports.factory = function(_, Promise, Agent, socketServer, instructions, container) {
 	instructions.set('agent:online', function(socket, data) {
 		var query = Agent.findById(data.agent);
 

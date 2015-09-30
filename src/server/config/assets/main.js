@@ -1,12 +1,12 @@
 'use strict';
 
-exports._ = '/config/assets';
-exports._requires = [
+exports.name = '/config/assets';
+exports.requires = [
 	'@bluebird',
 	'@glob',
 	'/app'
 ];
-exports._factory = function(Promise, glob, app) {
+exports.factory = function(Promise, glob, app) {
 	function convert(files, version) {
 		return files.map(function(file) {
 			return file.replace(/^src\/client/, '/src') + '?' + version;

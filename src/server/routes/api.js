@@ -1,13 +1,13 @@
 'use strict';
 
-exports._ = '/routes/api';
-exports._requires = [
+exports.name = '/routes/api';
+exports.requires = [
 	'/app',
 	'/middlewares/auth/filter',
 	'/middlewares/tenant',
 	'/middlewares/util'
 ];
-exports._factory = function(app, authFilter, tenant, util) {
+exports.factory = function(app, authFilter, tenant, util) {
 	app.use('/api', authFilter.blockUnauthenticated);
 
 	app.get('/api/sessions/current', util.json('_session'));

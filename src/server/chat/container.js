@@ -1,10 +1,10 @@
 'use strict';
 
-exports._ = '/chat/container';
-exports._requires = [
+exports.name = '/chat/container';
+exports.requires = [
 	'@lodash',
 ];
-exports._factory = function(_) {
+exports.factory = function(_) {
 	var self = {
 		waiting: {},
 		tenants: {},
