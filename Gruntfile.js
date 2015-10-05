@@ -21,22 +21,31 @@ module.exports = function(grunt) {
 					'src/server/**/*.js'
 				],
 				options: {
-					jshintrc: 'grunt/.jshintrc-server'
+					jshintrc: '_grunt/.jshintrc-server'
+				}
+			},
+			browserify: {
+				src: [
+					'src/public/js/injection/**/*.js'
+				],
+				options: {
+					jshintrc: '_grunt/.jshintrc-browserify'
 				}
 			},
 			client: {
 				src: [
 					'src/client/**/*.js',
-					'src/public/**/*.js'
+					'src/public/js/**/*.js',
+					'!src/public/js/injection/**'
 				],
 				options: {
-					jshintrc: 'grunt/.jshintrc-client'
+					jshintrc: '_grunt/.jshintrc-client'
 				}
 			}
 		},
 		jscs: {
 			options: {
-				config: 'grunt/.jscsrc'
+				config: '_grunt/.jscsrc'
 			},
 			server: {
 				src: [
@@ -46,6 +55,25 @@ module.exports = function(grunt) {
 			},
 			client: {
 				src: '<%= jshint.client.src %>'
+			},
+			browserify: {
+				src: '<%= jshint.browserify.src %>'
+			}
+		},
+		browserify: {
+			inject: {
+				options: {
+					watch: true,
+					browserifyOptions: {
+						standalone: '__'
+					}
+				},
+				files: {
+					'build/out/js/inject.js': [
+						'src/public/js/injection/context.js',
+						'src/public/js/injection/**/*.js'
+					]
+				}
 			}
 		},
 		copy: {
@@ -119,6 +147,12 @@ module.exports = function(grunt) {
 				],
 				tasks: ['jscs:client', 'jshint:client']
 			},
+			browserify: {
+				files: [
+					'<%= jshint.browserify.src %>'
+				],
+				tasks: ['jscs:browserify', 'jshint:browserify']
+			},
 			stylus: {
 				files: [
 					'src/**/*.styl'
@@ -142,6 +176,7 @@ module.exports = function(grunt) {
 		'copy:img',
 		'stylus:dev',
 		'develop:dev',
+		'browserify',
 		'watch'
 	]);
 };

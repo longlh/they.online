@@ -2,7 +2,7 @@
 
 var linker = require('di-linker');
 
-linker([
+linker.walk([
 	'src/main.js',
 	'src/server/**/*.js'
 ], require).then(function(context) {
