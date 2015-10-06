@@ -1,11 +1,11 @@
 'use strict';
 
 they.online.factory('main', [
-	'@ractive',
+	'@env',
 	'/services/http',
-	function(Ractive, http) {
-		console.log(Ractive);
-
-		console.log(http);
+	function(env, http) {
+		http.get(env.protocol + ':' + env.host + '/public/tpl/embed.tpl.html').then(function(html) {
+			console.log(html);
+		});
 	}
 ]);

@@ -63,10 +63,7 @@ module.exports = function(grunt) {
 		browserify: {
 			inject: {
 				options: {
-					watch: true,
-					browserifyOptions: {
-						standalone: '__'
-					}
+					watch: true
 				},
 				files: {
 					'build/out/js/inject.js': [

@@ -16,10 +16,10 @@ exports.factory = function(express, bodyParser, cookieParser, path, env) {
 
 	// use static middleware in `development` profile
 	if (env.development) {
-		app.use('/src', express.static(path.resolve(env._root, 'client')));
-		app.use('/public', express.static(path.resolve(env._root, 'public')));
-		app.use('/lib', express.static(path.resolve(env._root, '../bower_components')));
-		app.use('/build', express.static(path.resolve(env._root, '../build/out')));
+		app.use('/src', express.static(path.resolve(env._root, '../client')));
+		app.use('/public', express.static(path.resolve(env._root, '../public')));
+		app.use('/lib', express.static(path.resolve(env._root, '../../bower_components')));
+		app.use('/build', express.static(path.resolve(env._root, '../../build/out')));
 	}
 
 	app.use(bodyParser.json());

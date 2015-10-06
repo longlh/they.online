@@ -3,6 +3,8 @@
 they.online.factory('/services/http', [
 	'@promise',
 	function(Promise) {
+		console.log(Promise);
+
 		return {
 			get: function(url) {
 				var defer = Promise.defer();

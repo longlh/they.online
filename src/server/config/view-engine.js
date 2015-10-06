@@ -8,7 +8,7 @@ exports.requires = [
 	'/config/env'
 ];
 exports.factory = function(ect, path, app, env) {
-	var templateDir = path.resolve(env._root, 'server/views');
+	var templateDir = path.resolve(env._root, 'views');
 
 	var engine = ect({
 		watch: true,
