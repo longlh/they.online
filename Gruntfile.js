@@ -4,47 +4,47 @@ module.exports = function(grunt) {
 	grunt.initConfig({
 		clean: {
 			css: {
-				src: ['_build/out/css']
+				src: ['./build/out/css']
 			},
 			js: {
-				src: ['_build/out/js']
+				src: ['./build/out/js']
 			},
 			font: {
-				src: ['_build/out/fonts']
+				src: ['./build/out/fonts']
 			}
 		},
 		jshint: {
 			server: {
 				src: [
-					'index.js',
-					'server/**/*.js'
+					'./index.js',
+					'./src/server/**/*.js'
 				],
 				options: {
-					jshintrc: '_grunt/.jshintrc-server'
+					jshintrc: './grunt/.jshintrc-server'
 				}
 			},
 			browserify: {
 				src: [
-					'injection/**/*.js',
-					'admin/**/*.js'
+					'./src/injection/**/*.js',
+					'./src/admin/**/*.js'
 				],
 				options: {
-					jshintrc: '_grunt/.jshintrc-browserify'
+					jshintrc: './grunt/.jshintrc-browserify'
 				}
 			},
 			client: {
 				src: [
-					'client/**/*.js',
-					'public/js/**/*.js',
+					'./src/client/**/*.js',
+					'./src/public/js/**/*.js',
 				],
 				options: {
-					jshintrc: '_grunt/.jshintrc-client'
+					jshintrc: './grunt/.jshintrc-client'
 				}
 			}
 		},
 		jscs: {
 			options: {
-				config: '_grunt/.jscsrc'
+				config: './grunt/.jscsrc'
 			},
 			server: {
 				src: [
@@ -65,9 +65,9 @@ module.exports = function(grunt) {
 					watch: true
 				},
 				files: {
-					'_build/out/js/inject.js': [
-						'injection/context.js',
-						'injection/**/*.js'
+					'./build/out/js/inject.js': [
+						'./src/injection/context.js',
+						'./src/injection/**/*.js'
 					]
 				}
 			},
@@ -75,31 +75,31 @@ module.exports = function(grunt) {
 				options: {
 					watch: true,
 					alias: {
-						'app': './admin/app.js',
-						'app.core': './admin/shared/module.js',
-						'app.auth': './admin/modules/auth/module.js',
-						'app.dashboard': './admin/modules/dashboard/module.js'
+						'app': './src/admin/app.js',
+						'app.core': './src/admin/shared/module.js',
+						'app.auth': './src/admin/modules/auth/module.js',
+						'app.dashboard': './src/admin/modules/dashboard/module.js'
 					}
 				},
 				files: {
-					'_build/out/js/admin.js': [
-						'admin/**/*.js'
+					'./build/out/js/admin.js': [
+						'./src/admin/**/*.js'
 					]
 				}
 			}
 		},
 		copy: {
 			font: {
-				cwd: 'bower_components/font-awesome-stylus/fonts',
+				cwd: './bower_components/font-awesome-stylus/fonts',
 				src: '**',
-				dest: '_build/out/fonts/',
+				dest: './build/out/fonts/',
 				flatten: true,
 				expand: true
 			},
 			img: {
-				cwd: 'src/public/img',
+				cwd: './src/public/img',
 				src: '**',
-				dest: '_build/out/img',
+				dest: './build/out/img',
 				expand: true
 			}
 		},
@@ -111,21 +111,21 @@ module.exports = function(grunt) {
 			},
 			dev: {
 				files: [{
-					cwd: 'public/stylus',
+					cwd: './src/public/stylus',
 					src: [
 						'*.styl',
 						'!_*.styl'
 					],
-					dest: '_build/out/css',
+					dest: './build/out/css',
 					ext: '.css',
 					expand: true
 				}, {
-					cwd: 'public/stylus',
+					cwd: './src/public/stylus',
 					src: [
 						'*/*.styl',
 						'!*/_*.styl'
 					],
-					dest: '_build/out/css',
+					dest: './build/out/css',
 					ext: '.pages.css',
 					extDot: 'first',
 					flatten: true,
@@ -136,11 +136,11 @@ module.exports = function(grunt) {
 		uglify: {
 			dist: {
 				files: [{
-					cwd: '_build/out/js',
+					cwd: './build/out/js',
 					src: [
 						'**/*.js'
 					],
-					dest: '_build/out/js',
+					dest: './build/out/js',
 					ext: '.min.js',
 					expand: true
 				}]

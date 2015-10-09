@@ -4,7 +4,7 @@ var linker = require('di-linker');
 
 linker.walk([
 	// 'src/main.js',
-	'server/**/*.js'
+	'./src/server/**/*.js'
 ], require).then(function(context) {
 	return context.bootstrap(['/main']);
 }).then(function() {

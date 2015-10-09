@@ -21,7 +21,5 @@ exports.factory = function(_, path, specifiedConfiguration) {
 		development: true
 	};
 
-	console.log(defaults._root);
-
 	return _.assign(defaults, specifiedConfiguration);
 };
