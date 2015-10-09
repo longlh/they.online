@@ -15,27 +15,15 @@
 
 <% block 'end_body' : %>
 <!-- block `end_body` begin -->
-<script src="/socket.io/socket.io.js"></script>
-<script src="/lib/lodash/lodash.min.js"></script>
-<script src="/lib/angular/angular.min.js"></script>
-<script src="/lib/angular-route/angular-route.min.js"></script>
-<script src="/lib/angular-resource/angular-resource.min.js"></script>
-<script>
-<!--
-var APP = <%- JSON.stringify(@_env.applicationName) %>;
--->
-</script>
-<% for file in @assets : %>
-<script src="<%= file %>"></script>
-<% end %>
+<script src="/build/js/admin.js"></script>
 <% if @_session : %>
 <script>
 <!--
-	angular.module(APP).constant('SESSION', <%- JSON.stringify(@_session) %>);
-
-	angular.module(APP).constant('ENV', {
-		host: <%- JSON.stringify(@_env.host) %>
-	});
+	require('app')
+			.constant('SESSION', <%- JSON.stringify(@_session) %>)
+			.constant('ENV', {
+				host: <%- JSON.stringify(@_env.host) %>
+			});
 -->
 </script>
 <% end %>

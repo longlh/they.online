@@ -9,7 +9,7 @@ exports.requires = [
 exports.factory = function(app, filter, util) {
 	app._get('landing', '/', util.render('landing'));
 
-	app._get('backend.main', '/manager', filter.requireAuthentication, util.render('main'));
+	app._get('backend.main', '/app', filter.requireAuthentication, util.render('main'));
 
 	app.get('/test', util.render('test'));
 };

@@ -18,8 +18,8 @@ exports.factory = function(express, bodyParser, cookieParser, path, env) {
 	if (env.development) {
 		app.use('/src', express.static(path.resolve(env._root, '../client')));
 		app.use('/public', express.static(path.resolve(env._root, '../public')));
-		app.use('/lib', express.static(path.resolve(env._root, '../../bower_components')));
-		app.use('/build', express.static(path.resolve(env._root, '../../build/out')));
+		app.use('/lib', express.static(path.resolve(env._root, '../bower_components')));
+		app.use('/build', express.static(path.resolve(env._root, '../_build/out')));
 	}
 
 	app.use(bodyParser.json());

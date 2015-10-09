@@ -3,8 +3,8 @@
 var linker = require('di-linker');
 
 linker.walk([
-	'src/main.js',
-	'src/server/**/*.js'
+	// 'src/main.js',
+	'server/**/*.js'
 ], require).then(function(context) {
 	return context.bootstrap(['/main']);
 }).then(function() {

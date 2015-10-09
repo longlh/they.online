@@ -1,10 +1,6 @@
 ;(function() {
 	'use strict';
 
-	angular.element(window).ready(function() {
-		angular.bootstrap(document.body, [APP]);
-	});
-
 	angular.module(APP, [
 		'ngRoute',
 		'ngResource'
@@ -61,4 +57,12 @@
 			chat.connect();
 		}
 	]);
+
+	var t = Date.now();
+
+	angular.element(window).ready(function() {
+		angular.bootstrap(document.body, [APP]);
+
+		console.log(Date.now() - t);
+	});
 })();
