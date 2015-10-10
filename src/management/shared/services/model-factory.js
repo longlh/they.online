@@ -2,7 +2,7 @@
 
 var _ = require('lodash');
 
-require('app.core').factory('core.services.model-factory', [
+require('../module').factory('core.services.model-factory', [
 	'$resource',
 	function($resource) {
 		var DEFAULT_METHODS = {

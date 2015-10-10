@@ -3,8 +3,8 @@
 var angular = require('angular');
 
 module.exports = angular.module('they.online', [
-	require('app.auth').name,
-	require('app.dashboard').name
+	require('./modules/auth').name,
+	require('./modules/dashboard').name
 ]);
 
 angular.element(window).ready(function() {

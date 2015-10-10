@@ -3,5 +3,5 @@
 var angular = require('angular');
 
 module.exports = angular.module('app.auth', [
-	require('app.core').name
+	require('../../shared').name
 ]);

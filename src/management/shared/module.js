@@ -2,6 +2,6 @@
 
 var angular = require('angular');
 
-module.exports = angular.module('core', []).config(function() {
+module.exports = angular.module('/app/shared', []).config(function() {
 	console.log('core config');
 });
