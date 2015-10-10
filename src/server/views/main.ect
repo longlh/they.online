@@ -3,7 +3,7 @@
 <% block 'end_head' : %>
 <!-- block `end_head` begin -->
 
-<link rel="stylesheet" href="/build/css/main.css">
+<link rel="stylesheet" href="/build/css/management/app.css">
 <style>
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
   display: none !important;
@@ -15,7 +15,7 @@
 
 <% block 'end_body' : %>
 <!-- block `end_body` begin -->
-<script src="/build/js/admin.js"></script>
+<script src="/build/js/management.js"></script>
 <% if @_session : %>
 <script>
 <!--
@@ -30,6 +30,7 @@
 
 <!-- block `end_body` end -->
 <% end %>
+<div data-ng-include="'/src/management/app.html'"></div>
 <div id="page-container" class="full-height" data-ng-controller="/controllers/container" data-ng-cloak>
 	<header class="header-navbar">
 		<div class="pull-right thumb thumb-32 thumb-circular user-avatar">
