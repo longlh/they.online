@@ -1,8 +1,6 @@
 'use strict';
 
-var linker = require('di-linker');
-
-linker.walk([
+require('di-linker').walk([
 	// 'src/main.js',
 	'./src/server/**/*.js'
 ], require).then(function(context) {

@@ -11,6 +11,9 @@ module.exports = function(grunt) {
 			},
 			font: {
 				src: ['./build/out/fonts']
+			},
+			img: {
+				src: ['./build/out/img']
 			}
 		},
 		jshint: {
@@ -26,7 +29,7 @@ module.exports = function(grunt) {
 			browserify: {
 				src: [
 					'./src/injection/**/*.js',
-					'./src/admin/**/*.js'
+					'./src/management/**/*.js'
 				],
 				options: {
 					jshintrc: './grunt/.jshintrc-browserify'
@@ -71,19 +74,16 @@ module.exports = function(grunt) {
 					]
 				}
 			},
-			admin: {
+			management: {
 				options: {
 					watch: true,
 					alias: {
-						'app': './src/admin/app.js',
-						'app.core': './src/admin/shared/module.js',
-						'app.auth': './src/admin/modules/auth/module.js',
-						'app.dashboard': './src/admin/modules/dashboard/module.js'
+						'app': './src/management/app.js'
 					}
 				},
 				files: {
-					'./build/out/js/admin.js': [
-						'./src/admin/**/*.js'
+					'./build/out/js/management.js': [
+						'./src/management/**/*.js'
 					]
 				}
 			}
@@ -109,26 +109,23 @@ module.exports = function(grunt) {
 					require('kouto-swiss')
 				]
 			},
-			dev: {
+			management: {
 				files: [{
-					cwd: './src/public/stylus',
+					cwd: './src/management',
 					src: [
-						'*.styl',
-						'!_*.styl'
+						'*.styl'
 					],
-					dest: './build/out/css',
+					dest: './build/out/css/management',
 					ext: '.css',
 					expand: true
 				}, {
 					cwd: './src/public/stylus',
 					src: [
-						'*/*.styl',
-						'!*/_*.styl'
+						'**/*.styl',
+						'!**/_*.styl'
 					],
-					dest: './build/out/css',
-					ext: '.pages.css',
-					extDot: 'first',
-					flatten: true,
+					dest: './build/out/css/public',
+					ext: '.css',
 					expand: true
 				}]
 			}
@@ -210,8 +207,7 @@ module.exports = function(grunt) {
 		'static',
 		'copy:font',
 		'copy:img',
-		'stylus:dev',
-		'develop:dev',
+		'stylus',
 		'browserify',
 		// 'watch'
 	]);
