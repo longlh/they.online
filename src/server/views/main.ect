@@ -22,7 +22,8 @@
 	require('app')
 			.constant('SESSION', <%- JSON.stringify(@_session) %>)
 			.constant('ENV', {
-				host: <%- JSON.stringify(@_env.host) %>
+				host: <%- JSON.stringify(@_env.host) %>,
+				signOutUrl: '<%= @_url('auth.sign-out') %>'
 			});
 -->
 </script>
@@ -31,54 +32,3 @@
 <!-- block `end_body` end -->
 <% end %>
 <div data-ng-include="'/src/management/app.html'"></div>
-<div id="page-container" class="full-height" data-ng-controller="/controllers/container" data-ng-cloak>
-	<header class="header-navbar">
-		<div class="pull-right thumb thumb-32 thumb-circular user-avatar">
-			<a href="<%= @_url('auth.sign-out') %>">
-				<img src="http://pages.revox.io/dashboard/latest/angular/assets/img/profiles/avatar.jpg" width="32" height="32">
-			</a>
-		</div>
-		<div class="pull-right text-large text-color-hint user-name">
-			<span>{{session.agent.name}}</span>
-		</div>
-	</header>
-	<nav class="sidebar">
-		<div class="sidebar-header">
-			<span class="text-color-white">They <span class="text-color-success">Online</span></span>
-		</div>
-		<div class="sidebar-menu">
-			<ul class="menu-items">
-				<li>
-					<a href="#/">
-						<span class="title">Dashboard</span>
-						<span class="details">12 New Updates</span>
-					</a>
-					<span class="thumb thumb-40 text-color-white">
-						<i class="fa fa-globe fa-fw"></i>
-					</span>
-				</li>
-				<li>
-					<a href="#/tenant">
-						<span class="title">Tenant</span>
-					</a>
-					<span class="thumb thumb-40">
-						<i class="fa fa-building-o fa-fw"></i>
-					</span>
-				</li>
-				<li>
-					<a href="#/chat">
-						<span class="title">Chat</span>
-						<span class="details">100 New Messages</span>
-					</a>
-					<span class="thumb thumb-40">
-						<i class="fa fa-comments-o fa-fw"></i>
-					</span>
-				</li>
-			</ul>
-		</div>
-	</nav>
-	<main class="main-container full-height" data-ng-view data-ng-cloak>
-	</main>
-	<footer id="page-footer">
-	</footer>
-</div>

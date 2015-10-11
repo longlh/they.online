@@ -179,7 +179,7 @@ module.exports = function(grunt) {
 				files: [
 					'src/**/*.styl'
 				],
-				tasks: ['clean:css', 'stylus:dev']
+				tasks: ['clean:css', 'stylus']
 			}
 		},
 	});

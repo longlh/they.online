@@ -1,1 +1,11 @@
-<h1>app</h1>
+<div id="page-container" class="full-height ng-cloak" data-ng-cloak>
+	<header class="header-navbar"
+		data-ng-include="'/src/management/shared/partials/header.tpl.html'"
+		data-ng-controller="shared.controllers.header as header">
+	</header>
+	<nav class="sidebar"
+		data-ng-include="'/src/management/shared/partials/sidebar.tpl.html'">
+	</nav>
+	<main class="main-container full-height" data-ng-view data-ng-cloak>
+	</main>
+</div>

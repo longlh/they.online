@@ -3,6 +3,7 @@
 var angular = require('angular');
 
 module.exports = angular.module('they.online', [
+	require('./shared').name,
 	require('./modules/auth').name,
 	require('./modules/dashboard').name
 ]);
