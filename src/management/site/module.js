@@ -7,10 +7,11 @@ module.exports = angular.module('app.site', [
 	require('../_shared').name
 ]).config([
 	'$stateProvider',
-	function($stateProvider) {
+	'shared.services.template',
+	function($stateProvider, template) {
 		$stateProvider.state('dashboard', {
 			url: '/',
-			templateUrl: '/src/management/site/partials/dashboard.tpl.html',
+			templateUrl: template('site/partials/dashboard'),
 			controller: 'site.controllers.dashboard'
 		});
 	}
