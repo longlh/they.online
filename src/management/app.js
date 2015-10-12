@@ -3,9 +3,15 @@
 var angular = require('angular');
 
 module.exports = angular.module('they.online', [
-	require('./shared').name,
-	require('./modules/auth').name,
-	require('./modules/site').name
+	require('angular-ui-router'),
+	require('./_shared').name,
+	require('./auth').name,
+	require('./site').name
+]).config([
+	'$urlRouterProvider',
+	function($urlRouterProvider) {
+		$urlRouterProvider.otherwise('/');
+	}
 ]).run([
 	'$state',
 	function($state) {
