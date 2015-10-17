@@ -194,23 +194,13 @@ module.exports = function(grunt) {
 	]);
 
 	grunt.registerTask('default', [
-		// 'clean',
-		'static',
-		// 'copy:font',
-		// 'copy:img',
-		// 'stylus:dev',
-		'develop:dev',
-		'browserify',
-		'watch'
-	]);
-
-	grunt.registerTask('build-dev', [
 		'clean',
 		'static',
 		'copy:font',
 		'copy:img',
 		'stylus',
 		'browserify',
-		// 'watch'
+		'develop:dev',
+		'watch'
 	]);
 };
