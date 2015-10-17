@@ -115,8 +115,9 @@ module.exports = function(grunt) {
 					src: [
 						'*.styl'
 					],
-					dest: './build/out/css/management',
-					ext: '.css',
+					dest: './build/out/css',
+					ext: '.management.css',
+					extDot: 'last',
 					expand: true
 				}, {
 					cwd: './src/public/stylus',
@@ -124,8 +125,9 @@ module.exports = function(grunt) {
 						'**/*.styl',
 						'!**/_*.styl'
 					],
-					dest: './build/out/css/public',
-					ext: '.css',
+					dest: './build/out/css',
+					ext: '.public.css',
+					extDot: 'last',
 					expand: true
 				}]
 			}

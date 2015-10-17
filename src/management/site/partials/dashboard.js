@@ -2,6 +2,5 @@
 
 require('..').controller('site.controllers.dashboard', [
 	'$scope',
-	function($scope) {
-	}
+	function($scope) {}
 ]);
