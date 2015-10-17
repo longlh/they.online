@@ -2,7 +2,7 @@
 
 var angular = require('angular');
 
-module.exports = angular.module('/app/shared', [
+module.exports = angular.module('shared', [
 ]).config([
 	'$httpProvider',
 	function($httpProvider) {

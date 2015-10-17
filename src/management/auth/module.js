@@ -3,8 +3,7 @@
 var angular = require('angular');
 
 module.exports = angular.module('app.auth', [
-	require('angular-resource'),
-	require('../_shared').name
+	require('angular-resource')
 ]).config([
 	'$httpProvider',
 	function($httpProvider) {

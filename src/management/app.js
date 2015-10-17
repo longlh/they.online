@@ -6,7 +6,8 @@ module.exports = angular.module('they.online', [
 	require('angular-ui-router'),
 	require('./_shared').name,
 	require('./auth').name,
-	require('./site').name
+	require('./site').name,
+	require('./tenant').name
 ]).config([
 	'$urlRouterProvider',
 	function($urlRouterProvider) {

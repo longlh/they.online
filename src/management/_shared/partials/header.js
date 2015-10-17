@@ -2,7 +2,10 @@
 
 require('..').controller('shared.controllers.header', [
 	'ENV',
-	function(ENV) {
+	'shared.services.storage',
+	function(ENV, storage) {
 		this.signOutUrl = ENV.signOutUrl;
+
+		this.session = storage.get('session');
 	}
 ]);

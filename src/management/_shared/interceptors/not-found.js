@@ -1,11 +1,15 @@
 'use strict';
 
 require('..').factory('shared.interceptors.not-found', [
-	function() {
+	'$q',
+	function($q) {
 		return {
-			response: function(response) {
+			responseError: function(response) {
 				// TODO check 404 here
-				return response;
+				console.log('should redirect to error page', response);
+				alert('error');
+
+				return $q.reject(response);
 			}
 		};
 	}
