@@ -105,6 +105,9 @@ module.exports = function(grunt) {
 		},
 		stylus: {
 			options: {
+				paths: [
+					'./bower_components'
+				],
 				use: [
 					require('kouto-swiss')
 				]
