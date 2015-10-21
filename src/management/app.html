@@ -1,11 +1,11 @@
-<div id="page-container" class="full-height ng-cloak" data-ng-cloak>
-	<header class="header-navbar"
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
+	<header class="mdl-layout__header"
 		data-ng-include="'/src/management/_shared/partials/header.tpl.html'"
 		data-ng-controller="shared.controllers.header as header">
 	</header>
-	<nav class="sidebar"
-		data-ng-include="'/src/management/_shared/partials/sidebar.tpl.html'">
-	</nav>
-	<main class="main-container full-height" data-ui-view data-ng-cloak>
+	<div class="mdl-layout__drawer"
+		data-ng-include="'/src/management/_shared/partials/sidebar.tpl.html'"></div>
+	<main class="mdl-layout__content">
+		<div class="page-content" data-ui-view></div>
 	</main>
 </div>
