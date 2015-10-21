@@ -3,6 +3,7 @@
 <% block 'end_head' : %>
 <!-- block `end_head` begin -->
 
+<link rel="stylesheet" href="/lib/material-design-lite/material.min.css">
 <link rel="stylesheet" href="/build/css/app.management.css">
 <style>
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
@@ -15,6 +16,7 @@
 
 <% block 'end_body' : %>
 <!-- block `end_body` begin -->
+<script src="/lib/material-design-lite/material.min.js"></script>
 <script src="/build/js/management.js"></script>
 <% if @_session : %>
 <script>
@@ -27,6 +29,8 @@
 			});
 -->
 </script>
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <% end %>
 
 <!-- block `end_body` end -->

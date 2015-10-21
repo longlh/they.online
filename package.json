@@ -32,6 +32,7 @@
     "angular-route": "1.4.7",
     "angular-ui-router": "0.2.15",
     "browserify": "11.2.0",
+    "browserify-shim": "3.8.10",
     "eventemitter3": "^1.1.1",
     "grunt": "0.4.5",
     "grunt-browserify": "4.0.1",
@@ -46,7 +47,6 @@
     "kouto-swiss": "0.11.13",
     "load-grunt-tasks": "3.3.0",
     "ractive": "0.7.3",
-    "remapify": "2.0.3",
     "socket.io-client": "^1.3.7"
   },
   "scripts": {},
@@ -62,5 +62,13 @@
   "bugs": {
     "url": "https://github.com/longlh/they.online/issues"
   },
-  "homepage": "https://github.com/longlh/they.online#readme"
+  "homepage": "https://github.com/longlh/they.online#readme",
+  "browserify": {
+    "transform": [
+      "browserify-shim"
+    ]
+  },
+  "browserify-shim": {
+    "component-handler": "global:componentHandler"
+  }
 }
