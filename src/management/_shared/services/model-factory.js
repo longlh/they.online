@@ -36,7 +36,7 @@ require('..').factory('shared.services.model-factory', [
 				}
 
 				_.defaults(this, {
-					_ignore: []
+					_ignores: []
 				});
 			};
 
@@ -106,10 +106,10 @@ require('..').factory('shared.services.model-factory', [
 				},
 				includeProperty: {
 					value: function(property) {
-						var index = this._ignore.indexOf(property);
+						var index = this._ignores.indexOf(property);
 
 						if (index > -1) {
-							_.pullAt(this._ignore, index);
+							_.pullAt(this._ignores, index);
 						}
 
 						return this;
@@ -117,8 +117,8 @@ require('..').factory('shared.services.model-factory', [
 				},
 				ignoreProperty: {
 					value: function(property) {
-						if (this._ignore.indexOf(property) > -1) {
-							this._ignore.push(property);
+						if (this._ignores.indexOf(property) > -1) {
+							this._ignores.push(property);
 						}
 
 						return this;
@@ -128,11 +128,11 @@ require('..').factory('shared.services.model-factory', [
 					value: function() {
 						var result = proto.toJSON.apply(this);
 
-						_.forEach(this._ignore, function iterate(prop) {
+						_.forEach(this._ignores, function iterate(prop) {
 							result[prop] = undefined;
 						});
 
-						result._ignore = undefined;
+						result._ignores = undefined;
 
 						return result;
 					}
