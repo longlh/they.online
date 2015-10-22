@@ -7,7 +7,7 @@ require('..').factory('socket.services.connection', [
 		var socket = io();
 
 		socket.on('connect', function() {
-			console.log(socket.id);
+			console.log('Connected: ', socket.id);
 		});
 
 		return socket;

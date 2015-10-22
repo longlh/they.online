@@ -24,13 +24,20 @@ module.exports = angular.module('they.online', [
 	}
 ]).run([
 	'$rootScope',
-	'$timeout',
-	function($rootScope, $timeout) {
-		$rootScope.$on('$viewContentLoaded', function() {
-			$timeout(function() {
+	function($rootScope) {
+		var deferred;
+
+		function upgradeDom() {
+			clearTimeout(deferred);
+
+			deferred = setTimeout(function() {
 				componentHandler.upgradeAllRegistered();
-			});
-		});
+			}, 100);
+		}
+
+		// integrate with Material-Design-Lite
+		$rootScope.$on('$viewContentLoaded', upgradeDom);
+		$rootScope.$on('$includeContentLoaded', upgradeDom);
 	}
 ]);
 
