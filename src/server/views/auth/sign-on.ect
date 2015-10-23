@@ -1,29 +1,27 @@
 <% extend 'auth/_base' %>
 
-<div class="gs-16 gs-fluid">
-	<div class="row">
-		<div class="col-12-offset-2">
-			<h1>They <span class="text-color-success">Online</span></h1>
-			<form action="<%= @_url('auth.sign-on') %>" method="post" class="form form-stack">
-				<div class="form-group">
-					<label class="label" for="email">Email</label>
-					<div class="form-control">
-						<input type="text" name="email" id="email" class="input input-single-line">
-					</div>
+<div class="mdl-grid">
+	<div class="mdl-cell mdl-cell--2-col"></div>
+	<div class="mdl-cell mdl-cell--8-col">
+		<h1>They <span class="text-color-success">Online</span></h1>
+		<form action="<%= @_url('auth.sign-on') %>" method="post" class="form form-stack">
+			<div class="mdl-textfield mdl-js-textfield">
+				<input class="mdl-textfield__input"
+					type="text" name="email" id="email">
+				<label class="mdl-textfield__label" for="email">Email</label>
+			</div>
+			<br>
+			<div class="mdl-textfield mdl-js-textfield">
+				<input class="mdl-textfield__input"
+					type="password" name="password" id="password">
+				<label class="mdl-textfield__label" for="password">Password</label>
+			</div>
+			<div class="form-group">
+				<div class="pull-right contact text-small">
+					<span class="text-color-hint">Need help? <a href="/support">Contact support</a></span>
 				</div>
-				<div class="form-group">
-					<label class="label" for="password">Password</label>
-					<div class="form-control">
-						<input type="password" name="password" id="password" class="input input-single-line">
-					</div>
-				</div>
-				<div class="form-group">
-					<div class="pull-right contact text-small">
-						<span class="text-color-hint">Need help? <a href="/support">Contact support</a></span>
-					</div>
-					<button class="button button-complete text-upper">Sign on</button>
-				</div>
-			</form>
-		</div>
+				<button class="button button-complete text-upper">Sign on</button>
+			</div>
+		</form>
 	</div>
 </div>

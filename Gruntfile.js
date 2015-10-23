@@ -113,7 +113,7 @@ module.exports = function(grunt) {
 					// require('flexiblegs-stylus-plus')
 				]
 			},
-			management: {
+			all: {
 				files: [{
 					cwd: './src/management',
 					src: [
@@ -124,13 +124,12 @@ module.exports = function(grunt) {
 					extDot: 'last',
 					expand: true
 				}, {
-					cwd: './src/public/stylus',
+					cwd: './src/public/stylus/pages',
 					src: [
-						'**/*.styl',
-						'!**/_*.styl'
+						'**/*.styl'
 					],
+					ext: '.page.css',
 					dest: './build/out/css',
-					ext: '.public.css',
 					extDot: 'last',
 					expand: true
 				}]

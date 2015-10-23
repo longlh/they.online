@@ -46,14 +46,14 @@ require('..').factory('shared.services.model-factory', [
 						var data;
 
 						if (_.isArray(response.resource)) {
-							data = _.map(response.resource, function iterate(r) {
-								if (r instanceof Model) {
-									Model.call(r);
+							data = _.map(response.resource, function iterate(resource) {
+								if (resource instanceof Model) {
+									Model.call(resource);
 
-									return r;
+									return resource;
 								}
 
-								return new Model(r);
+								return new Model(resource);
 							});
 						} else {
 							data = response.resource;
@@ -71,6 +71,7 @@ require('..').factory('shared.services.model-factory', [
 					}
 				};
 			};
+
 			var injectIntercepter = function(method) {
 				method.interceptor = method.interceptor || {};
 
