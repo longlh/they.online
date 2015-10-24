@@ -1,49 +1,48 @@
 <% extend 'auth/_base' %>
 
-<div class="gs-16 gs-fluid">
-	<div class="row">
-		<div class="col-12-offset-2">
-			<h1>Finish your registration</h1>
-			<form action="/registration/activate/<%= @_registration._id %>" method="post" class="form form-stack">
-				<div class="form-group">
-					<label class="label">Tenant name</label>
-					<div class="form-control">
-						<input type="text" class="input input-single-line" disabled
-							value="<%= @_registration.tenantName %>">
+<div class="mdl-grid">
+	<div class="mdl-cell mdl-cell--1-col"></div>
+	<div class="mdl-cell mdl-cell--10-col">
+		<div class="mdl-card mdl-card--full">
+			<div class="mdl-card__title">
+				<h2 class="mdl-card__title-text">Finish your registration</h2>
+			</div>
+			<div class="mdl-card__supporting-text mdl-card__supporting-text--full">
+				<form class="form-auth"
+					id="form-activate" action="/registration/activate/<%= @_registration._id %>" method="post">
+					<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+						<input class="mdl-textfield__input"
+							type="text" value="<%= @_registration.tenantName %>" id="tenant_name" disabled>
+						<label class="mdl-textfield__label" for="tenant_name">Tenant name</label>
 					</div>
-				</div>
-				<div class="form-group">
-					<label class="label">Email</label>
-					<div class="form-control">
-						<input type="email" class="input input-single-line" disabled
-							value="<%= @_registration.email %>">
+					<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+						<input class="mdl-textfield__input"
+							type="email" value="<%= @_registration.email %>" id="email" disabled>
+						<label class="mdl-textfield__label" for="email">Tenant name</label>
 					</div>
-				</div>
-				<div class="break">
-				</div>
-				<div class="form-group">
-					<label class="label">Administrator Name</label>
-					<div class="form-control">
-						<input type="text" name="name" class="input input-single-line">
+					<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+						<input class="mdl-textfield__input"
+							type="name" name="name" id="name" required>
+						<label class="mdl-textfield__label" for="name">Administrator name</label>
 					</div>
-				</div>
-				<div class="form-group">
-					<label class="label">Password</label>
-					<div class="form-control">
-						<input type="password" name="password" class="input input-single-line">
+					<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+						<input class="mdl-textfield__input"
+							type="password" name="password" id="password" required>
+						<label class="mdl-textfield__label" for="password">Password</label>
 					</div>
-				</div>
-				<div class="form-group">
-					<label class="label">Confirm</label>
-					<span class="help">Re-type the password</span>
-					<div class="form-control">
-						<input type="password" name="confirmPassword" class="input input-single-line">
+					<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+						<input class="mdl-textfield__input"
+							type="password" name="confirmPassword" id="confirm-password" required>
+						<label class="mdl-textfield__label" for="confirm-password">Confirm</label>
 					</div>
-				</div>
-				<div class="form-group">
-					<button class="button button-complete text-upper">Create Account</button>
-				</div>
-			</form>
+				</form>
+			</div>
+			<div class="mdl-card__actions">
+				<button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--primary"
+					form="form-activate">Create Account</button>
+				<div class="mdl-layout-spacer"></div>
+				<a href="#"><i class="material-icons">help_outline</i></a>
+			</div>
 		</div>
 	</div>
 </div>
