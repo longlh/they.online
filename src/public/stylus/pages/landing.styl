@@ -1,46 +1,41 @@
 @import '../main'
 
-body
-	@extend .bg-white
-
 .landing-wrapper
-	background url('/build/img/bg_landing.jpg') no-repeat center center
-	background-size cover
-	height 370px
-	position relative
-
-	.overlay
-		position absolute
-		top 0
-		left 0
-		right 0
-		bottom 0
-		background COLOR_BLACK
-		opacity .4
+	@extend .full-height
 
 	.landing
 		position relative
-		z-index 1
-		padding 50px 20px
+		text-align center
+		background url('/build/img/bg_landing.jpg') no-repeat center center
+		background-size cover
+		padding-bottom 40px
 
-		.landing-promotion
-			padding-bottom 40px
-			max-width 600px
-			margin 0 auto
+		.landing-heading
+			position relative
+			z-index 1
 
-		.landing-buttons
-			.landing-button
-				margin 0 15px
+			.actions
+				margin-top 40px
 
-				.button
-					width 150px
+				.mdl-button
+					margin 0 30px
 
-.landing-steps
-	padding-top 60px
+		.overlay
+			position absolute
+			z-index 0
+			top 0
+			left 0
+			right 0
+			bottom 0
+			opacity .3
+
+	.getting-started
+		text-align center
 
 	.steps
-		padding-top 60px
+		text-align center
 
-		.step
-			font-size 100px
-			padding-bottom 30px
+		.material-icons
+			&--large
+				font-size 112px
+				padding-bottom 10px
