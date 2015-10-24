@@ -1,31 +1,35 @@
 @import '../main'
 
 html, body
+
+
+.auth-layout
 	@extend .full-height
 
-.login-wrapper
-	.login-container
-		width 500px
-		position relative
+	.mdl-card
+		&--full
+			width 100%
 
-		.contact
-			line-height 35px
+		.mdl-card__supporting-text
+			&--full
+				width 100%
 
-	.bg-pic
-		margin-right 500px
-		overflow hidden
-		position relative
+		.mdl-card__actions
+			display flex
+			align-items center
 
-		.background
-			background url('/build/img/bg_sign_up.jpg') no-repeat center bottom
-			background-size cover
+	.form-auth
+		.mdl-textfield
+			display block
+			width auto
 
-		.introduction-wrapper
-			position absolute
-			padding 30px
-			bottom 0
-			left 0
-			right 0
 
-			.introduction
-				max-width 500px
+.bg-pic
+	position relative
+	background url('/build/img/bg_sign_up.jpg') no-repeat center bottom
+	background-size cover
+
+	.introduction
+		position absolute
+		bottom 0
+		left 0

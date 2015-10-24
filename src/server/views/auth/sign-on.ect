@@ -1,27 +1,33 @@
 <% extend 'auth/_base' %>
 
 <div class="mdl-grid">
-	<div class="mdl-cell mdl-cell--2-col"></div>
-	<div class="mdl-cell mdl-cell--8-col">
-		<h1>They <span class="text-color-success">Online</span></h1>
-		<form action="<%= @_url('auth.sign-on') %>" method="post" class="form form-stack">
-			<div class="mdl-textfield mdl-js-textfield">
-				<input class="mdl-textfield__input"
-					type="text" name="email" id="email">
-				<label class="mdl-textfield__label" for="email">Email</label>
+	<div class="mdl-cell mdl-cell--1-col"></div>
+	<div class="mdl-cell mdl-cell--10-col">
+		<div class="mdl-card mdl-card--full">
+			<div class="mdl-card__title">
+				<h2 class="mdl-card__title-text">They <span class="text-color-success">Online</span></h2>
 			</div>
-			<br>
-			<div class="mdl-textfield mdl-js-textfield">
-				<input class="mdl-textfield__input"
-					type="password" name="password" id="password">
-				<label class="mdl-textfield__label" for="password">Password</label>
+			<div class="mdl-card__supporting-text mdl-card__supporting-text--full">
+				<form class="form-auth"
+					id="form-sign-on" action="<%= @_url('auth.sign-on') %>" method="post">
+					<div class="mdl-textfield mdl-js-textfield">
+						<input class="mdl-textfield__input"
+							type="email" name="email" id="email" required>
+						<label class="mdl-textfield__label" for="email">Email</label>
+					</div>
+					<div class="mdl-textfield mdl-js-textfield">
+						<input class="mdl-textfield__input"
+							type="password" name="password" id="password" required>
+						<label class="mdl-textfield__label" for="password">Password</label>
+					</div>
+				</form>
 			</div>
-			<div class="form-group">
-				<div class="pull-right contact text-small">
-					<span class="text-color-hint">Need help? <a href="/support">Contact support</a></span>
-				</div>
-				<button class="button button-complete text-upper">Sign on</button>
+			<div class="mdl-card__actions">
+				<button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--primary"
+					form="form-sign-on">Sign on</button>
+				<div class="mdl-layout-spacer"></div>
+				<a href="#"><i class="material-icons">help_outline</i></a>
 			</div>
-		</form>
+		</div>
 	</div>
 </div>

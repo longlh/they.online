@@ -8,21 +8,16 @@
 <!-- block `end_head` end -->
 <% end %>
 
-<div class="full-height login-wrapper cf">
-	<div class="login-container bg-white pull-right full-height">
-		<div class="break break-large">
-		</div>
-		<% content %>
-	</div>
-	<div class="bg-pic full-height bg-black">
-		<!--<img src="http://pages.revox.io/dashboard/latest/angular/assets/img/demo/new-york-city-buildings-sunrise-morning-hd-wallpaper.jpg" alt="">-->
-		<div class="background full-height">
-		</div>
-		<div class="introduction-wrapper text-color-white">
-			<div class="introduction">
+<div class="auth-layout mdl-grid mdl-grid--no-spacing">
+	<div class="bg-pic mdl-cell mdl-cell--8-col mdl-cell--8-col-tablet mdl-cell--hide-phone">
+		<div class="mdl-grid introduction">
+			<div class="mdl-cell mdl-cell--bottom  mdl-cell--6-col mdl-cell--8-col-tablet">
 				<h2>They <span class="text-color-success">Online</span></h2>
 				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
 			</div>
 		</div>
+	</div>
+	<div class="mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet mdl-cell--4-col-phone mdl-color--white">
+		<% content %>
 	</div>
 </div>
