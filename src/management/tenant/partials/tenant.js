@@ -19,6 +19,7 @@ require('..').controller('tenant.controllers.tenant', [
 
 		// MESSAGES
 		Emitter.on('tenant:update', function(tenant) {
+
 			$scope._update(tenant);
 		});
 	}
