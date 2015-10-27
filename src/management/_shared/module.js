@@ -9,6 +9,9 @@ module.exports = angular.module('shared', [
 		$httpProvider.interceptors.push('shared.interceptors.not-found');
 	}
 ]).run([
+	'shared.services.mdl-integration',
+	function() {}
+]).run([
 	'$rootScope',
 	function($rootScope) {
 		$rootScope.$on('$stateChangeError', function() {

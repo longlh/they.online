@@ -1,4 +1,37 @@
 <div class="mdl-grid">
-	<div class="mdl-cell mdl-cell--8-col">8</div>
-	<div class="mdl-cell mdl-cell--4-col">4</div>
+	<div class="mdl-cell mdl-cell--2-col"></div>
+	<div class="mdl-cell mdl-cell--8-col">
+		<button class="mdl-button mdl-js-button mdl-js-ripple-effect"
+			data-ng-click="addAgent()">Add</button>
+		<table class="mdl-data-table mdl-js-data-table mdl-data-table--full">
+			<thead>
+				<tr>
+					<th class="mdl-data-table__cell--non-numeric mdl-data-table__cell--minimal">
+						<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-all">
+							<input type="checkbox" id="checkbox-all" class="mdl-checkbox__input">
+						</label>
+					</th>
+					<th class="mdl-data-table__cell--non-numeric">Name</th>
+					<th class="mdl-data-table__cell--non-numeric">Email</th>
+					<th>Status</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr data-ng-repeat="agent in agents track by $index"
+					data-ng-class="{'is-selected': agent.isSelected}">
+					<td class="mdl-data-table__cell--non-numeric mdl-data-table__cell--minimal">
+						<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect"
+							for="checkbox-{{$index}}">
+							<input class="mdl-checkbox__input"
+								type="checkbox" id="checkbox-{{$index}}"
+								data-ng-model="agent.isSelected">
+						</label>
+					</td>
+					<td class="mdl-data-table__cell--non-numeric">{{agent.name}}</td>
+					<td class="mdl-data-table__cell--non-numeric">{{agent.email}}</td>
+					<td>{{agent.status}}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
 </div>
