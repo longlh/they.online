@@ -14,8 +14,6 @@
     "tests"
   ],
   "dependencies": {
-    "font-awesome-stylus": "~4.4.0",
-    "flexiblegs-stylus-plus": "~5.4.0",
     "material-design-lite": "~1.0.5"
   }
 }

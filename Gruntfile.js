@@ -199,7 +199,7 @@ module.exports = function(grunt) {
 	grunt.registerTask('default', [
 		'clean',
 		'static',
-		'copy:font',
+		// 'copy:font',
 		'copy:img',
 		'stylus',
 		'browserify',
