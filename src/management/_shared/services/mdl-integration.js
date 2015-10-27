@@ -6,8 +6,9 @@ require('..').factory('shared.services.mdl-integration', [
 	'shared.services.event-hub',
 	function($rootScope, componentHandler, eventHub) {
 		var self = {};
+		self.latency = 50;
 		self.upgrade = function() {
-			componentHandler.upgradeAllRegistered();
+			componentHandler.upgradeDom();
 		};
 
 		function activate() {
@@ -17,9 +18,8 @@ require('..').factory('shared.services.mdl-integration', [
 				clearTimeout(deferred);
 
 				deferred = setTimeout(function() {
-					componentHandler.upgradeAllRegistered();
-					// componentHandler.upgradeDom();
-				}, 10);
+					self.upgrade();
+				}, self.latency);
 			}
 
 			// integrate with Material-Design-Lite
