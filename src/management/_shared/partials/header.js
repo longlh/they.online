@@ -7,6 +7,9 @@ require('..').controller('shared.controllers.header', [
 		this.signOutUrl = ENV.signOutUrl;
 
 		this.session = storage.get('session');
-		console.log(this.session);
+
+		this.signOut = function() {
+			alert('should sign out');
+		};
 	}
 ]);
