@@ -4,6 +4,7 @@ var angular = require('angular');
 var componentHandler = require('component-handler');
 
 module.exports = angular.module('they.online', [
+	require('angular-material-icons'),
 	require('angular-ui-router'),
 	require('./_shared').name,
 	require('./auth').name,

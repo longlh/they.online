@@ -1,14 +1,29 @@
 @import 'kouto-swiss'
 
+meyer-reset()
+box-sizing-reset()
+normalize()
+
 @import './_shared/module'
 @import './auth/module'
 @import './site/module'
 @import './socket/module'
 @import './tenant/module'
 
-meyer-reset()
-box-sizing-reset()
-normalize()
+
+ng-md-icon
+	margin auto
+	background-repeat no-repeat no-repeat
+	display inline-block
+	vertical-align middle
+	fill currentColor
+	size 24px
+	transition fill 750ms ease-in-out;
+
+	& > svg
+		pointer-events none
+		display block
+		transition: width 750ms ease-in-out, height 750ms ease-in-out;
 
 body
 	// font-family font-stack('Consolas')
