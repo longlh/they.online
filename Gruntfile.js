@@ -89,13 +89,6 @@ module.exports = function(grunt) {
 			}
 		},
 		copy: {
-			font: {
-				cwd: './bower_components/font-awesome-stylus/fonts',
-				src: '**',
-				dest: './build/out/fonts/',
-				flatten: true,
-				expand: true
-			},
 			img: {
 				cwd: './src/public/img',
 				src: '**',
@@ -199,8 +192,7 @@ module.exports = function(grunt) {
 	grunt.registerTask('default', [
 		'clean',
 		'static',
-		// 'copy:font',
-		'copy:img',
+		'copy',
 		'stylus',
 		'browserify',
 		'develop:dev',

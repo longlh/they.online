@@ -4,6 +4,15 @@ require('..').controller('site.controllers.dashboard', [
 	'$scope',
 	'$interval',
 	function($scope, $interval) {
+		var toggle = true;
+
+		$scope.switchIcon = function() {
+			toggle = !toggle;
+
+			$scope.icon = toggle ? 'send' : 'autorenew';
+			$scope.size = toggle ? 20 : 30;
+		};
+
 		$scope.agents = [{
 			name: 'LongLH',
 			email: 'long.luc@ntq-solution.com.vn',

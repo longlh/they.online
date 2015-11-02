@@ -75,7 +75,12 @@ exports.factory = function(_, crypto, db) {
 			type: Boolean,
 			default: false
 		},
-		accounts: [accountSchema]
+		accounts: [accountSchema],
+		profile: {
+			company: String,
+			location: String,
+			country: String
+		}
 	});
 
 	agentSchema.methods = {
