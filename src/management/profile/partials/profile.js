@@ -2,7 +2,9 @@
 
 require('..').controller('profile.controller.profile', [
 	'$scope',
-	function($scope) {
+	'_profile',
+	function($scope, profile) {
 		console.log('My account');
+		console.log(profile);
 	}
 ]);

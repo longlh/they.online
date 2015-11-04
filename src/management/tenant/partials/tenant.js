@@ -6,7 +6,7 @@ require('..').controller('tenant.controllers.tenant', [
 	'shared.services.event-hub',
 	function($scope, tenant, Emitter) {
 		$scope.tenant = tenant;
-
+		console.log(tenant);
 		// PUBLIC API
 		$scope.update = function() {
 			Emitter.emit('tenant:update', $scope.tenant);

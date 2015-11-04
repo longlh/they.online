@@ -5,9 +5,10 @@ exports.requires = [
 	'/app',
 	'/middlewares/auth/filter',
 	'/middlewares/tenant',
-	'/middlewares/util'
+	'/middlewares/util',
+	'/middlewares/agent'
 ];
-exports.factory = function(app, authFilter, tenant, util) {
+exports.factory = function(app, authFilter, tenant, util, agent) {
 	app.use('/api', authFilter.blockUnauthenticated);
 
 	app.get('/api/sessions/current', util.json('_session'));
@@ -18,4 +19,6 @@ exports.factory = function(app, authFilter, tenant, util) {
 			.post(tenant.identify('id'), tenant.update, util.json('_tenant'));
 
 	app.get('/api/agents/me', util.json('_session.data'));
+	app.route('/api/agents/:id/profile')
+		.get(agent.identify('id'), util.json('_profile'));
 };
