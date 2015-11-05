@@ -4,7 +4,11 @@ require('..').controller('profile.controller.profile', [
 	'$scope',
 	'_profile',
 	function($scope, profile) {
-		console.log('My account');
-		console.log(profile);
+
+		$scope.profile = profile;
+
+		$scope.update = function() {
+			$scope.profile.save();
+		};
 	}
 ]);

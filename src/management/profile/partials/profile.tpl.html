@@ -8,12 +8,20 @@
 			<form ng-submit="update()">
 				<div class="mdl-card__supporting-text">
 					<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-						<input class="mdl-textfield__input" type="text" id="name" ng-model="tenant.name"/>
+						<input class="mdl-textfield__input" type="text" id="name" ng-model="profile.name"/>
 						<label class="mdl-textfield__label" for="name">Name</label>
 					</div>
 					<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-						<input class="mdl-textfield__input" type="email" id="email" ng-model="tenant.email"/>
-						<label class="mdl-textfield__label" for="email">Email</label>
+						<input class="mdl-textfield__input" type="text" id="company" ng-model="profile.profile.company"/>
+						<label class="mdl-textfield__label" for="company">Company</label>
+					</div>
+					<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+						<input class="mdl-textfield__input" type="text" id="location" ng-model="profile.profile.location"/>
+						<label class="mdl-textfield__label" for="location">Location</label>
+					</div>
+					<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+						<input class="mdl-textfield__input" type="text" id="country" ng-model="profile.profile.country"/>
+						<label class="mdl-textfield__label" for="country">Country</label>
 					</div>
 				</div>
 				<div class="mdl-card__actions mdl-card--border">
