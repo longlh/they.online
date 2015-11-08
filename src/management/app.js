@@ -11,7 +11,7 @@ module.exports = angular.module('they.online', [
 	require('./site').name,
 	require('./socket').name,
 	require('./tenant').name,
-	require('./profile').name
+	// require('./profile').name
 ]).constant('global:componentHandler', componentHandler).config([
 	'$urlRouterProvider',
 	function($urlRouterProvider) {

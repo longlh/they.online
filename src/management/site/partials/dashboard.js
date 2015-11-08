@@ -5,12 +5,13 @@ require('..').controller('site.controllers.dashboard', [
 	'$interval',
 	function($scope, $interval) {
 		var toggle = true;
+		$scope.size = 30;
 
 		$scope.switchIcon = function() {
 			toggle = !toggle;
 
 			$scope.icon = toggle ? 'send' : 'autorenew';
-			$scope.size = toggle ? 20 : 30;
+			// $scope.size = toggle ? 20 : 30;
 		};
 
 		$scope.agents = [{

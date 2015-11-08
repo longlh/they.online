@@ -15,8 +15,8 @@ exports.factory = function(Promise, Agent) {
 			var query = Agent.findById(id);
 
 			return Promise.resolve(query.exec()).then(function(agent) {
-
-				res.locals._profile = agent;
+				// console.log(agent);
+				res.locals._agent = agent;
 
 				next();
 			}).catch(next);
@@ -25,19 +25,20 @@ exports.factory = function(Promise, Agent) {
 
 	self.updateProfile = function(req, res, next) {
 
-		var query = Agent.findByIdAndUpdate(res.locals._profile._id, {
-			name: req.body.name,
+		var query = Agent.findByIdAndUpdate(res.locals._agent._id, {
+
 			profile: {
-				company: req.body.profile.company,
-				location: req.body.profile.location,
-				country: req.body.profile.country
+				name: req.body.name,
+				email: req.body.email,
+				phone: req.body.phone,
+				information: req.body.information
 			}
 		}, {
 			new: true
 		});
 
-		return Promise.resolve(query.exec()).then(function(profile) {
-			res.locals._profile = profile;
+		return Promise.resolve(query.exec()).then(function(agent) {
+			res.locals._agent = agent;
 
 			next();
 		}).catch(next);

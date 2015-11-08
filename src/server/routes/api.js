@@ -18,8 +18,8 @@ exports.factory = function(app, authFilter, tenant, util, agent) {
 	app.route('/api/tenants/:id')
 			.post(tenant.identify('id'), tenant.update, util.json('_tenant'));
 
-	app.get('/api/agents/me', util.json('_session.data'));
+	app.get('/api/agents/me', util.json('_session.agent'));
+
 	app.route('/api/agents/:id/profile')
-		.get(agent.identify('id'), util.json('_profile'))
-		.post(agent.identify('id'), agent.updateProfile, util.json('_profile'));
+		.post(agent.identify('id'), agent.updateProfile, util.json('_agent.profile'));
 };

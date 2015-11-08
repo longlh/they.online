@@ -1,17 +1,17 @@
 'use strict';
 
-require('..').controller('tenant.controllers.tenant', [
+require('..').controller('tenant.controllers.profile', [
 	'$scope',
-	'_tenant',
-	'shared.services.event-hub',
+	'_agent',
 	'shared.services.switch-icon',
-	function($scope, tenant, Emitter, switchIcon) {
-		$scope.tenant = tenant;
+	function($scope, agent, switchIcon) {
 
-		$scope.update = function() {
+		$scope.profile = agent.profile;
+
+		$scope.save = function() {
 			$scope.icon = switchIcon.save('processing');
 
-			$scope.tenant.save().then(function() {
+			$scope.profile.save().then(function() {
 				$scope.icon = switchIcon.save('success');
 
 				setTimeout(function() {
