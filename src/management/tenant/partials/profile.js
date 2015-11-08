@@ -3,26 +3,20 @@
 require('..').controller('tenant.controllers.profile', [
 	'$scope',
 	'_agent',
-	'shared.services.switch-icon',
-	function($scope, agent, switchIcon) {
+	function($scope, agent) {
 
 		$scope.profile = agent.profile;
 
 		$scope.save = function() {
-			$scope.icon = switchIcon.save('processing');
+			$scope.statusCurrent = 'processing';
 
 			$scope.profile.save().then(function() {
-				$scope.icon = switchIcon.save('success');
-
-				setTimeout(function() {
-
-					$scope.icon = switchIcon.save();
-				});
+				$scope.statusCurrent = 'success';
 			});
 		};
 
 		function init() {
-			$scope.icon = switchIcon.save('save');
+			$scope.statusCurrent = 'save';
 		}
 
 		init();

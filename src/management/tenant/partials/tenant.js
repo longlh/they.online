@@ -3,26 +3,19 @@
 require('..').controller('tenant.controllers.tenant', [
 	'$scope',
 	'_tenant',
-	'shared.services.event-hub',
-	'shared.services.switch-icon',
-	function($scope, tenant, Emitter, switchIcon) {
+	function($scope, tenant) {
 		$scope.tenant = tenant;
 
 		$scope.update = function() {
-			$scope.icon = switchIcon.save('processing');
+			$scope.statusCurrent = 'processing';
 
 			$scope.tenant.save().then(function() {
-				$scope.icon = switchIcon.save('success');
-
-				setTimeout(function() {
-
-					$scope.icon = switchIcon.save();
-				});
+				$scope.statusCurrent = 'success';
 			});
 		};
 
 		function init() {
-			$scope.icon = switchIcon.save('save');
+			$scope.statusCurrent = 'save';
 		}
 
 		init();
