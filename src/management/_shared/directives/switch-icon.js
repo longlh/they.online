@@ -7,10 +7,6 @@ require('..').directive('switchIcon', [
 			restrict: 'E',
 			templateUrl: template('_shared/directives/switch-icon'),
 			link: function(scope, el, attrs) {
-				var startX = 0;
-				var startY = 0;
-				var x = 0;
-				var y = 0;
 
 				function switchIconSave(status) {
 					var icon;
@@ -45,7 +41,6 @@ require('..').directive('switchIcon', [
 					if (scope.icon === 'error') {
 
 						el.children()[0].style.backgroundColor = 'red';
-
 					}
 				}
 
@@ -53,37 +48,6 @@ require('..').directive('switchIcon', [
 
 					switchIconSave(status);
 				});
-
-				el.css({
-					position: 'relative',
-					top: '0px',
-					left: '0px'
-				});
-
-				el.on('mousedown', function(event) {
-
-					startX = event.pageX - x;
-					startY = event.pageY - y;
-
-					$document.on('mousemove', mousemove);
-					$document.on('mouseup', mouseup);
-				});
-
-				function mousemove(event) {
-
-					x = event.pageX - startX;
-					y = event.pageY - startY;
-
-					el.css({
-						top: y + 'px',
-						left: x + 'px'
-					});
-				}
-
-				function mouseup() {
-					$document.off('mousemove', mousemove);
-					$document.off('mouseup', mouseup);
-				}
 			}
 		};
 	}
