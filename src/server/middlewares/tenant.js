@@ -37,6 +37,7 @@ exports.factory = function(Promise, Tenant) {
 
 	self.update = function(req, res, next) {
 		// specify tenant's fields should be updated
+		console.log(req.body);
 		var query = Tenant.findByIdAndUpdate(res.locals._tenant._id, {
 			name: req.body.name,
 			email: req.body.email,

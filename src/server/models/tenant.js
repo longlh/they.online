@@ -11,6 +11,7 @@ exports.factory = function(db) {
 			required: true
 		},
 		biography: String,
+		email: String,
 		plan: {
 			type: String,
 			default: 'free'
